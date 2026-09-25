@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>King's Vault — Chamber sliding open</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap">
+<style>
+body{margin:0;background:#0a0806;font-family:'Cormorant Garamond',Georgia,serif;color:#efe6d2}
+a{color:#efe6d2;text-decoration:none}a:hover{color:#e8c77f}
+.vid{background:radial-gradient(circle at 30% 40%,rgba(255,196,110,.55),transparent 28%),radial-gradient(circle at 72% 58%,rgba(214,150,60,.45),transparent 30%),radial-gradient(circle at 50% 85%,rgba(140,70,20,.6),transparent 40%),linear-gradient(120deg,#1a1108,#3b2610 40%,#12100c 70%,#2c1c0c);background-size:220% 220%;animation:drift 16s ease-in-out infinite alternate}
+.vidText{background:radial-gradient(circle at 25% 40%,#fff4d6,transparent 22%),radial-gradient(circle at 70% 60%,#ffd27a,transparent 26%),linear-gradient(110deg,#6e4414,#d9a14a 30%,#fbe7b8 45%,#a8661e 60%,#e8b55e 80%,#5a3610);background-size:240% 240%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:drift 9s ease-in-out infinite alternate}
+.streak{background:linear-gradient(90deg,rgba(201,164,92,0),rgba(232,199,127,.8))}
+@keyframes drift{0%{background-position:0% 0%}50%{background-position:100% 40%}100%{background-position:30% 100%}}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; position: relative; overflow: hidden; background: #0a0806">
+
+<header style="position: absolute; top: 0; left: 0; width: 1440px; height: 88px; box-sizing: border-box; padding: 0 56px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(201, 164, 92, 0.3)">
+<span style="font-family: Cinzel, Georgia, serif; font-size: 18px; letter-spacing: 0.3em; font-weight: 600">KING'S VAULT</span>
+</header>
+
+<div style="position: absolute; top: 88px; left: 0; width: 1080px; height: 812px; overflow: hidden">
+<div class="vid" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0"></div>
+<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(8, 6, 4, 0.7)"></div>
+<div style="position: absolute; top: 250px; left: 120px; display: flex; flex-direction: column; gap: 16px; opacity: 0.6">
+<div style="font-family: Cinzel, Georgia, serif; font-size: 13px; letter-spacing: 0.45em; color: #c9a45c">CHAMBER I</div>
+<div class="vidText" style="font-family: Cinzel, Georgia, serif; font-weight: 700; font-size: 104px; line-height: 1">The Legacy</div>
+<div style="font-size: 28px; font-style: italic; color: #d8cdb4">Treasures beyond time.</div>
+</div>
+<div class="streak" style="position: absolute; top: 120px; left: 700px; width: 380px; height: 1px"></div>
+<div class="streak" style="position: absolute; top: 260px; left: 820px; width: 260px; height: 1px"></div>
+<div class="streak" style="position: absolute; top: 410px; left: 620px; width: 460px; height: 2px"></div>
+<div class="streak" style="position: absolute; top: 560px; left: 780px; width: 300px; height: 1px"></div>
+<div class="streak" style="position: absolute; top: 700px; left: 680px; width: 400px; height: 1px"></div>
+</div>
+
+<div style="position: absolute; top: 88px; left: 1080px; width: 180px; height: 812px; overflow: hidden; background: #0d0a07; display: flex; align-items: center; justify-content: center">
+<div style="writing-mode: vertical-rl; font-family: Cinzel, Georgia, serif; font-size: 18px; letter-spacing: 0.4em; color: #8e826a">THE COLLECTION</div>
+</div>
+<div style="position: absolute; top: 88px; left: 1260px; width: 180px; height: 812px; overflow: hidden; background: #0d0a07; display: flex; align-items: center; justify-content: center">
+<div style="writing-mode: vertical-rl; font-family: Cinzel, Georgia, serif; font-size: 18px; letter-spacing: 0.4em; color: #8e826a">THE ATELIER</div>
+</div>
+
+<div style="position: absolute; top: 88px; left: 1079px; width: 3px; height: 812px; background: #e8c77f; box-shadow: 0 0 28px rgba(255, 200, 110, 0.8)"></div>
+<div style="position: absolute; top: 88px; left: 1260px; width: 1px; height: 812px; background: rgba(201, 164, 92, 0.5)"></div>
+
+<div style="position: absolute; top: 470px; left: 1052px; width: 56px; height: 56px; border-radius: 999px; background: #c9a45c; color: #140e06; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14 6 20 12 14 18"></polyline></svg>
+</div>
+
+<div style="position: absolute; top: 112px; left: 40px; padding: 5px 12px; border: 1px dashed rgba(239, 230, 210, 0.4); border-radius: 4px; font-family: Cinzel, Georgia, serif; font-size: 11px; letter-spacing: 0.2em; color: #cfc3a8">[ IN MOTION · CHAMBER I SWEEPS RIGHT ]</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

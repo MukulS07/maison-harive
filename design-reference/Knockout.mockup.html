@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>King's Vault — Homepage, Concept B</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap">
+<style>
+body{margin:0;background:#070605;font-family:'Cormorant Garamond',Georgia,serif;color:#efe6d2}
+a{color:#efe6d2;text-decoration:none}a:hover{color:#e8c77f}
+.vidText{background:radial-gradient(circle at 25% 40%,#fff4d6,transparent 22%),radial-gradient(circle at 70% 60%,#ffd27a,transparent 26%),linear-gradient(110deg,#6e4414,#d9a14a 30%,#fbe7b8 45%,#a8661e 60%,#e8b55e 80%,#5a3610);background-size:240% 240%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:drift 9s ease-in-out infinite alternate}
+.lamp{animation:flick 3.5s ease-in-out infinite}
+@keyframes drift{0%{background-position:0% 0%}50%{background-position:100% 40%}100%{background-position:30% 100%}}
+@keyframes flick{0%,100%{fill:#3a2410}50%{fill:#7a4e1a}}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1400px; position: relative; overflow: hidden; background: #070605">
+
+<header style="position: absolute; top: 0; left: 0; width: 1440px; height: 88px; box-sizing: border-box; padding: 0 56px; display: flex; align-items: center; justify-content: space-between">
+<a href="#" style="width: 240px; font-family: Cinzel, Georgia, serif; font-size: 18px; letter-spacing: 0.3em; font-weight: 600">KING'S MAISON</a>
+<nav aria-label="Main" style="display: flex; gap: 36px; font-family: Cinzel, Georgia, serif; font-size: 13px; letter-spacing: 0.22em">
+<a href="#" style="color: #e8c77f; padding: 12px 0; border-bottom: 1px solid #c9a45c">COLLECTION</a>
+<a href="#" style="padding: 12px 0">ARTEFACTS</a>
+<a href="#" style="padding: 12px 0">HERITAGE</a>
+<a href="#" style="padding: 12px 0">ATELIER</a>
+<a href="#" style="padding: 12px 0">CONTACT</a>
+</nav>
+<a href="#" style="width: 240px; text-align: right; font-size: 17px; font-style: italic; color: #e8c77f">Private Viewing</a>
+</header>
+
+<div style="position: absolute; top: 112px; left: 40px; width: 1360px; height: 748px; box-sizing: border-box; border: 1px solid rgba(201, 164, 92, 0.35)"></div>
+
+<div style="position: absolute; top: 200px; left: 0; width: 1440px; display: flex; flex-direction: column; align-items: center">
+<div style="font-size: 72px; font-style: italic; font-weight: 400; color: #efe6d2">Enter the</div>
+<h1 class="vidText" style="margin: -6px 0 0 0; font-family: Cinzel, Georgia, serif; font-weight: 700; font-size: 260px; line-height: 0.9; letter-spacing: 0.04em">MAISON</h1>
+<div style="margin-top: 28px; font-family: Cinzel, Georgia, serif; font-size: 14px; letter-spacing: 0.5em; color: #c9a45c">TREASURES BEYOND TIME</div>
+</div>
+
+<div style="position: absolute; top: 740px; left: 0; width: 1440px; display: flex; flex-direction: column; align-items: center; gap: 12px">
+<div style="font-family: Cinzel, Georgia, serif; font-size: 11px; letter-spacing: 0.4em; color: #cfc3a8">SCROLL</div>
+<div style="width: 1px; height: 64px; background: #c9a45c"></div>
+</div>
+
+<div style="position: absolute; top: 1000px; left: 0; width: 1440px; display: flex; flex-direction: column; align-items: center; gap: 14px">
+<div style="font-family: Cinzel, Georgia, serif; font-size: 13px; letter-spacing: 0.45em; color: #c9a45c">THE MAISON</div>
+<h2 style="margin: 0; font-size: 60px; font-style: italic; font-weight: 400; color: #efe6d2">Where would you like to go?</h2>
+<div style="display: flex; align-items: center; gap: 28px; margin-top: 44px; font-family: Cinzel, Georgia, serif; font-size: 14px; letter-spacing: 0.28em">
+<a href="Legacy.mockup.html">THE LEGACY</a><span style="width: 6px; height: 6px; transform: rotate(45deg); background: #c9a45c"></span>
+<a href="Collection.mockup.html">THE COLLECTION</a><span style="width: 6px; height: 6px; transform: rotate(45deg); background: #c9a45c"></span>
+<a href="Atelier.mockup.html">THE ATELIER</a><span style="width: 6px; height: 6px; transform: rotate(45deg); background: #c9a45c"></span>
+<a href="Sisters.mockup.html">THE SISTERS</a>
+</div>
+<a href="Chambers.mockup.html" style="margin-top: 56px; padding: 16px 34px; background: #c9a45c; color: #140e06; font-family: Cinzel, Georgia, serif; font-weight: 700; font-size: 14px; letter-spacing: 0.32em; border-radius: 2px; box-shadow: 0 0 44px rgba(255, 200, 110, 0.5)">ENTER</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

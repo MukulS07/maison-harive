@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>King's Vault — Homepage, Mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap">
+<style>
+body{margin:0;background:#0a0806;font-family:'Cormorant Garamond',Georgia,serif;color:#efe6d2}
+a{color:#efe6d2;text-decoration:none}a:hover{color:#e8c77f}
+.vid{background:radial-gradient(circle at 30% 40%,rgba(255,196,110,.55),transparent 28%),radial-gradient(circle at 72% 58%,rgba(214,150,60,.45),transparent 30%),radial-gradient(circle at 50% 85%,rgba(140,70,20,.6),transparent 40%),linear-gradient(120deg,#1a1108,#3b2610 40%,#12100c 70%,#2c1c0c);background-size:220% 220%;animation:drift 16s ease-in-out infinite alternate}
+.vidText{background:radial-gradient(circle at 25% 40%,#fff4d6,transparent 22%),radial-gradient(circle at 70% 60%,#ffd27a,transparent 26%),linear-gradient(110deg,#6e4414,#d9a14a 30%,#fbe7b8 45%,#a8661e 60%,#e8b55e 80%,#5a3610);background-size:240% 240%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:drift 9s ease-in-out infinite alternate}
+.lamp{animation:flick 3.5s ease-in-out infinite}
+.tabs::-webkit-scrollbar{display:none}
+@keyframes drift{0%{background-position:0% 0%}50%{background-position:100% 40%}100%{background-position:30% 100%}}
+@keyframes flick{0%,100%{fill:#3a2410}50%{fill:#7a4e1a}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #0a0806">
+<div class="vid" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0"></div>
+<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(8, 6, 4, 0.55)"></div>
+
+<header style="position: absolute; top: 0; left: 0; width: 390px; height: 64px; box-sizing: border-box; padding: 0 20px; display: flex; align-items: center; justify-content: space-between">
+<a href="#" style="font-family: Cinzel, Georgia, serif; font-size: 15px; letter-spacing: 0.28em; font-weight: 600">KING'S VAULT</a>
+<button aria-label="Open menu" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: transparent; border: 1px solid rgba(201, 164, 92, 0.4); border-radius: 999px; color: #efe6d2; padding: 0">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="4" y1="8" x2="20" y2="8"></line><line x1="4" y1="16" x2="20" y2="16"></line></svg>
+</button>
+</header>
+
+<nav class="tabs" aria-label="Main" style="position: absolute; top: 72px; left: 0; width: 390px; box-sizing: border-box; padding: 0 20px; display: flex; gap: 8px; overflow-x: auto; white-space: nowrap">
+<a href="#" style="padding: 8px 14px; border: 1px solid rgba(201, 164, 92, 0.6); border-radius: 999px; font-size: 15px; background: rgba(201, 164, 92, 0.15)">The Collection</a>
+<a href="#" style="padding: 8px 14px; border: 1px solid rgba(201, 164, 92, 0.3); border-radius: 999px; font-size: 15px">Artefacts</a>
+<a href="#" style="padding: 8px 14px; border: 1px solid rgba(201, 164, 92, 0.3); border-radius: 999px; font-size: 15px">Heritage</a>
+<a href="#" style="padding: 8px 14px; border: 1px solid rgba(201, 164, 92, 0.3); border-radius: 999px; font-size: 15px">The Atelier</a>
+<a href="#" style="padding: 8px 14px; border: 1px solid rgba(201, 164, 92, 0.3); border-radius: 999px; font-size: 15px">Contact</a>
+</nav>
+
+<div style="position: absolute; top: 200px; left: 0; width: 390px; display: flex; flex-direction: column; align-items: center">
+<div style="font-size: 38px; font-style: italic; color: #efe6d2">Enter the</div>
+<h1 class="vidText" style="margin: -2px 0 0 0; font-family: Cinzel, Georgia, serif; font-weight: 700; font-size: 92px; line-height: 1; letter-spacing: 0.04em">VAULT</h1>
+<div style="margin-top: 14px; font-family: Cinzel, Georgia, serif; font-size: 11px; letter-spacing: 0.42em; color: #c9a45c">TREASURES BEYOND TIME</div>
+</div>
+
+<div style="position: absolute; left: 0; bottom: 0; width: 390px; height: 266px">
+<svg viewBox="380 0 440 300" width="390" height="266" aria-hidden="true" style="display: block">
+<defs><radialGradient id="dg" cx="50%" cy="95%" r="75%"><stop offset="0%" stop-color="#ffd58a"></stop><stop offset="45%" stop-color="#a8641c"></stop><stop offset="100%" stop-color="#1a1008"></stop></radialGradient></defs>
+<g fill="#0a0806" stroke="#c9a45c" stroke-width="1.2">
+<rect x="270" y="170" width="210" height="130"></rect><rect x="720" y="170" width="210" height="130"></rect>
+<rect x="264" y="164" width="222" height="6"></rect><rect x="714" y="164" width="222" height="6"></rect>
+<rect x="480" y="110" width="240" height="190"></rect><rect x="470" y="104" width="260" height="8"></rect>
+<path d="M510 104 C510 56 572 46 600 22 C628 46 690 56 690 104 Z"></path>
+<path d="M478 104 C478 92 495 88 495 80 C495 88 512 92 512 104 Z"></path><path d="M688 104 C688 92 705 88 705 80 C705 88 722 92 722 104 Z"></path>
+</g>
+<g stroke="#c9a45c" stroke-width="1.2"><line x1="600" y1="22" x2="600" y2="6"></line><line x1="0" y1="299.4" x2="1200" y2="299.4"></line></g>
+<circle cx="600" cy="6" r="3" fill="#c9a45c"></circle>
+<g class="lamp" fill="#3a2410" stroke="#c9a45c" stroke-width="1">
+<path d="M418 235 V205 Q438 186 458 205 V235 Z"></path><path d="M742 235 V205 Q762 186 782 205 V235 Z"></path>
+<path d="M418 290 V262 Q438 245 458 262 V290 Z"></path><path d="M742 290 V262 Q762 245 782 262 V290 Z"></path>
+<path d="M494 230 V190 Q505 176 516 190 V230 Z"></path><path d="M684 230 V190 Q695 176 706 190 V230 Z"></path>
+</g>
+<path d="M530 300 V205 Q530 165 600 152 Q670 165 670 205 V300 Z" fill="url(#dg)" stroke="#c9a45c" stroke-width="1.5"></path>
+<path d="M542 300 V208 Q542 176 600 165 Q658 176 658 208 V300" fill="none" stroke="#c9a45c" stroke-opacity="0.5"></path>
+</svg>
+<a href="#" style="position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); padding: 14px 20px; background: #c9a45c; color: #140e06; font-family: Cinzel, Georgia, serif; font-weight: 700; font-size: 13px; letter-spacing: 0.26em; border-radius: 2px; box-shadow: 0 0 32px rgba(255, 200, 110, 0.55)">ENTER</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

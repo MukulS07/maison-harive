@@ -1,0 +1,101 @@
+/* King's Maison — design tokens (source of truth for colour, type, motion) */
+
+:root {
+  /* ---- Colour ---- */
+  --km-black: #0a0806;          /* page background */
+  --km-black-deep: #070605;     /* knockout / stage background */
+  --km-surface: #15100a;        /* image placeholders, cards */
+  --km-surface-raised: #1a130c;
+  --km-gold: #c9a45c;           /* primary gold: lines, borders, buttons */
+  --km-gold-bright: #e8c77f;    /* hover, active, highlights */
+  --km-gold-pale: #fbe7b8;
+  --km-gold-deep: #7a5418;
+  --km-ivory: #efe6d2;          /* primary text */
+  --km-ivory-soft: #d8cdb4;     /* body copy */
+  --km-muted: #a89878;          /* captions, placeholders */
+  --km-on-gold: #140e06;        /* text on gold buttons */
+
+  --km-line: rgba(201, 164, 92, 0.30);       /* hairline dividers */
+  --km-line-strong: rgba(201, 164, 92, 0.60);
+  --km-scrim: rgba(8, 6, 4, 0.55);           /* over the hero video */
+  --km-scrim-heavy: rgba(8, 6, 4, 0.72);     /* over panel videos */
+
+  /* Gem colours used in illustrations */
+  --km-emerald: #1f7a4d;
+  --km-ruby: #9b1b2a;
+  --km-sapphire: #1d3f8a;
+  --km-amber: #b86b12;
+
+  /* ---- Type ---- */
+  --km-font-display: "Cinzel", Georgia, serif;           /* logos, headings, labels, buttons */
+  --km-font-body: "Cormorant Garamond", Georgia, serif;  /* body, italics, taglines */
+
+  /* Labels are always Cinzel, uppercase, widely tracked */
+  --km-tracking-label: 0.30em;
+  --km-tracking-eyebrow: 0.45em;
+  --km-tracking-wide: 0.50em;
+
+  /* Desktop sizes (scale with clamp() on smaller screens) */
+  --km-size-hero: 220px;        /* "MAISON" on home */
+  --km-size-h1: 108px;          /* chamber / section titles */
+  --km-size-h2: 60px;
+  --km-size-panel-title: 46px;
+  --km-size-body: 22px;
+  --km-size-nav: 17px;
+  --km-size-label: 13px;
+  --km-size-micro: 11px;
+
+  /* ---- Layout ---- */
+  --km-header-h: 88px;
+  --km-gutter: 56px;
+  --km-max: 1440px;
+  --km-radius-pill: 999px;
+  --km-radius-btn: 2px;
+
+  /* ---- Effects ---- */
+  --km-glow: 0 0 40px rgba(255, 200, 110, 0.5);
+  --km-glow-strong: 0 0 50px rgba(255, 200, 110, 0.65);
+
+  /* ---- Motion ---- */
+  --km-ease-royal: cubic-bezier(0.2, 0.7, 0.1, 1);   /* slides, reveals */
+  --km-ease-soft: cubic-bezier(0.3, 0.7, 0.2, 1);
+  --km-dur-fast: 250ms;
+  --km-dur-base: 600ms;
+  --km-dur-slide: 1100ms;   /* chamber panel expansion */
+  --km-dur-cinematic: 1400ms;
+}
+
+/* The moving gold "video" used as a fallback before the real video exists,
+   and as the fill of video-textured text. */
+.km-gold-motion {
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255, 196, 110, 0.55), transparent 28%),
+    radial-gradient(circle at 72% 58%, rgba(214, 150, 60, 0.45), transparent 30%),
+    radial-gradient(circle at 50% 85%, rgba(140, 70, 20, 0.6), transparent 40%),
+    linear-gradient(120deg, #1a1108, #3b2610 40%, #12100c 70%, #2c1c0c);
+  background-size: 180% 180%;
+  animation: km-drift 16s ease-in-out infinite alternate;
+}
+
+.km-gold-text {
+  background:
+    radial-gradient(circle at 25% 40%, #fff4d6, transparent 22%),
+    radial-gradient(circle at 70% 60%, #ffd27a, transparent 26%),
+    linear-gradient(110deg, #6e4414, #d9a14a 30%, #fbe7b8 45%, #a8661e 60%, #e8b55e 80%, #5a3610);
+  background-size: 240% 240%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: km-drift 9s ease-in-out infinite alternate;
+}
+
+@keyframes km-drift {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 40%; }
+  100% { background-position: 30% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .km-gold-motion, .km-gold-text { animation: none; }
+}
