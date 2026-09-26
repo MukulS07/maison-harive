@@ -84,6 +84,9 @@ export function ArchivePage({ initialSection = "buttons" }: { initialSection?: A
           <h1 className="km-gold-text font-display text-[clamp(48px,6.4vw,92px)] leading-none font-bold tracking-[0.03em]">
             {active === "treasures" ? "ALL TREASURES" : site.archive.title}
           </h1>
+          <p className="mt-2 max-w-5xl font-serif text-[13.5px] italic text-gold-pale/85 sm:text-[15px] md:text-[16px] md:whitespace-nowrap">
+            &ldquo;Every treasure from the MAISON comes with a special note, a gift to keep, and its Certificate of Authenticity&rdquo;
+          </p>
         </div>
       </section>
 
@@ -92,13 +95,16 @@ export function ArchivePage({ initialSection = "buttons" }: { initialSection?: A
 
       {active !== "treasures" ? (
         <>
-          <div className="flex flex-col items-center gap-2.5 px-5 pt-4 pb-16 text-center lg:pt-0">
+          <div className="flex flex-col items-center gap-2 px-5 pt-4 pb-16 text-center lg:pt-0">
             <p aria-live="polite" className="text-body text-ivory-soft italic">
               {section.caption}
             </p>
+            <p className="max-w-4xl font-serif text-[13px] italic text-gold/80 sm:text-[14px] md:whitespace-nowrap">
+              &ldquo;Every treasure from the MAISON comes with a special note, a gift to keep, and its Certificate of Authenticity&rdquo;
+            </p>
             <a
               href="#every-piece"
-              className="border-b border-gold py-2 font-display text-xs tracking-[0.35em] text-gold-bright uppercase transition-colors duration-300 hover:text-gold-pale"
+              className="mt-1 border-b border-gold py-1.5 font-display text-xs tracking-[0.35em] text-gold-bright uppercase transition-colors duration-300 hover:text-gold-pale"
             >
               See every piece in {section.label} →
             </a>

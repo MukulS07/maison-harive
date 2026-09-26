@@ -125,6 +125,8 @@ export const site = {
   archive: {
     eyebrow: "MAISON HARIVÉ · THE SHOP",
     title: "Products · Men",
+    tagline:
+      "Every treasure from the MAISON comes with a special note, a gift to keep, and its Certificate of Authenticity",
     bagCount: 0,
   },
 };
