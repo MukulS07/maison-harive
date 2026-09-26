@@ -305,7 +305,7 @@ export function ChambersStage() {
 
           {/* Gold divider with a diamond at its midpoint. */}
           {[panels[1].pos].map((pos, i) => (
-            <Divider key={i} pos={pos} axis={axis} measured={measured} index={i + 1} hidden={Boolean(shown)} />
+            <Divider key={i} pos={pos} axis={axis} measured={measured} hidden={Boolean(shown)} />
           ))}
 
           {moving === "legacy" && <MovingEdge pos={edgeLegacy} glow={edgeGlow} axis={axis} trail="before" />}
@@ -509,13 +509,11 @@ function Divider({
   pos,
   axis,
   measured,
-  index,
   hidden,
 }: {
   pos: MotionValue<number>;
   axis: Axis;
   measured: boolean;
-  index: number;
   hidden: boolean;
 }) {
   const style = measured ? (axis === "x" ? { left: pos } : { top: pos }) : undefined;

@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
 import { archiveSections, productsFor, toNumeral, type ArchiveSectionId, type Product } from "@/content/products";
 import { site } from "@/content/site";
 import { BackButton } from "../BackButton";
@@ -12,6 +12,8 @@ import { Eyebrow, GoldBackdrop } from "../ui";
 import { Medallion } from "./Medallion";
 import { AllTreasures3DSection } from "./AllTreasures3DSection";
 import { ProductCard3D } from "./ProductCard3D";
+import { SearchModal } from "./SearchModal";
+import { BagModal } from "./BagModal";
 
 /*
  * Necklace geometry (spec §5.2), in the mockup's 1440-wide space, measured from the top of
@@ -39,15 +41,23 @@ const strands = (hx: number) => [
 
 const HANG = { type: "spring" as const, stiffness: 210, damping: 14, mass: 0.9 };
 
+import { useTreasuryBag } from "@/context/TreasuryBagContext";
+
 /** Page 4 (spec §5): the shop, where each section hangs as a necklace from its tab. */
 export function ArchivePage({ initialSection = "buttons" }: { initialSection?: ArchiveSectionId }) {
   const [active, setActive] = useState<ArchiveSectionId>(initialSection);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isBagOpen, setIsBagOpen] = useState(false);
+  const { bagCount } = useTreasuryBag();
   const index = archiveSections.findIndex((s) => s.id === active);
   const section = archiveSections[index];
   const pieces = productsFor(active);
 
   return (
     <main className="min-h-dvh">
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <BagModal isOpen={isBagOpen} onClose={() => setIsBagOpen(false)} />
+
       <section className="relative overflow-hidden">
         <GoldBackdrop scrim={0.72} />
         <SiteHeader
@@ -63,6 +73,7 @@ export function ArchivePage({ initialSection = "buttons" }: { initialSection?: A
               </Link>
               <button
                 type="button"
+                onClick={() => setIsSearchOpen(true)}
                 aria-label="Search the Archive"
                 className="flex size-11 cursor-pointer items-center justify-center text-ivory transition-colors duration-300 hover:text-gold-bright"
               >
@@ -70,11 +81,12 @@ export function ArchivePage({ initialSection = "buttons" }: { initialSection?: A
               </button>
               <button
                 type="button"
-                aria-label={`Your treasury bag, ${site.archive.bagCount} pieces`}
+                onClick={() => setIsBagOpen(true)}
+                aria-label={`Your treasury bag, ${bagCount} pieces`}
                 className="flex h-11 cursor-pointer items-center gap-2 px-1 font-display text-label tracking-[0.2em] text-ivory transition-colors duration-300 hover:text-gold-bright"
               >
                 <BagIcon />
-                {site.archive.bagCount}
+                <span className="font-display text-[12px] text-gold-bright">{bagCount}</span>
               </button>
             </div>
           }
@@ -98,9 +110,6 @@ export function ArchivePage({ initialSection = "buttons" }: { initialSection?: A
           <div className="flex flex-col items-center gap-2 px-5 pt-4 pb-16 text-center lg:pt-0">
             <p aria-live="polite" className="text-body text-ivory-soft italic">
               {section.caption}
-            </p>
-            <p className="max-w-4xl font-serif text-[13px] italic text-gold/80 sm:text-[14px] md:whitespace-nowrap">
-              &ldquo;Every treasure from the MAISON comes with a special note, a gift to keep, and its Certificate of Authenticity&rdquo;
             </p>
             <a
               href="#every-piece"
@@ -196,14 +205,15 @@ function NecklaceDesktop({ active, onSelect, pieces }: NecklaceProps) {
   const boxRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [strandIndex, setStrandIndex] = useState(0);
+  const [prevActive, setPrevActive] = useState(active);
+  if (prevActive !== active) {
+    setPrevActive(active);
+    setStrandIndex(0);
+  }
   const { refs, onKeyDown } = useTabKeys(active, onSelect);
   const hx = hookX(active);
   const [left, right] = strands(hx);
   const sectionId = archiveSections[active].id;
-
-  useEffect(() => {
-    setStrandIndex(0);
-  }, [active]);
 
   useLayoutEffect(() => {
     const el = boxRef.current;

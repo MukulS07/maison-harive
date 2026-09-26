@@ -59,13 +59,16 @@ export function AtelierChamber() {
   });
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const set = (k: keyof Fields) => (v: string) => {
     setFields((f) => ({ ...f, [k]: v }));
     if (errors[k]) setErrors((e) => ({ ...e, [k]: undefined }));
+    if (submitError) setSubmitError(null);
   };
 
-  const submit = (ev: FormEvent<HTMLFormElement>) => {
+  const submit = async (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const e = validate(fields);
     setErrors(e);
@@ -74,7 +77,33 @@ export function AtelierChamber() {
       document.getElementById(`${uid}-${first}`)?.focus();
       return;
     }
-    setSent(true);
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const isEmail = EMAIL.test(fields.contact.trim());
+      const res = await fetch("/api/concierge", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fields.name,
+          phone: isEmail ? "" : fields.contact,
+          email: isEmail ? fields.contact : "",
+          type: "Private Viewing",
+          message: `Piece requested: ${fields.piece}`,
+          prefDate: fields.date,
+          prefTime: "Atelier Salon Session",
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Unable to dispatch viewing request.");
+      }
+      setSent(true);
+    } catch (err: unknown) {
+      setSubmitError(err instanceof Error ? err.message : "Error dispatching viewing request. Please connect directly via Concierge.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -100,6 +129,7 @@ export function AtelierChamber() {
             <div className="relative aspect-[16/9] w-full overflow-hidden border border-gold/40 bg-surface">
               <video
                 ref={videoRef}
+                poster="/media/heritage-portrait.jpg"
                 src={site.atelier.video}
                 autoPlay
                 loop
@@ -295,9 +325,18 @@ export function AtelierChamber() {
                       </select>
                     </Field>
                   </div>
-                  <div className="flex justify-center pt-2">
-                    <Button type="submit" className="w-full sm:w-auto px-10 py-[17px] md:text-[13px] md:tracking-[0.28em]">
-                      REQUEST A PRIVATE VIEWING
+                  <div className="flex flex-col items-center gap-3 pt-2">
+                    {submitError && (
+                      <p role="alert" className="text-center font-display text-xs tracking-[0.2em] text-rose-300 uppercase">
+                        {submitError}
+                      </p>
+                    )}
+                    <Button
+                      type="submit"
+                      disabled={submitting}
+                      className="w-full sm:w-auto px-10 py-[17px] md:text-[13px] md:tracking-[0.28em]"
+                    >
+                      {submitting ? "DISPATCHING REQUEST..." : "REQUEST A PRIVATE VIEWING"}
                     </Button>
                   </div>
                 </motion.form>

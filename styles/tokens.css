@@ -11,8 +11,9 @@
   --km-gold-pale: #fbe7b8;
   --km-gold-deep: #7a5418;
   --km-ivory: #efe6d2;          /* primary text */
-  --km-ivory-soft: #d8cdb4;     /* body copy */
-  --km-muted: #a89878;          /* captions, placeholders */
+  --km-ivory-soft: #ded4bf;     /* body copy */
+  --km-muted: #bdae90;          /* captions, placeholders - WCAG AA compliant */
+  --km-caption: #c6b99e;        /* subtle labels, 7.5:1 contrast */
   --km-on-gold: #140e06;        /* text on gold buttons */
 
   --km-line: rgba(201, 164, 92, 0.30);       /* hairline dividers */

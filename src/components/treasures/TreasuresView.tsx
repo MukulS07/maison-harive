@@ -2,14 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { products, type ProductCategory, type Product, toNumeral } from "@/content/products";
-import { site } from "@/content/site";
+import { products, type ProductCategory, toNumeral } from "@/content/products";
 import { BackButton } from "../BackButton";
 import { BagIcon, SearchIcon } from "../icons";
 import { HeaderEyebrow, SiteHeader } from "../SiteHeader";
 import { ButtonLink, Eyebrow, GoldBackdrop } from "../ui";
 import { Medallion } from "../archive/Medallion";
 import { ProductCard3D } from "../archive/ProductCard3D";
+import { SearchModal } from "../archive/SearchModal";
+import { BagModal } from "../archive/BagModal";
+import { useTreasuryBag } from "@/context/TreasuryBagContext";
 
 type FilterId = "all" | ProductCategory;
 
@@ -23,6 +25,9 @@ const filters: { id: FilterId; label: string }[] = [
 
 export function TreasuresView() {
   const [activeFilter, setActiveFilter] = useState<FilterId>("all");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isBagOpen, setIsBagOpen] = useState(false);
+  const { bagCount } = useTreasuryBag();
 
   const filteredProducts =
     activeFilter === "all" ? products : products.filter((p) => p.category === activeFilter);
@@ -31,6 +36,9 @@ export function TreasuresView() {
 
   return (
     <main className="min-h-dvh bg-black text-ivory">
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <BagModal isOpen={isBagOpen} onClose={() => setIsBagOpen(false)} />
+
       {/* Hero Banner */}
       <section className="relative overflow-hidden border-b border-line">
         <GoldBackdrop scrim={0.7} />
@@ -47,6 +55,7 @@ export function TreasuresView() {
               </Link>
               <button
                 type="button"
+                onClick={() => setIsSearchOpen(true)}
                 aria-label="Search the Vault"
                 className="flex size-11 cursor-pointer items-center justify-center text-ivory transition-colors duration-300 hover:text-gold-bright"
               >
@@ -54,11 +63,12 @@ export function TreasuresView() {
               </button>
               <button
                 type="button"
-                aria-label={`Your treasury bag, ${site.archive.bagCount} pieces`}
+                onClick={() => setIsBagOpen(true)}
+                aria-label={`Your treasury bag, ${bagCount} pieces`}
                 className="flex h-11 cursor-pointer items-center gap-2 px-1 font-display text-label tracking-[0.2em] text-ivory transition-colors duration-300 hover:text-gold-bright"
               >
                 <BagIcon />
-                {site.archive.bagCount}
+                <span className="font-display text-[12px] text-gold-bright">{bagCount}</span>
               </button>
             </div>
           }

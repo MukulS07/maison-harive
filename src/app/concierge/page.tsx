@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { ConciergeView } from "@/components/concierge/ConciergeView";
 
 export const metadata: Metadata = {
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function ConciergePage() {
-  return <ConciergeView />;
+  return (
+    <Suspense fallback={<div className="min-h-dvh bg-black" />}>
+      <ConciergeView />
+    </Suspense>
+  );
 }

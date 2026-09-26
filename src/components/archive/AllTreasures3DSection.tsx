@@ -38,13 +38,6 @@ export function AllTreasures3DSection() {
 
   return (
     <section id="every-piece" className="relative mx-auto w-full max-w-km px-5 pt-6 pb-24">
-      {/* Maison Treasure Promise */}
-      <div className="mb-6 flex justify-center text-center">
-        <p className="max-w-5xl font-serif text-[13.5px] italic text-gold/85 sm:text-[15px] md:text-[16px] md:whitespace-nowrap">
-          &ldquo;Every treasure from the MAISON comes with a special note, a gift to keep, and its Certificate of Authenticity&rdquo;
-        </p>
-      </div>
-
       {/* Category filter pills */}
       <div className="mb-10 flex flex-wrap items-center justify-center gap-2 md:gap-3">
         {filterTabs.map((tab) => {

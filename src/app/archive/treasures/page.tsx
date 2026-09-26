@@ -1,8 +1,5 @@
-import type { Metadata } from "next";
-import { TreasuresView } from "@/components/treasures/TreasuresView";
-
-export const metadata: Metadata = { title: "All Treasures · Maison Harivé" };
+import { redirect } from "next/navigation";
 
 export default function ArchiveTreasuresPage() {
-  return <TreasuresView />;
+  redirect("/treasures");
 }

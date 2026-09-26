@@ -77,15 +77,15 @@ export const site = {
   },
 
   collection: {
-    /** Filter pills (placeholder categories). */
-    filters: ["All pieces", "Rings", "Cuffs", "Pendants", "Chains"],
-    nextArtefact: "[ NEXT ARTEFACT ]",
-    photo: "[ PRODUCT PHOTO ]",
+    /** Real catalogue categories */
+    filters: ["All Pieces", "Buttons", "Brooches", "Kalangi", "Pendants"],
+    nextArtefact: "Next Artefact",
+    photo: "/media/heritage-portrait.jpg",
   },
 
   atelier: {
     lead: "Unveiling a bold new horizon of craft and distinction.",
-    video: "/media/video-output-4098CE0C-7E21-476B-88F5-EED370891E88-1.mov",
+    video: "/media/video-output-4098CE0C-7E21-476B-88F5-EED370891E88-1.mp4",
     body:
       "Maison Harivé is a new house born from an old world of treasures, stories and heritage.\n\nInspired by the grandeur of Jaipur and the elegance of France, it reimagines the jewels and symbols of another time for a new generation.\n\nEach creation is imagined as a treasure discovered within the house carrying a story, a symbol and a sense of mystery. Founded by two sisters, Maison Harivé is where an inherited legacy finds a language of its own.\n\nA new house. A new chapter. Treasures, reimagined.",
     viewingTitle: "View the Maison in private.",

@@ -30,7 +30,13 @@ export function Medallion({
         }}
       >
         {product.image ? (
-          <Image src={product.image} alt="" fill sizes={`${size}px`} className="object-cover" />
+          <Image
+            src={product.image}
+            alt={product.name || "Handcrafted Royal Artefact"}
+            fill
+            sizes={`${size}px`}
+            className="object-cover"
+          />
         ) : (
           <span style={{ fontSize: Math.round(size * 0.4) }}>
             <Numeral>{numeral}</Numeral>

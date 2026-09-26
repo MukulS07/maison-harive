@@ -2,10 +2,11 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { products } from "@/content/products";
 import { site } from "@/content/site";
-import { ArrowRight, CheckIcon, ClockIcon, CloseIcon, SearchIcon, WhatsAppIcon } from "../icons";
+import { CheckIcon, ClockIcon, CloseIcon, SearchIcon, WhatsAppIcon } from "../icons";
 import { Button, Eyebrow, GoldBackdrop } from "../ui";
 
 export type ConciergeSectionId =
@@ -36,8 +37,19 @@ export function ConciergeView({
   onClose,
   isModal = false,
 }: ConciergeViewProps) {
-  const [activeTab, setActiveTab] = useState<ConciergeSectionId>(initialSection);
+  const searchParams = useSearchParams();
+  const paramSection = searchParams.get("section") as ConciergeSectionId | null;
+  const paramProduct = searchParams.get("product");
+
+  const [activeTab, setActiveTab] = useState<ConciergeSectionId>(() => {
+    if (paramSection && conciergeSections.some((s) => s.id === paramSection)) {
+      return paramSection;
+    }
+    return initialSection;
+  });
   const [submittedRef, setSubmittedRef] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
 
   // Form states
   const [name, setName] = useState("");
@@ -56,24 +68,77 @@ export function ConciergeView({
   const [customMetal, setCustomMetal] = useState("22K Yellow Gold & Kundan Polki");
   const [customBudget, setCustomBudget] = useState("Flexible / Discretionary");
 
-  const [enquiryProduct, setEnquiryProduct] = useState(products[0]?.name ?? "Shield of Legacy");
+  const [enquiryProduct, setEnquiryProduct] = useState(
+    paramProduct || products[0]?.name || "Shield of Legacy"
+  );
   const [enquiryTopic, setEnquiryTopic] = useState("Gemstone & Purity Certifications");
 
   const [stylingOccasion, setStylingOccasion] = useState("Royal Wedding Ceremony");
   const [stylingPalette, setStylingPalette] = useState("Ivory & Gold Zari");
 
+  // Sync with searchParams if navigated with new query
+  const [prevParamSection, setPrevParamSection] = useState(paramSection);
+  if (prevParamSection !== paramSection) {
+    setPrevParamSection(paramSection);
+    if (paramSection && conciergeSections.some((s) => s.id === paramSection)) {
+      setActiveTab(paramSection);
+    }
+  }
+
+  const [prevParamProduct, setPrevParamProduct] = useState(paramProduct);
+  if (prevParamProduct !== paramProduct) {
+    setPrevParamProduct(paramProduct);
+    if (paramProduct) {
+      setEnquiryProduct(paramProduct);
+    }
+  }
+
   // Order history search
   const [orderQuery, setOrderQuery] = useState("");
   const [searchedOrder, setSearchedOrder] = useState<boolean>(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const randomId = "MH-" + Math.floor(10000 + Math.random() * 90000);
-    setSubmittedRef(randomId);
+    setIsSubmitting(true);
+    setApiError(null);
+    try {
+      const notes = [
+        message ? `Notes: ${message}` : null,
+        activeTab === "appointments" ? `Viewing: ${viewingType} (${city ? "City: " + city : ""})` : null,
+        activeTab === "custom" ? `Category: ${customCategory}, Metal: ${customMetal}, Budget: ${customBudget}` : null,
+        activeTab === "enquiry" ? `Product: ${enquiryProduct}, Topic: ${enquiryTopic}` : null,
+        activeTab === "styling" ? `Occasion: ${stylingOccasion}, Palette: ${stylingPalette}` : null,
+        `Preferred Contact: ${contactMethod}`,
+      ].filter(Boolean).join(" | ");
+
+      const res = await fetch("/api/concierge", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          email,
+          type: activeTab,
+          message: notes,
+          prefDate,
+          prefTime,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Unable to process appointment dispatch.");
+      }
+      setSubmittedRef(data.reference || `MH-${Math.floor(10000 + Math.random() * 90000)}`);
+    } catch (err: unknown) {
+      setApiError(err instanceof Error ? err.message : "Error contacting Concierge. Please connect directly via WhatsApp.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const resetForm = () => {
     setSubmittedRef(null);
+    setApiError(null);
     setMessage("");
   };
 
@@ -226,6 +291,11 @@ export function ConciergeView({
               transition={{ duration: 0.35, ease: [0.2, 0.7, 0.1, 1] }}
               className="overflow-hidden rounded-lg border border-gold/35 bg-surface/80 p-6 backdrop-blur-md md:p-12"
             >
+              {apiError && (
+                <div role="alert" className="mb-6 rounded border border-rose-500/50 bg-rose-950/40 p-4 text-center font-display text-xs tracking-[0.2em] text-rose-200 uppercase">
+                  {apiError}
+                </div>
+              )}
               {/* 1. PRIVATE APPOINTMENTS */}
               {activeTab === "appointments" && (
                 <div>
@@ -297,7 +367,7 @@ export function ConciergeView({
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                       <div>
                         <label className="mb-2 block font-display text-[12px] tracking-[0.25em] text-gold uppercase">
                           Viewing Format
@@ -310,6 +380,20 @@ export function ConciergeView({
                           <option value="Private Atelier Salon">Private Atelier Salon</option>
                           <option value="Private Residence Viewing">Private Residence Viewing</option>
                           <option value="Confidential Digital Salon">Confidential Digital Salon</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="mb-2 block font-display text-[12px] tracking-[0.25em] text-gold uppercase">
+                          Contact Channel
+                        </label>
+                        <select
+                          value={contactMethod}
+                          onChange={(e) => setContactMethod(e.target.value)}
+                          className="km-field bg-surface text-ivory"
+                        >
+                          <option value="whatsapp">WhatsApp</option>
+                          <option value="phone">Phone Call</option>
+                          <option value="email">Email</option>
                         </select>
                       </div>
                       <div>
@@ -353,8 +437,8 @@ export function ConciergeView({
                     </div>
 
                     <div className="pt-4">
-                      <Button type="submit" className="w-full md:w-auto">
-                        REQUEST PRIVATE APPOINTMENT
+                      <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto">
+                        {isSubmitting ? "DISPATCHING REQUEST..." : "REQUEST PRIVATE APPOINTMENT"}
                       </Button>
                     </div>
                   </form>
@@ -456,6 +540,21 @@ export function ConciergeView({
                       </div>
                       <div>
                         <label className="mb-2 block font-display text-[12px] tracking-[0.25em] text-gold uppercase">
+                          Estimated Budget Tier
+                        </label>
+                        <select
+                          value={customBudget}
+                          onChange={(e) => setCustomBudget(e.target.value)}
+                          className="km-field bg-surface text-ivory"
+                        >
+                          <option value="Flexible / Discretionary">Flexible / Discretionary</option>
+                          <option value="₹2,00,000 – ₹5,00,000">₹2,00,000 – ₹5,00,000</option>
+                          <option value="₹5,00,000 – ₹15,00,000">₹5,00,000 – ₹15,00,000</option>
+                          <option value="₹15,00,000+ (Imperial Bespoke)">₹15,00,000+ (Imperial Bespoke)</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="mb-2 block font-display text-[12px] tracking-[0.25em] text-gold uppercase">
                           Target Completion Window
                         </label>
                         <input
@@ -482,8 +581,8 @@ export function ConciergeView({
                     </div>
 
                     <div className="pt-4">
-                      <Button type="submit" className="w-full md:w-auto">
-                        COMMISSION BESPOKE ARTEFACT
+                      <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto">
+                        {isSubmitting ? "DISPATCHING REQUEST..." : "COMMISSION BESPOKE ARTEFACT"}
                       </Button>
                     </div>
                   </form>
@@ -596,8 +695,8 @@ export function ConciergeView({
                     </div>
 
                     <div className="pt-4">
-                      <Button type="submit" className="w-full md:w-auto">
-                        DISPATCH PRODUCT ENQUIRY
+                      <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto">
+                        {isSubmitting ? "DISPATCHING REQUEST..." : "DISPATCH PRODUCT ENQUIRY"}
                       </Button>
                     </div>
                   </form>
@@ -691,8 +790,8 @@ export function ConciergeView({
                     </div>
 
                     <div className="pt-4">
-                      <Button type="submit" className="w-full md:w-auto">
-                        REQUEST STYLING SESSION
+                      <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto">
+                        {isSubmitting ? "DISPATCHING REQUEST..." : "REQUEST STYLING SESSION"}
                       </Button>
                     </div>
                   </form>
@@ -789,8 +888,8 @@ export function ConciergeView({
                       </div>
 
                       <div>
-                        <Button type="submit" variant="secondary">
-                          REQUEST WHATSAPP REACHOUT
+                        <Button type="submit" disabled={isSubmitting} variant="secondary">
+                          {isSubmitting ? "DISPATCHING REQUEST..." : "REQUEST WHATSAPP REACHOUT"}
                         </Button>
                       </div>
                     </form>

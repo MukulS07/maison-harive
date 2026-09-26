@@ -4,6 +4,7 @@ import { Medallion } from "@/components/archive/Medallion";
 import { BackButton } from "@/components/BackButton";
 import { Logo, SiteHeader, HeaderEyebrow } from "@/components/SiteHeader";
 import { ButtonLink, Eyebrow, GoldBackdrop } from "@/components/ui";
+import { ProductBagButton } from "@/components/archive/ProductBagButton";
 import { archiveSections, getProduct, products, productsFor, toNumeral } from "@/content/products";
 import { site } from "@/content/site";
 
@@ -51,8 +52,19 @@ export default async function ProductPage({ params }: PageProps<"/archive/[id]">
           </p>
         )}
         {product.price && <p className="relative text-[24px] text-gold italic">{product.price}</p>}
-        <div className="relative mt-6 flex flex-wrap justify-center gap-4">
-          <ButtonLink href={site.privateViewing.href}>REQUEST A PRIVATE VIEWING</ButtonLink>
+
+        {/* Maison Authenticity Promise */}
+        <div className="relative mt-2 max-w-xl rounded-md border border-gold/30 bg-surface/50 px-6 py-3.5 text-center backdrop-blur-sm">
+          <p className="font-serif text-[13.5px] italic text-gold sm:text-[15px]">
+            &ldquo;{site.archive.tagline}&rdquo;
+          </p>
+        </div>
+
+        <div className="relative mt-4 flex flex-wrap justify-center items-center gap-4">
+          <ButtonLink href={`/concierge?section=enquiry&product=${encodeURIComponent(product.name)}`}>
+            REQUEST A PRIVATE VIEWING
+          </ButtonLink>
+          <ProductBagButton product={product} />
           <ButtonLink href="/archive" variant="secondary">
             RETURN TO THE ARCHIVE
           </ButtonLink>

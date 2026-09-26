@@ -1,13 +1,12 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/content/site";
 import { BackButton } from "./BackButton";
 import { ArrowRight } from "./icons";
 import { HeaderEyebrow, Logo, SiteHeader } from "./SiteHeader";
-import { ButtonLink, Eyebrow, FramedPlaceholder, GoldBackdrop } from "./ui";
+import { ButtonLink, Eyebrow, GoldBackdrop } from "./ui";
 
 const ROYAL = [0.2, 0.7, 0.1, 1] as const;
 
