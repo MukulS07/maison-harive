@@ -1,6 +1,6 @@
 /**
- * The product catalogue. Everything here is a placeholder until real
- * names, prices and photos arrive: edit this file only.
+ * The Maison Harive product catalogue.
+ * Grounded in the Jaipur heritage and Parisian elegance.
  */
 
 export type ProductCategory = "buttons" | "brooches" | "kalangi" | "pendant";
@@ -10,40 +10,518 @@ export type Product = {
   name: string;
   category: ProductCategory;
   price?: string;
-  /** Path under /public, e.g. "/products/shield-of-legacy.jpg". */
+  tagline?: string;
+  typeLabel?: string;
+  /** Path under /public, e.g. "/products/the-citadel-pendant.webp". */
   image?: string;
-  /** Featured pieces hang on the "All Treasures" strand and fill the Collection grid. */
+  /** Featured pieces hang on the "All Treasures" strand and fill the Collection highlights. */
   featured?: boolean;
 };
 
-const PRICE = "[ PRICE ]";
-
-/** The five named artefacts. Their categories are placeholders; set the real ones. */
-const featured: Product[] = [
-  { id: "shield-of-legacy", name: "Shield of Legacy", category: "brooches", price: PRICE, featured: true },
-  { id: "arms-of-honour", name: "Arms of Honour", category: "brooches", price: PRICE, featured: true },
-  { id: "crownbound", name: "Crownbound", category: "kalangi", price: PRICE, featured: true },
-  { id: "phoenix-reign", name: "Phoenix Reign", category: "pendant", price: PRICE, featured: true },
-  { id: "dominion", name: "Dominion", category: "buttons", price: PRICE, featured: true },
-];
-
-const numerals = ["I", "II", "III", "IV", "V"];
-
-function placeholders(category: ProductCategory, label: string): Product[] {
-  return numerals.map((n) => ({
-    id: `${category}-${n.toLowerCase()}`,
-    name: `[ ${label} ${n} ]`,
-    category,
-    price: PRICE,
-  }));
-}
-
 export const products: Product[] = [
-  ...featured,
-  ...placeholders("buttons", "BUTTON"),
-  ...placeholders("brooches", "BROOCH"),
-  ...placeholders("kalangi", "KALANGI"),
-  ...placeholders("pendant", "PENDANT"),
+  {
+    id: "the-citadel-pendant",
+    name: "The Citadel Pendant",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Built to protect what matters.",
+    typeLabel: "Pendant",
+    image: "/products/the-citadel-pendant.webp",
+    featured: true,
+  },
+  {
+    id: "the-garudas-crest",
+    name: "The Garuda's Crest",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "Born to rise above the ordinary.",
+    typeLabel: "Brooch",
+    image: "/products/the-garudas-crest.webp",
+    featured: true,
+  },
+  {
+    id: "seshnag-talisman",
+    name: "Seshnag Talisman",
+    category: "kalangi",
+    price: "Inquire",
+    tagline: "Where ancient power meets eternal protection.",
+    typeLabel: "Pendant/ Kalangi",
+    image: "/products/seshnag-talisman.webp",
+  },
+  {
+    id: "the-vault-pinnacle",
+    name: "The Vault Pinnacle",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "The crown jewel of the vault.",
+    typeLabel: "Brooch",
+    image: "/products/the-vault-pinnacle.webp",
+    featured: true,
+  },
+  {
+    id: "empress",
+    name: "Empress",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "She was never meant to follow.",
+    typeLabel: "Brooch/Pend ant",
+    image: "/products/empress.webp",
+    featured: true,
+  },
+  {
+    id: "ruby-heart",
+    name: "Ruby Heart",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "A heart made for royalty.",
+    typeLabel: "Brooch",
+    image: "/products/ruby-heart.webp",
+  },
+  {
+    id: "maniratna",
+    name: "Maniratna",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "The jewel beyond measure.",
+    typeLabel: "Brooch",
+    image: "/products/maniratna.webp",
+  },
+  {
+    id: "the-airavata-crest",
+    name: "The Airavata Crest",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "Strength worthy of a king.",
+    typeLabel: "Brooch",
+    image: "/products/the-airavata-crest.webp",
+  },
+  {
+    id: "imperial-peacock",
+    name: "Imperial Peacock",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "Grandeur, in full display.",
+    typeLabel: "Brooch",
+    image: "/products/imperial-peacock.webp",
+  },
+  {
+    id: "vanguard",
+    name: "Vanguard",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "For those who lead from the front.",
+    typeLabel: "Brooch",
+    image: "/products/vanguard.webp",
+  },
+  {
+    id: "sovereign-opal-turtle",
+    name: "Sovereign Opal Turtle",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "Patience. Power. Permanence. Luck.",
+    typeLabel: "Brooch",
+    image: "/products/sovereign-opal-turtle.webp",
+  },
+  {
+    id: "narasimha-the-monarchs-lion",
+    name: "Narasimha / The Monarch's Lion",
+    category: "buttons",
+    price: "Inquire",
+    tagline: "Fierce enough to protect a kingdom.",
+    typeLabel: "Brooch/Butto ns",
+    image: "/products/narasimha-the-monarchs-lion.webp",
+  },
+  {
+    id: "sovereign-syamantaka",
+    name: "Sovereign Syamantaka",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "A legend worthy of the vault.",
+    typeLabel: "Brooch",
+    image: "/products/sovereign-syamantaka.webp",
+  },
+  {
+    id: "royal-tiger-of-bengal-brooch",
+    name: "Royal Tiger of Bengal Brooch",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "The wild, crowned in power.",
+    typeLabel: "Brooch",
+    image: "/products/royal-tiger-of-bengal-brooch.webp",
+    featured: true,
+  },
+  {
+    id: "eclipse-pendant",
+    name: "Eclipse Pendant",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "When light meets its shadow.",
+    typeLabel: "Pendant",
+    image: "/products/eclipse-pendant.webp",
+  },
+  {
+    id: "cascade",
+    name: "Cascade",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "An endless fall of brilliance.",
+    typeLabel: "Brooch/Pend ant",
+    image: "/products/cascade.webp",
+  },
+  {
+    id: "indigo-quee-n",
+    name: "Indigo-Queen",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Royalty, written in blue.",
+    typeLabel: "Pendant",
+    image: "/products/indigo-quee-n.webp",
+  },
+  {
+    id: "celestial-pearl-pendant-earring-set",
+    name: "Celestial Pearl Pendant & Earring Set",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "Treasures borrowed from the heavens.",
+    typeLabel: "Brooch Pendant",
+    image: "/products/celestial-pearl-pendant-earring-set.webp",
+  },
+  {
+    id: "blood-rose",
+    name: "Blood-Rose",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Beauty with a darker side.",
+    typeLabel: "Pendant",
+    image: "/products/blood-rose.webp",
+  },
+  {
+    id: "citadel-emerald-turban-ornament",
+    name: "Citadel Emerald Turban Ornament",
+    category: "kalangi",
+    price: "Inquire",
+    tagline: "A crown deserves its own armour.",
+    typeLabel: "Kalangi",
+    image: "/products/citadel-emerald-turban-ornament.webp",
+    featured: true,
+  },
+  {
+    id: "nizams-emerald-rosette-buttons",
+    name: "Nizam's Emerald Rosette Buttons",
+    category: "buttons",
+    price: "Inquire",
+    tagline: "A touch of the old royal court.",
+    typeLabel: "Buttons",
+    image: "/products/nizams-emerald-rosette-buttons.webp",
+    featured: true,
+  },
+  {
+    id: "starlight-sapphire",
+    name: "Starlight Sapphire",
+    category: "buttons",
+    price: "Inquire",
+    tagline: "A piece of the night sky, captured.",
+    typeLabel: "Buttons",
+    image: "/products/starlight-sapphire.webp",
+  },
+  {
+    id: "sapphire-parrot",
+    name: "Sapphire Parrot",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "A jewel with a voice of its own.",
+    typeLabel: "Brooch",
+    image: "/products/sapphire-parrot.webp",
+  },
+  {
+    id: "geometric-cabochon-suite",
+    name: "Geometric Cabochon Suite",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Where precision becomes art.",
+    typeLabel: "Pendant",
+    image: "/products/geometric-cabochon-suite.webp",
+  },
+  {
+    id: "peacock-sapphire-ring",
+    name: "Peacock Sapphire Ring",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "A peacock, captured in a ring.",
+    typeLabel: "Brooch",
+    image: "/products/peacock-sapphire-ring.webp",
+  },
+  {
+    id: "prism",
+    name: "Prism",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Every angle reveals another story.",
+    typeLabel: "Pendant/Broo ch",
+    image: "/products/prism.webp",
+  },
+  {
+    id: "stellar-diamond-studs",
+    name: "Stellar Diamond Studs",
+    category: "buttons",
+    price: "Inquire",
+    tagline: "Small in scale. Stellar in presence.",
+    typeLabel: "Buttons",
+    image: "/products/stellar-diamond-studs.webp",
+  },
+  {
+    id: "palmette",
+    name: "Palmette",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "A classic, rewritten for today.",
+    typeLabel: "Pendant",
+    image: "/products/palmette.webp",
+  },
+  {
+    id: "geometric-diamond-arch",
+    name: "Geometric Diamond Arch",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Architecture, reduced to brilliance.",
+    typeLabel: "Pendant",
+    image: "/products/geometric-diamond-arch.webp",
+  },
+  {
+    id: "chandelier-tiered-brooch",
+    name: "Chandelier Tiered Brooch",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "A cascade fit for the court.",
+    typeLabel: "Brooch",
+    image: "/products/chandelier-tiered-brooch.webp",
+  },
+  {
+    id: "blush-eucalyptus-koala",
+    name: "Blush Eucalyptus Koala",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "A little charm from the wild.",
+    typeLabel: "Brooch",
+    image: "/products/blush-eucalyptus-koala.webp",
+  },
+  {
+    id: "halo-rosette",
+    name: "Halo Rosette",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Surrounded by an aura of royalty.",
+    typeLabel: "Pendant",
+    image: "/products/halo-rosette.webp",
+  },
+  {
+    id: "crimson-cluster",
+    name: "Crimson Cluster",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "A constellation in crimson.",
+    typeLabel: "Pendant",
+    image: "/products/crimson-cluster.webp",
+  },
+  {
+    id: "diamond-radial-set",
+    name: "Diamond Radial Set",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Brilliance, radiating from within.",
+    typeLabel: "Pendant set",
+    image: "/products/diamond-radial-set.webp",
+  },
+  {
+    id: "onyx-frame",
+    name: "Onyx Frame",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "Dark. Defined. Distinct.",
+    typeLabel: "Brooch",
+    image: "/products/onyx-frame.webp",
+  },
+  {
+    id: "nouveau-shell-pendant",
+    name: "Nouveau Shell Pendant",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "Nature, sculpted into modern royalty.",
+    typeLabel: "Brooch",
+    image: "/products/nouveau-shell-pendant.webp",
+  },
+  {
+    id: "nizam-pearl-strand",
+    name: "Nizam Pearl Strand",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "An heirloom of timeless elegance.",
+    typeLabel: "Pendant",
+    image: "/products/nizam-pearl-strand.webp",
+  },
+  {
+    id: "virasat-polki-pendant",
+    name: "Virasat Polki Pendant",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Some treasures are meant to be inherited.",
+    typeLabel: "Pendant",
+    image: "/products/virasat-polki-pendant.webp",
+    featured: true,
+  },
+  {
+    id: "velvet-flare",
+    name: "Velvet Flare",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Soft in character. Bold in presence.",
+    typeLabel: "Pendant/ brooch",
+    image: "/products/velvet-flare.webp",
+  },
+  {
+    id: "mughal-mayura-ring",
+    name: "Mughal Mayura Ring",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "Where Mughal grandeur meets the peacock's pride.",
+    typeLabel: "Ring",
+    image: "/products/mughal-mayura-ring.webp",
+  },
+  {
+    id: "citrine-drop",
+    name: "Citrine Drop",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "A drop of golden sunlight.",
+    typeLabel: "Pendant",
+    image: "/products/citrine-drop.webp",
+  },
+  {
+    id: "panda-solitaire",
+    name: "Panda Solitaire",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "A playful spirit, made precious.",
+    typeLabel: "Brooch",
+    image: "/products/panda-solitaire.webp",
+  },
+  {
+    id: "the-navratna",
+    name: "The Navratna",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Nine jewels. One timeless legacy.",
+    typeLabel: "pendant",
+    image: "/products/the-navratna.webp",
+  },
+  {
+    id: "jaipur-filigree-tassel-pendant",
+    name: "Jaipur Filigree Tassel Pendant",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Jaipur's artistry, suspended in time.",
+    typeLabel: "pendant",
+    image: "/products/jaipur-filigree-tassel-pendant.webp",
+  },
+  {
+    id: "sultanas-zenith",
+    name: "Sultana's Zenith",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "She reigns at the very top.",
+    typeLabel: "brooch/ pendant",
+    image: "/products/sultanas-zenith.webp",
+  },
+  {
+    id: "cobalt-jharokha",
+    name: "Cobalt Jharokha",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "A window into royal Jaipur.",
+    typeLabel: "pendant",
+    image: "/products/cobalt-jharokha.webp",
+  },
+  {
+    id: "mayura-archway-brooch",
+    name: "Mayura Archway Brooch",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "A royal gateway, crowned by the peacock.",
+    typeLabel: "brooch",
+    image: "/products/mayura-archway-brooch.webp",
+  },
+  {
+    id: "chandrasaar-pearl-cascade",
+    name: "Chandrasaar Pearl Cascade",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Moonlight, falling in pearls.",
+    typeLabel: "pendant",
+    image: "/products/chandrasaar-pearl-cascade.webp",
+  },
+  {
+    id: "meena-lattice-filigree",
+    name: "Meena Lattice Filigree",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Delicate detail. Regal soul.",
+    typeLabel: "pendant",
+    image: "/products/meena-lattice-filigree.webp",
+  },
+  {
+    id: "dewdrop-durbar-pendant",
+    name: "Dewdrop Durbar Pendant",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "A royal court, captured in a drop.",
+    typeLabel: "pendant",
+    image: "/products/dewdrop-durbar-pendant.webp",
+  },
+  {
+    id: "crown-compass",
+    name: "Crown & Compass",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Rule with purpose. Move with direction.",
+    typeLabel: "pendant",
+    image: "/products/crown-compass.webp",
+  },
+  {
+    id: "guardians-of-the-crown",
+    name: "Guardians of the Crown",
+    category: "brooches",
+    price: "Inquire",
+    tagline: "Every crown needs its protectors.",
+    typeLabel: "brooch",
+    image: "/products/guardians-of-the-crown.webp",
+  },
+  {
+    id: "the-royal-reserve",
+    name: "The Royal Reserve",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Kept for those who know its worth.",
+    typeLabel: "pendant",
+    image: "/products/the-royal-reserve.webp",
+  },
+  {
+    id: "shahi-gulab",
+    name: "Shahi Gulab",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "A rose with royal blood.",
+    typeLabel: "Pendant",
+    image: "/products/shahi-gulab.webp",
+  },
+  {
+    id: "written-in-the-stars",
+    name: "Written in the Stars",
+    category: "pendant",
+    price: "Inquire",
+    tagline: "Some treasures were always destined to be.",
+    typeLabel: "pendant",
+    image: "/products/written-in-the-stars.webp",
+  },
 ];
 
 export type ArchiveSectionId = "treasures" | ProductCategory;
@@ -58,13 +536,12 @@ export const archiveSections: { id: ArchiveSectionId; label: string; caption: st
 ];
 
 /**
- * Pieces shown for an Archive section. "All Treasures" shows the featured pieces.
- * A section shows its own placeholders until named pieces are moved into it
- * (clear `featured` on a named piece to list it under its category instead).
+ * Pieces shown for an Archive section. "All Treasures" shows the featured masterpieces.
+ * For categories, returns all pieces in that category.
  */
 export function productsFor(section: ArchiveSectionId): Product[] {
   if (section === "treasures") return products.filter((p) => p.featured);
-  return products.filter((p) => p.category === section && !p.featured).slice(0, 5);
+  return products.filter((p) => p.category === section);
 }
 
 export const featuredProducts = products.filter((p) => p.featured);
@@ -74,5 +551,13 @@ export function getProduct(id: string) {
 }
 
 export function toNumeral(index: number) {
-  return ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"][index] ?? String(index + 1);
+  const roman = [
+    "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+    "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
+    "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX",
+    "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
+    "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L",
+    "LI", "LII", "LIII", "LIV", "LV"
+  ];
+  return roman[index] ?? String(index + 1);
 }

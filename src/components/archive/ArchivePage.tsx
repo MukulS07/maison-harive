@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
 import { archiveSections, productsFor, toNumeral, type ArchiveSectionId, type Product } from "@/content/products";
 import { site } from "@/content/site";
 import { BackButton } from "../BackButton";
@@ -11,6 +11,7 @@ import { HeaderEyebrow, SiteHeader } from "../SiteHeader";
 import { Eyebrow, GoldBackdrop } from "../ui";
 import { Medallion } from "./Medallion";
 import { AllTreasures3DSection } from "./AllTreasures3DSection";
+import { ProductCard3D } from "./ProductCard3D";
 
 /*
  * Necklace geometry (spec §5.2), in the mockup's 1440-wide space, measured from the top of
@@ -104,22 +105,36 @@ export function ArchivePage({ initialSection = "buttons" }: { initialSection?: A
           </div>
 
           <section id="every-piece" aria-label={`Every piece in ${section.label}`} className="scroll-mt-8 px-5 pb-24">
-            <ul className="mx-auto max-w-3xl border-t border-line">
-              {pieces.map((p, i) => (
-                <li key={p.id} className="border-b border-line">
-                  <Link
-                    href={`/archive/${p.id}`}
-                    className="group flex items-baseline justify-between gap-6 py-5 transition-colors duration-300 hover:text-gold-bright"
-                  >
-                    <span className="flex items-baseline gap-5">
-                      <span className="w-8 font-display text-xs tracking-[0.2em] text-gold">{toNumeral(i)}</span>
-                      <span className="font-display text-sm tracking-[0.18em] uppercase md:text-base">{p.name}</span>
-                    </span>
-                    <span className="text-[18px] text-gold italic">{p.price}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="mx-auto max-w-km">
+              <div className="mb-10 flex flex-col items-center justify-between gap-4 border-b border-gold/20 pb-6 text-center sm:flex-row sm:text-left">
+                <div>
+                  <Eyebrow>MAISON HARIVÉ · THE ARCHIVE</Eyebrow>
+                  <h2 className="km-gold-text mt-1 font-display text-2xl font-bold tracking-[0.16em] uppercase md:text-3xl">
+                    The {section.label} Collection
+                  </h2>
+                  <p className="mt-1 font-serif text-sm italic text-ivory/70 md:text-base">
+                    {section.caption} · {pieces.length} Handcrafted Medallions & Artefacts
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="rounded-pill border border-gold/40 bg-gold/10 px-4 py-1.5 font-display text-[11px] tracking-[0.25em] text-gold-bright uppercase">
+                    {pieces.length} {pieces.length === 1 ? "MEDALLION" : "MEDALLIONS"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Visual Medallions Grid for ALL items in this category */}
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                {pieces.map((product, i) => (
+                  <ProductCard3D
+                    key={product.id}
+                    product={product}
+                    numeral={toNumeral(i)}
+                    index={i}
+                  />
+                ))}
+              </div>
+            </div>
           </section>
         </>
       ) : (
@@ -174,10 +189,15 @@ function NecklaceDesktop({ active, onSelect, pieces }: NecklaceProps) {
   const reduce = useReducedMotion() ?? false;
   const boxRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+  const [strandIndex, setStrandIndex] = useState(0);
   const { refs, onKeyDown } = useTabKeys(active, onSelect);
   const hx = hookX(active);
   const [left, right] = strands(hx);
   const sectionId = archiveSections[active].id;
+
+  useEffect(() => {
+    setStrandIndex(0);
+  }, [active]);
 
   useLayoutEffect(() => {
     const el = boxRef.current;
@@ -189,10 +209,42 @@ function NecklaceDesktop({ active, onSelect, pieces }: NecklaceProps) {
 
   const isTreasures = archiveSections[active].id === "treasures";
   const stageHeight = isTreasures ? 84 * scale : H * scale;
+  const totalStrands = Math.ceil(pieces.length / 5);
+  const currentPieces = pieces.slice(strandIndex * 5, strandIndex * 5 + 5);
 
   return (
     <div ref={boxRef} className="relative mx-auto hidden w-full max-w-km lg:block" style={{ height: stageHeight }}>
       <div className="absolute top-0 left-0 origin-top-left" style={{ width: W, height: isTreasures ? 84 : H, transform: `scale(${scale})` }}>
+        {/* Strand switcher when a category has multiple strands of medallions */}
+        {!isTreasures && totalStrands > 1 && (
+          <div
+            className="absolute z-30 flex items-center gap-2.5 rounded-pill border border-gold/40 bg-black/85 px-3.5 py-1.5 shadow-[0_4px_20px_rgba(0,0,0,0.8)] backdrop-blur-md"
+            style={{ right: 48, top: 76 }}
+          >
+            <button
+              type="button"
+              onClick={() => setStrandIndex((prev) => (prev - 1 + totalStrands) % totalStrands)}
+              className="flex size-6 cursor-pointer items-center justify-center rounded-full text-gold transition-colors hover:bg-gold/25 hover:text-gold-bright"
+              title="Previous strand of medallions"
+              aria-label="Previous strand"
+            >
+              ←
+            </button>
+            <span className="font-display text-[10px] tracking-[0.25em] text-gold-pale uppercase">
+              STRAND {toNumeral(strandIndex)} / {toNumeral(totalStrands - 1)}
+            </span>
+            <button
+              type="button"
+              onClick={() => setStrandIndex((prev) => (prev + 1) % totalStrands)}
+              className="flex size-6 cursor-pointer items-center justify-center rounded-full text-gold transition-colors hover:bg-gold/25 hover:text-gold-bright"
+              title="Next strand of medallions"
+              aria-label="Next strand"
+            >
+              →
+            </button>
+          </div>
+        )}
+
         <div
           role="group"
           aria-label="Sections"
@@ -265,33 +317,46 @@ function NecklaceDesktop({ active, onSelect, pieces }: NecklaceProps) {
             </svg>
 
             <ul aria-label={`${archiveSections[active].label}`}>
-              <AnimatePresence initial={false}>
-                {pieces.map((p, i) => {
-                  const x = JEWEL_X[i];
-                  const top = jewelTop(x);
-                  const featured = i === 2;
-                  return (
-                    <motion.li
-                      key={`${sectionId}-${p.id}`}
-                      className="absolute w-[180px] pointer-events-auto"
-                      style={{ left: x - 90, top }}
-                      initial={
-                        reduce
-                          ? { opacity: 0 }
-                          : { opacity: 0, x: hx - x, y: HOOK_Y - top - 10, scale: 0.35 }
-                      }
-                      animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: reduce ? 0 : 20, transition: { duration: 0.2 } }}
-                      transition={
-                        reduce
-                          ? { duration: 0.4 }
-                          : { ...HANG, delay: 0.06 * i, opacity: { duration: 0.25, delay: 0.06 * i } }
-                      }
-                    >
-                      <Jewel product={p} numeral={toNumeral(i)} size={featured ? 132 : 108} />
-                    </motion.li>
-                  );
-                })}
+              <AnimatePresence initial={false} mode="wait">
+                <motion.div key={`${sectionId}-strand-${strandIndex}`} className="contents">
+                  {currentPieces.map((p, i) => {
+                    const total = currentPieces.length;
+                    const x =
+                      total === 1
+                        ? 720
+                        : total === 2
+                          ? [490, 950][i] ?? 720
+                          : total === 3
+                            ? [380, 720, 1060][i] ?? 720
+                            : total === 4
+                              ? [320, 580, 860, 1120][i] ?? 720
+                              : JEWEL_X[i] ?? 720;
+                    const top = jewelTop(x);
+                    const featured = total >= 3 ? i === Math.floor(total / 2) : false;
+                    const globalIndex = strandIndex * 5 + i;
+                    return (
+                      <motion.li
+                        key={`${sectionId}-${p.id}`}
+                        className="absolute w-[180px] pointer-events-auto"
+                        style={{ left: x - 90, top }}
+                        initial={
+                          reduce
+                            ? { opacity: 0 }
+                            : { opacity: 0, x: hx - x, y: HOOK_Y - top - 10, scale: 0.35 }
+                        }
+                        animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: reduce ? 0 : 20, transition: { duration: 0.2 } }}
+                        transition={
+                          reduce
+                            ? { duration: 0.4 }
+                            : { ...HANG, delay: 0.06 * i, opacity: { duration: 0.25, delay: 0.06 * i } }
+                        }
+                      >
+                        <Jewel product={p} numeral={toNumeral(globalIndex)} size={featured ? 132 : 108} />
+                      </motion.li>
+                    );
+                  })}
+                </motion.div>
               </AnimatePresence>
             </ul>
           </motion.div>

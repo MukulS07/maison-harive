@@ -4,7 +4,7 @@ import { Medallion } from "@/components/archive/Medallion";
 import { BackButton } from "@/components/BackButton";
 import { Logo, SiteHeader, HeaderEyebrow } from "@/components/SiteHeader";
 import { ButtonLink, Eyebrow, GoldBackdrop } from "@/components/ui";
-import { archiveSections, getProduct, products, productsFor } from "@/content/products";
+import { archiveSections, getProduct, products, productsFor, toNumeral } from "@/content/products";
 import { site } from "@/content/site";
 
 export function generateStaticParams() {
@@ -25,7 +25,8 @@ export default async function ProductPage({ params }: PageProps<"/archive/[id]">
 
   const section = archiveSections.find((s) => s.id === product.category);
   const inSection = product.featured ? productsFor("treasures") : productsFor(product.category);
-  const numeral = ["I", "II", "III", "IV", "V"][Math.max(0, inSection.findIndex((p) => p.id === id))];
+  const idx = inSection.findIndex((p) => p.id === id);
+  const numeral = toNumeral(idx >= 0 ? idx : 0);
 
   return (
     <main className="min-h-dvh">
@@ -38,10 +39,17 @@ export default async function ProductPage({ params }: PageProps<"/archive/[id]">
         <GoldBackdrop scrim={0.8} />
         <span aria-hidden="true" className="relative h-16 w-px bg-gold" />
         <Medallion product={product} numeral={numeral} size={240} className="relative -mt-6 shadow-glow" />
-        <Eyebrow className="relative mt-4">{site.brand.toUpperCase()} · ARTEFACT</Eyebrow>
+        <Eyebrow className="relative mt-4">
+          {site.brand.toUpperCase()} · {(product.typeLabel || "Artefact").toUpperCase()}
+        </Eyebrow>
         <h1 className="km-gold-text relative font-display text-[clamp(40px,5vw,72px)] leading-none font-bold tracking-[0.06em] uppercase">
           {product.name}
         </h1>
+        {product.tagline && (
+          <p className="relative max-w-xl font-serif text-lg italic text-ivory/80 md:text-xl">
+            &ldquo;{product.tagline}&rdquo;
+          </p>
+        )}
         {product.price && <p className="relative text-[24px] text-gold italic">{product.price}</p>}
         <div className="relative mt-6 flex flex-wrap justify-center gap-4">
           <ButtonLink href={site.privateViewing.href}>REQUEST A PRIVATE VIEWING</ButtonLink>
