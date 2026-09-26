@@ -30,18 +30,18 @@ const DETAILS: Record<ChamberId, ComponentType> = {
 
 const ROYAL = [0.2, 0.7, 0.1, 1] as const;
 const SLIDE_S = 1.1; // --km-dur-slide
-const SCRIM = [0.76, 0.58, 0.76];
+const SCRIM = [0.76, 0.76];
 
 type Axis = "x" | "y";
 type Track = { pos: number[]; size: number[]; content: number[]; strip: number[]; fade: number[] };
 
 /**
  * Keyframes (start → middle → end) for every panel when chamber `c` opens along a track of
- * length L. Side chambers grow from their own edge while the other two are squeezed into
- * strips and pushed off; the middle chamber grows both ways while its neighbours slip out.
+ * length L. Side chambers grow from their own edge while the other chamber is squeezed into
+ * a strip and pushed off.
  */
 function openTracks(c: ChamberId, L: number, S: number): Track[] {
-  const t = L / 3;
+  const t = L / 2;
   const squeezed = (pos: number[]): Track => ({
     pos,
     size: [t, S, S],
@@ -57,26 +57,16 @@ function openTracks(c: ChamberId, L: number, S: number): Track[] {
     fade: [1, 1, 1],
   });
 
-  if (c === "legacy")
+  if (c === "legacy") {
     return [
-      opening([0, 0, 0], [t, L - 2 * S, L]),
-      squeezed([t, L - 2 * S, L]),
-      squeezed([2 * t, L - S, L + S]),
+      opening([0, 0, 0], [t, L - S, L]),
+      squeezed([t, L - S, L]),
     ];
-  if (c === "atelier")
-    return [
-      squeezed([0, 0, -2 * S]),
-      squeezed([t, S, -S]),
-      opening([2 * t, 2 * S, 0], [t, L - 2 * S, L]),
-    ];
-  const slipOut = (pos: number[]): Track => ({
-    pos,
-    size: [t, t, t],
-    content: [1, 0.4, 0],
-    strip: [0, 0, 0],
-    fade: [1, 0.4, 0],
-  });
-  return [slipOut([0, -t / 2, -t]), opening([t, t / 2, 0], [t, 2 * t, L]), slipOut([2 * t, 2.5 * t, L])];
+  }
+  return [
+    squeezed([0, 0, -S]),
+    opening([t, S, 0], [t, L - S, L]),
+  ];
 }
 
 const TIMES = [0, 0.55, 1];
@@ -140,7 +130,7 @@ export function ChambersStage() {
   const prevOpen = useRef<ChamberId | null>(open);
   const running = useRef<AnimationPlaybackControls | null>(null);
 
-  const panels = [usePanelValues(), usePanelValues(), usePanelValues()];
+  const panels = [usePanelValues(), usePanelValues()];
   const edgeGlow = useMotionValue(0);
   const detailOpacity = useMotionValue(open ? 1 : 0);
   const detailY = useMotionValue(0);
@@ -183,10 +173,10 @@ export function ChambersStage() {
         pv.strip.set(interp(tr.strip, p));
         pv.fade.set(interp(tr.fade, p));
       });
-      edgeGlow.set(c === "collection" ? 0 : interpAt([0, 1, 1, 0], [0, 0.05, 0.9, 1], p));
-      // The chamber's page fades in from 40% of the move (and drops in, for the Collection).
+      edgeGlow.set(interpAt([0, 1, 1, 0], [0, 0.05, 0.9, 1], p));
+      // The chamber's page fades in from 40% of the move.
       detailOpacity.set(interpAt([0, 0, 1], [0, 0.4, 1], p));
-      detailY.set(c === "collection" ? interpAt([-40, -40, 0], [0, 0.4, 1], p) : 0);
+      detailY.set(0);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps -- motion values are stable
     [L, S],
@@ -247,7 +237,7 @@ export function ChambersStage() {
     const chamber = to ?? from!;
     setSettled(false);
     setShown(chamber);
-    setMoving(chamber === "collection" ? null : chamber);
+    setMoving(chamber);
     if (to) {
       // Opening (from the stage, or straight across from another chamber).
       apply(to, 0);
@@ -271,7 +261,7 @@ export function ChambersStage() {
     ),
   );
   const edgeLegacy = useTransform([panels[0].pos, panels[0].size], ([p, s]: number[]) => p + s);
-  const edgeAtelier = panels[2].pos;
+  const edgeAtelier = panels[1].pos;
 
   const Detail = shown ? DETAILS[shown] : null;
   const shownIndex = shown ? chamberOrder.indexOf(shown) : -1;
@@ -313,8 +303,8 @@ export function ChambersStage() {
             />
           ))}
 
-          {/* Gold dividers with a diamond at their midpoint. */}
-          {[panels[1].pos, panels[2].pos].map((pos, i) => (
+          {/* Gold divider with a diamond at its midpoint. */}
+          {[panels[1].pos].map((pos, i) => (
             <Divider key={i} pos={pos} axis={axis} measured={measured} index={i + 1} hidden={Boolean(shown)} />
           ))}
 
@@ -394,8 +384,7 @@ function DetailHeader({ chamber }: { chamber: ChamberId }) {
 /** Where each panel sits before it has been measured (server render / first paint). */
 const FALLBACK = [
   "max-md:top-0 md:left-0",
-  "max-md:top-1/3 md:left-1/3",
-  "max-md:top-2/3 md:left-2/3",
+  "max-md:top-1/2 md:left-1/2",
 ];
 
 function Panel({
@@ -460,14 +449,14 @@ function Panel({
       aria-label={c.title}
       onClick={onOpen}
       style={style}
-      className={`group absolute cursor-pointer overflow-hidden max-md:inset-x-0 max-md:h-1/3 md:inset-y-0 md:w-1/3 ${measured ? "" : FALLBACK[index]}`}
+      className={`group absolute cursor-pointer overflow-hidden max-md:inset-x-0 max-md:h-1/2 md:inset-y-0 md:w-1/2 ${measured ? "" : FALLBACK[index]}`}
     >
       <GoldBackdrop scrim={SCRIM[index]} className="transition-opacity duration-700" />
 
-      {/* Resting content, laid out at one-third width so it never reflows while the panel moves. */}
+      {/* Resting content, laid out at half width so it never reflows while the panel moves. */}
       <motion.div
         style={{ opacity: values.content }}
-        className="absolute inset-y-0 left-0 w-full md:w-[33.334vw]"
+        className="absolute inset-y-0 left-0 w-full md:w-[50vw]"
       >
         <Numeral className="absolute top-1/2 right-4 -translate-y-1/2 text-[130px] md:inset-x-0 md:top-10 md:translate-y-0 md:text-center md:text-[clamp(160px,16.7vw,240px)]">
           {c.numeral}
@@ -484,11 +473,7 @@ function Panel({
         {/* The way in: a round arrow pointing where the chamber will open. */}
         <div
           className={`absolute right-5 bottom-5 flex items-center gap-4 md:bottom-[10.8%] ${
-            id === "legacy"
-              ? "md:right-8"
-              : id === "atelier"
-                ? "md:right-auto md:left-8"
-                : "md:right-auto md:bottom-[15.8%] md:left-1/2 md:-translate-x-1/2 md:flex-col"
+            id === "legacy" ? "md:right-12" : "md:right-auto md:left-12"
           }`}
         >
           {id === "atelier" ? (
@@ -498,7 +483,7 @@ function Panel({
             </>
           ) : (
             <>
-              {hint(featured ? "DESCEND" : "SLIDE OPEN")}
+              {hint("SLIDE OPEN")}
               {control}
             </>
           )}
@@ -540,7 +525,7 @@ function Divider({
       style={style}
       className={`pointer-events-none absolute transition-opacity duration-500 max-md:inset-x-0 max-md:h-px md:inset-y-0 md:w-px ${
         hidden ? "opacity-0" : ""
-      } ${measured ? "" : index === 1 ? "max-md:top-1/3 md:left-1/3" : "max-md:top-2/3 md:left-2/3"}`}
+      } ${measured ? "" : "max-md:top-1/2 md:left-1/2"}`}
     >
       <span className="absolute inset-0 bg-gold" />
       <span className="absolute top-1/2 left-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-gold bg-black" />

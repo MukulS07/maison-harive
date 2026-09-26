@@ -57,9 +57,9 @@ export const site = {
     },
     atelier: {
       id: "atelier",
-      numeral: "III",
-      eyebrow: "CHAMBER III",
-      headerLabel: "III · NEW CHAPTER",
+      numeral: "II",
+      eyebrow: "CHAMBER II",
+      headerLabel: "II · NEW CHAPTER",
       title: "New Chapter",
       subline: "Unveiling a bold new horizon of craft and distinction.",
       href: "/chambers/atelier",
@@ -122,4 +122,4 @@ export const site = {
   },
 };
 
-export const chamberOrder: ChamberId[] = ["legacy", "collection", "atelier"];
+export const chamberOrder: ChamberId[] = ["legacy", "atelier"];
