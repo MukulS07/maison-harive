@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
 import { featuredProducts } from "@/content/products";
@@ -20,19 +21,12 @@ export function LegacyChamber() {
               {c.title}
             </h1>
             <p className="text-[clamp(24px,2.2vw,32px)] text-ivory italic">{site.legacy.lead}</p>
-            <p className="mt-2 max-w-[560px] text-[19px] leading-[1.55] text-ivory-soft md:text-body">
+            <p className="mt-2 max-w-[560px] text-[19px] leading-[1.55] text-ivory-soft md:text-body whitespace-pre-line">
               {site.legacy.body}
             </p>
             <div className="mt-[18px] flex flex-wrap gap-4">
-              <ButtonLink href={site.chambers.collection.href} className="px-7 md:text-[13px] md:tracking-[0.28em]">
+              <ButtonLink href="/archive" className="px-7 md:text-[13px] md:tracking-[0.28em]">
                 SEE THE COLLECTION
-              </ButtonLink>
-              <ButtonLink
-                href="#heritage-film"
-                variant="secondary"
-                className="px-7 md:text-[13px] md:tracking-[0.28em]"
-              >
-                WATCH THE FILM
               </ButtonLink>
             </div>
           </div>
@@ -40,7 +34,18 @@ export function LegacyChamber() {
             id="heritage-film"
             caption={site.legacy.portrait}
             className="aspect-[460/620] w-full max-w-[460px] shrink-0 scroll-mt-28 self-center"
-          />
+          >
+            {site.legacy.image ? (
+              <Image
+                src={site.legacy.image}
+                alt="Heritage Portrait · The Founders"
+                fill
+                sizes="(max-width: 1024px) 100vw, 460px"
+                className="object-cover"
+                priority
+              />
+            ) : undefined}
+          </FramedPlaceholder>
         </div>
       </section>
 

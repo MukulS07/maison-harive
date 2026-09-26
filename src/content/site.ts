@@ -67,9 +67,11 @@ export const site = {
   } satisfies Record<ChamberId, unknown>,
 
   legacy: {
-    lead: "Treasures beyond time.",
-    body: "Maison Harivé is a contemporary jewellery house inspired by royal dynasties. Bold, masculine, and rooted in Indian jewellery heritage, each piece sits between jewellery and collectable art.",
+    lead: "Heritage, seen through a new lens.",
+    body:
+      "Born into the fifth generation of the Rambhajos family, jewellery has always been a part of Harshi and Ritvi’s world. Growing up in Jaipur, surrounded by a living legacy of treasures, stories and generations of craft, shaped their understanding of jewellery from the very beginning. Maison Harive emerged from this heritage, carrying the soul of Jaipur into a new expression. The sisters bring together the richness of Indian craftsmanship with the elegance, restraint and spirit of French culture. Rooted in where they come from, yet inspired by where the world is going, Maison Harive is their own interpretation of heritage.\n\nA new house, where Jaipur meets France, and an old legacy finds a new language.",
     portrait: "[ HERITAGE PORTRAIT / FILM ]",
+    image: "/media/heritage-portrait.jpg",
     conceptEyebrow: "THE CONCEPT",
     concept: "Every piece, a royal artefact with its own story.",
   },
