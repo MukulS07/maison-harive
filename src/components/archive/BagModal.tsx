@@ -62,7 +62,7 @@ export function BagModal({ isOpen, onClose }: BagModalProps) {
                 type="button"
                 onClick={onClose}
                 aria-label="Close bag"
-                className="absolute top-4 right-4 flex size-9 cursor-pointer items-center justify-center rounded-full border border-gold/30 text-ivory-soft transition-colors hover:border-gold hover:text-gold-bright"
+                className="absolute top-4 right-4 flex size-11 cursor-pointer items-center justify-center rounded-full border border-gold/30 text-ivory-soft transition-colors hover:border-gold hover:text-gold-bright"
               >
                 <CloseIcon size={16} />
               </button>
@@ -156,9 +156,9 @@ export function BagModal({ isOpen, onClose }: BagModalProps) {
                           type="button"
                           onClick={() => removeFromBag(item.id)}
                           aria-label={`Remove ${item.name} from bag`}
-                          className="shrink-0 p-1 text-ivory-soft/50 hover:text-rose-300 transition-colors"
+                          className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full text-ivory-soft/60 transition-colors hover:bg-gold/15 hover:text-rose-300"
                         >
-                          <CloseIcon size={14} />
+                          <CloseIcon size={15} />
                         </button>
                       </li>
                     ))}

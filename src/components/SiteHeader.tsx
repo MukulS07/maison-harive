@@ -14,6 +14,7 @@ type SiteHeaderProps = {
 /**
  * Three-zone header (spec §0.1). Each page decides what goes in each zone.
  * On desktop the side zones share the leftover width equally, so the centre stays centred.
+ * On tablets (≥768px) and above, the grid layout activates. On mobile, flex layout.
  */
 export function SiteHeader({
   left,
@@ -24,15 +25,15 @@ export function SiteHeader({
 }: SiteHeaderProps) {
   return (
     <header
-      className={`relative z-20 flex h-16 items-center justify-between gap-4 border-b border-line px-5 md:grid md:h-header md:grid-cols-[minmax(15rem,1fr)_auto_minmax(15rem,1fr)] md:px-gutter ${className}`}
+      className={`relative z-20 flex h-16 items-center justify-between gap-4 border-b border-line px-5 md:grid md:h-header md:grid-cols-[minmax(12rem,1fr)_auto_minmax(12rem,1fr)] md:px-gutter ${className}`}
     >
-      <div className="flex min-w-0 items-center justify-start">{left}</div>
+      <div className="flex min-w-0 items-center justify-start overflow-hidden">{left}</div>
       {center && (
-        <div className={`min-w-0 items-center justify-center ${centerOnMobile ? "flex" : "hidden md:flex"}`}>
+        <div className={`min-w-0 items-center justify-center overflow-hidden ${centerOnMobile ? "flex" : "hidden md:flex"}`}>
           {center}
         </div>
       )}
-      <div className="flex min-w-0 items-center justify-end">{right}</div>
+      <div className="flex min-w-0 items-center justify-end overflow-hidden">{right}</div>
     </header>
   );
 }

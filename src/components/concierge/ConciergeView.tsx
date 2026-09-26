@@ -321,6 +321,7 @@ export function ConciergeView({
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Your Name and Title"
+                          autoComplete="name"
                           className="km-field"
                         />
                       </div>
@@ -334,6 +335,8 @@ export function ConciergeView({
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="+91 98765 43210"
+                          autoComplete="tel"
+                          inputMode="tel"
                           className="km-field"
                         />
                       </div>
@@ -350,6 +353,8 @@ export function ConciergeView({
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="name@domain.com"
+                          autoComplete="email"
+                          inputMode="email"
                           className="km-field"
                         />
                       </div>
@@ -362,6 +367,7 @@ export function ConciergeView({
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
                           placeholder="e.g. Mumbai, New Delhi, London"
+                          autoComplete="address-level2"
                           className="km-field"
                         />
                       </div>
@@ -470,6 +476,7 @@ export function ConciergeView({
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Your Name"
+                          autoComplete="name"
                           className="km-field"
                         />
                       </div>
@@ -483,6 +490,8 @@ export function ConciergeView({
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="+91 Phone Number"
+                          autoComplete="tel"
+                          inputMode="tel"
                           className="km-field"
                         />
                       </div>
@@ -499,6 +508,8 @@ export function ConciergeView({
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Email address"
+                          autoComplete="email"
+                          inputMode="email"
                           className="km-field"
                         />
                       </div>
@@ -614,6 +625,7 @@ export function ConciergeView({
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Full Name"
+                          autoComplete="name"
                           className="km-field"
                         />
                       </div>
@@ -627,6 +639,8 @@ export function ConciergeView({
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="+91 Number"
+                          autoComplete="tel"
+                          inputMode="tel"
                           className="km-field"
                         />
                       </div>
@@ -643,6 +657,8 @@ export function ConciergeView({
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Email address"
+                          autoComplete="email"
+                          inputMode="email"
                           className="km-field"
                         />
                       </div>
@@ -728,6 +744,7 @@ export function ConciergeView({
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Your Name"
+                          autoComplete="name"
                           className="km-field"
                         />
                       </div>
@@ -741,6 +758,8 @@ export function ConciergeView({
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           placeholder="+91 Number"
+                          autoComplete="tel"
+                          inputMode="tel"
                           className="km-field"
                         />
                       </div>
@@ -856,6 +875,7 @@ export function ConciergeView({
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             placeholder="Full Name"
+                            autoComplete="name"
                             className="km-field"
                           />
                         </div>
@@ -869,6 +889,8 @@ export function ConciergeView({
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                             placeholder="+91 98765 43210"
+                            autoComplete="tel"
+                            inputMode="tel"
                             className="km-field"
                           />
                         </div>

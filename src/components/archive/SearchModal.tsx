@@ -75,13 +75,13 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search by name, motif, or category (e.g. Amber, Brooch, Kalangi)..."
-                className="flex-1 bg-transparent font-display text-[14px] tracking-[0.06em] text-ivory placeholder:text-ivory-soft/40 focus:outline-none md:text-[16px]"
+                className="flex-1 bg-transparent font-display text-[16px] tracking-[0.04em] text-ivory placeholder:text-ivory-soft/40 focus:outline-none"
               />
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Close search"
-                className="flex size-9 cursor-pointer items-center justify-center rounded-full border border-gold/30 text-ivory-soft transition-colors hover:border-gold hover:text-gold-bright"
+                className="flex size-11 cursor-pointer items-center justify-center rounded-full border border-gold/30 text-ivory-soft transition-colors hover:border-gold hover:text-gold-bright"
               >
                 <CloseIcon size={16} />
               </button>

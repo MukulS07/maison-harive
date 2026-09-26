@@ -67,7 +67,7 @@ export function ArchivePage({ initialSection = "buttons" }: { initialSection?: A
             <div className="flex items-center gap-2.5 md:gap-4">
               <Link
                 href="/concierge"
-                className="flex items-center gap-1.5 rounded-pill border border-gold/50 bg-gold/10 px-3.5 py-1.5 font-display text-[11px] tracking-[0.25em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/25 hover:text-gold-pale"
+                className="hidden items-center gap-1.5 rounded-pill border border-gold/50 bg-gold/10 px-3.5 py-1.5 font-display text-[11px] tracking-[0.25em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/25 hover:text-gold-pale sm:flex"
               >
                 THE CONCIERGE
               </Link>
@@ -93,7 +93,7 @@ export function ArchivePage({ initialSection = "buttons" }: { initialSection?: A
         />
         <div className="relative flex flex-col items-center gap-2.5 px-5 pt-8 pb-10 text-center md:min-h-[calc(290px-var(--km-header-h))] md:pt-[30px]">
           <Eyebrow>{site.archive.eyebrow}</Eyebrow>
-          <h1 className="km-gold-text font-display text-[clamp(48px,6.4vw,92px)] leading-none font-bold tracking-[0.03em]">
+          <h1 className="km-gold-text font-display text-[clamp(36px,6vw,92px)] leading-none font-bold tracking-[0.03em]">
             {active === "treasures" ? "ALL TREASURES" : site.archive.title}
           </h1>
           <p className="mt-2 max-w-5xl font-serif text-[13.5px] italic text-gold-pale/85 sm:text-[15px] md:text-[16px] md:whitespace-nowrap">
@@ -398,10 +398,10 @@ function Jewel({ product, numeral, size }: { product: Product; numeral: string; 
           size={size}
           className="group-hover:shadow-glow-strong group-focus-visible:shadow-glow-strong group-focus-visible:outline-2 group-focus-visible:outline-offset-4 group-focus-visible:outline-gold-bright"
         />
-        <span className="mt-3.5 text-center font-display text-[13px] tracking-[0.18em] text-ivory uppercase transition-colors duration-300 group-hover:text-gold-bright">
+        <span className="mt-3.5 px-1 text-center font-display text-[11.5px] tracking-[0.14em] text-ivory uppercase transition-colors duration-300 group-hover:text-gold-bright sm:text-[13px] sm:tracking-[0.18em]">
           {product.name}
         </span>
-        {product.price && <span className="mt-1 text-[16px] text-gold italic">{product.price}</span>}
+        {product.price && <span className="mt-1 text-[15px] text-gold italic sm:text-[16px]">{product.price}</span>}
       </span>
     </Link>
   );
@@ -477,7 +477,7 @@ function NecklaceStrand({ active, onSelect, pieces }: NecklaceProps) {
               return (
                 <motion.li
                   key={`${sectionId}-${p.id}`}
-                  className="relative flex w-1/3 shrink-0 snap-start justify-center"
+                  className="relative flex w-[140px] shrink-0 snap-start justify-center sm:w-1/3"
                   style={{ paddingTop: drop }}
                   initial={reduce ? { opacity: 0 } : { opacity: 0, y: -40, scale: 0.6 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}

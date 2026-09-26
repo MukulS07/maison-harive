@@ -12,7 +12,7 @@ export function Eyebrow({ children, className = "" }: { children: ReactNode; cla
 }
 
 const buttonBase =
-  "inline-flex items-center justify-center gap-3.5 rounded-btn px-[34px] py-4 font-display text-[13px] tracking-[0.28em] transition-[box-shadow,background-color,color] duration-300 md:text-[14px] md:tracking-[0.32em]";
+  "inline-flex max-w-full items-center justify-center gap-3 rounded-btn px-6 py-3.5 font-display text-[12px] tracking-[0.22em] text-center transition-[box-shadow,background-color,color] duration-300 sm:px-[34px] sm:py-4 sm:text-[13px] sm:tracking-[0.28em] md:text-[14px] md:tracking-[0.32em]";
 
 const buttonVariants = {
   primary: `${buttonBase} bg-gold font-bold text-on-gold shadow-glow hover:bg-gold-bright hover:shadow-glow-strong`,

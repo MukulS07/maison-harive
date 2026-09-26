@@ -288,7 +288,7 @@ export function ChambersStage() {
         <div
           ref={trackRef}
           aria-hidden={stageHidden}
-          className={`absolute inset-x-0 top-0 h-[max(540px,calc(100dvh-64px))] overflow-hidden md:h-[max(600px,calc(100dvh-var(--km-header-h)))] ${stageHidden ? "invisible" : ""}`}
+          className={`absolute inset-x-0 top-0 h-[max(500px,calc(100dvh-64px))] overflow-hidden md:h-[max(600px,calc(100dvh-var(--km-header-h)))] ${stageHidden ? "invisible" : ""}`}
           inert={Boolean(open)}
         >
           {chamberOrder.map((id, i) => (

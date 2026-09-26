@@ -51,11 +51,16 @@ export function ProductCard3D({ product, numeral, index }: ProductCard3DProps) {
       }}
       onMouseEnter={() => !reduce && setIsFlipped(true)}
       onMouseLeave={() => !reduce && setIsFlipped(false)}
-      onClick={() => setIsFlipped((prev) => !prev)}
     >
       <Link
         href={`/archive/${product.id}`}
         aria-label={`${product.name}, ${product.price ?? "Royal Piece"}`}
+        onClick={(e) => {
+          if (typeof window !== "undefined" && window.matchMedia("(hover: none)").matches && !isFlipped) {
+            e.preventDefault();
+            setIsFlipped(true);
+          }
+        }}
         className="block h-full w-full outline-none"
       >
         {/* Card Frame with 3D Preservation */}
@@ -168,9 +173,19 @@ export function ProductCard3D({ product, numeral, index }: ProductCard3DProps) {
               <span className="rounded-pill border border-gold/40 bg-black/75 px-2.5 py-0.5 font-display text-[10px] tracking-[0.2em] text-gold-bright uppercase backdrop-blur-sm">
                 {numeral} · Artefact
               </span>
-              <span className="rounded-pill border border-gold/40 bg-black/75 px-2.5 py-0.5 font-display text-[9px] tracking-[0.2em] text-gold-pale uppercase backdrop-blur-sm">
-                Actual Photo
-              </span>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setIsFlipped(false);
+                }}
+                className="flex items-center gap-1 rounded-pill border border-gold/40 bg-black/75 px-2.5 py-0.5 font-display text-[9px] tracking-[0.2em] text-gold-pale uppercase backdrop-blur-sm transition-colors hover:border-gold hover:text-gold-bright"
+                title="Flip back to medallion"
+              >
+                <span>Photo</span>
+                <span className="text-[10px]">↻</span>
+              </button>
             </div>
 
             {/* Back Footer: Title & Inspect CTA */}

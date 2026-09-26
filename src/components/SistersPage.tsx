@@ -123,12 +123,12 @@ function FoundersDivider({ reduce }: { reduce: boolean }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.9, delay: reduce ? 0.2 : 1.5, ease: "easeOut" }}
-      className="font-display text-xs tracking-[0.4em] whitespace-nowrap text-gold-bright md:text-sm md:[writing-mode:vertical-rl]"
+      className="font-display text-[10px] tracking-[0.2em] whitespace-nowrap text-gold-bright sm:text-xs sm:tracking-[0.35em] md:text-sm md:tracking-[0.4em] md:[writing-mode:vertical-rl]"
     >
       {site.sisters.divider}
     </motion.span>
   );
-  const diamond = <span aria-hidden="true" className="size-[9px] shrink-0 rotate-45 border border-gold bg-black" />;
+  const diamond = <span aria-hidden="true" className="size-[8px] sm:size-[9px] shrink-0 rotate-45 border border-gold bg-black" />;
   const draw = reduce
     ? { initial: { opacity: 0 }, animate: { opacity: 1 } }
     : { initial: { clipPath: "inset(0 0 100% 0)" }, animate: { clipPath: "inset(0 0 0% 0)" } };
@@ -142,7 +142,7 @@ function FoundersDivider({ reduce }: { reduce: boolean }) {
       <motion.div
         {...drawFlat}
         transition={{ duration: 1.3, delay: 0.5, ease: ROYAL }}
-        className="flex w-full items-center gap-3 md:hidden"
+        className="flex w-full items-center gap-2 sm:gap-3 md:hidden"
       >
         <span className="h-px flex-1 bg-gold" />
         {diamond}

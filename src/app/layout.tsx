@@ -63,12 +63,15 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#0a0806",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${cinzel.variable} ${cormorant.variable}`}>
-      <body className="min-h-dvh">
+      <body className="min-h-dvh pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
         <TreasuryBagProvider>{children}</TreasuryBagProvider>
       </body>
     </html>

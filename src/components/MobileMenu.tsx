@@ -11,8 +11,9 @@ const doors = [
 ];
 
 /**
- * Phone / tablet navigation (spec §7): a 44px round button that opens a full-screen list of
+ * Phone / tablet navigation (spec §7): a 48px round button that opens a full-screen list of
  * doors. Built on <dialog>, so focus is trapped and Escape closes it.
+ * Touch targets are minimum 48x48px for comfortable interaction.
  */
 export function MobileMenu({ className = "" }: { className?: string }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -25,7 +26,7 @@ export function MobileMenu({ className = "" }: { className?: string }) {
         aria-label="Open menu"
         aria-haspopup="dialog"
         onClick={() => ref.current?.showModal()}
-        className={`flex size-11 cursor-pointer items-center justify-center rounded-pill border border-gold/40 text-ivory transition-colors duration-300 hover:border-gold hover:text-gold-bright ${className}`}
+        className={`flex size-12 cursor-pointer items-center justify-center rounded-pill border border-gold/40 text-ivory transition-colors duration-300 hover:border-gold hover:text-gold-bright ${className}`}
       >
         <MenuIcon />
       </button>
@@ -41,7 +42,7 @@ export function MobileMenu({ className = "" }: { className?: string }) {
             type="button"
             aria-label="Close menu"
             onClick={close}
-            className="flex size-11 cursor-pointer items-center justify-center rounded-pill border border-gold/40 hover:text-gold-bright"
+            className="flex size-12 cursor-pointer items-center justify-center rounded-pill border border-gold/40 hover:text-gold-bright"
           >
             <CloseIcon />
           </button>

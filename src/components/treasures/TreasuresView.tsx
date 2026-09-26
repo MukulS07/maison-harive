@@ -49,7 +49,7 @@ export function TreasuresView() {
             <div className="flex items-center gap-2.5 md:gap-4">
               <Link
                 href="/concierge"
-                className="flex items-center gap-1.5 rounded-pill border border-gold/50 bg-gold/10 px-3.5 py-1.5 font-display text-[11px] tracking-[0.25em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/25 hover:text-gold-pale"
+                className="hidden items-center gap-1.5 rounded-pill border border-gold/50 bg-gold/10 px-3.5 py-1.5 font-display text-[11px] tracking-[0.25em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/25 hover:text-gold-pale sm:flex"
               >
                 THE CONCIERGE
               </Link>
@@ -75,7 +75,7 @@ export function TreasuresView() {
         />
         <div className="relative mx-auto flex max-w-4xl flex-col items-center gap-4 px-5 pt-12 pb-16 text-center">
           <Eyebrow>MAISON HARIVÉ · THE COMPLETE CATALOGUE</Eyebrow>
-          <h1 className="km-gold-text font-display text-[clamp(48px,7vw,96px)] leading-none font-bold tracking-[0.04em]">
+          <h1 className="km-gold-text font-display text-[clamp(36px,6.5vw,96px)] leading-none font-bold tracking-[0.04em]">
             ALL TREASURES
           </h1>
           <p className="max-w-xl text-[20px] text-ivory-soft italic md:text-[24px]">

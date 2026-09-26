@@ -111,6 +111,7 @@
   border-bottom: 1px solid var(--km-line-strong);
   border-radius: 0;
   color: var(--km-ivory);
+  color-scheme: dark;
   font-family: var(--km-font-body);
   font-size: 20px;
   transition: border-color var(--km-dur-fast) ease;

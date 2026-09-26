@@ -243,7 +243,7 @@ export function StageIntro({ onReveal, onDone }: StageIntroProps) {
           <button
             type="button"
             onClick={leave}
-            className="absolute right-5 bottom-5 cursor-pointer px-2 py-2 font-display text-micro tracking-[0.3em] text-muted transition-colors duration-300 hover:text-gold-bright md:right-14 md:bottom-8"
+            className="absolute right-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center px-3 py-2 font-display text-micro tracking-[0.3em] text-muted transition-colors duration-300 hover:text-gold-bright sm:right-6 md:right-14 md:bottom-8"
           >
             {site.intro.skip}
           </button>
