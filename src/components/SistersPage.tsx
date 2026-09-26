@@ -70,23 +70,45 @@ export function SistersPage() {
 }
 
 function Founder({ founder }: { founder: (typeof site.founders)[number] }) {
+  const paragraphs = founder.story.split("\n\n").filter(Boolean);
+
   return (
-    <section aria-label={founder.name} className="flex flex-col items-center gap-[22px] text-center">
-      <FramedPlaceholder caption={founder.portrait} className="aspect-[380/480] w-full max-w-[380px]">
-        {founder.image ? (
-          <Image src={founder.image} alt={founder.name} fill sizes="380px" className="object-cover" />
-        ) : undefined}
-      </FramedPlaceholder>
-      <h2 className="km-gold-text mt-3 font-display text-[clamp(28px,2.7vw,38px)] font-bold tracking-[0.12em]">
-        {founder.name}
-      </h2>
-      <Eyebrow className="tracking-[0.4em]">{founder.role}</Eyebrow>
-      <p className="mt-1.5 max-w-[460px] text-[19px] leading-[1.55] text-ivory-soft italic md:text-[21px]">
-        {founder.story}
-      </p>
-      <p className="max-w-[460px] text-[19px] leading-[1.55] text-ivory-soft italic md:text-[21px]">
-        {founder.origin}
-      </p>
+    <section aria-label={founder.name} className="flex flex-col items-center w-full">
+      {/* Name Headline & Role */}
+      <div className="w-full max-w-[540px] text-left border-b border-gold/30 pb-5">
+        <Eyebrow className="tracking-[0.4em] text-gold">{founder.role}</Eyebrow>
+        <h2 className="km-gold-text mt-2 font-display text-[clamp(32px,3.2vw,46px)] font-bold tracking-[0.08em] leading-tight">
+          {founder.name}
+        </h2>
+      </div>
+
+      {/* Realigned Narrative Body */}
+      <div className="w-full max-w-[540px] pt-6 flex flex-col gap-5 text-left">
+        {paragraphs.map((para, idx) => {
+          const isPoetic =
+            para.includes("The values came from") ||
+            para.includes("Honouring the roots") ||
+            para.includes("A curious mind. An artist’s eye");
+          return (
+            <p
+              key={idx}
+              className={`whitespace-pre-line text-[16px] leading-[1.8] md:text-[17px] ${
+                isPoetic
+                  ? "text-gold font-display text-[15px] md:text-[16px] tracking-[0.04em] pl-4 border-l border-gold/50 my-1 not-italic"
+                  : "text-ivory-soft italic"
+              }`}
+            >
+              {para}
+            </p>
+          );
+        })}
+
+        {founder.origin ? (
+          <p className="whitespace-pre-line text-[16px] leading-[1.8] text-ivory-soft italic md:text-[17px] pt-2">
+            {founder.origin}
+          </p>
+        ) : null}
+      </div>
     </section>
   );
 }
