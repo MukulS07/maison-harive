@@ -9,9 +9,6 @@ import {
   CheckIcon,
   ClockIcon,
   CloseIcon,
-  MailIcon,
-  MapPinIcon,
-  PhoneIcon,
   SearchIcon,
   WhatsAppIcon,
 } from "../icons";
@@ -87,12 +84,14 @@ export function ConciergeView({
     const paramSection = params.get("section") as ConciergeSectionId | null;
     const paramProd = params.get("product");
 
-    if (paramSection && conciergeSections.some((s) => s.id === paramSection)) {
-      setActiveTab(paramSection);
-    }
-    if (paramProd) {
-      setEnquiryProduct(paramProd);
-    }
+    queueMicrotask(() => {
+      if (paramSection && conciergeSections.some((s) => s.id === paramSection)) {
+        setActiveTab(paramSection);
+      }
+      if (paramProd) {
+        setEnquiryProduct(paramProd);
+      }
+    });
   }, []);
 
   // Order history search

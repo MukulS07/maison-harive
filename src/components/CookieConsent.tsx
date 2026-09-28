@@ -8,7 +8,9 @@ export function CookieConsent() {
 
   useEffect(() => {
     try {
-      if (!localStorage.getItem("km-cookie-consent")) setVisible(true);
+      if (!localStorage.getItem("km-cookie-consent")) {
+        queueMicrotask(() => setVisible(true));
+      }
     } catch {
       /* storage unavailable */
     }
