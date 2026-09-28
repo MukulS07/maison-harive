@@ -129,13 +129,13 @@ export function AtelierChamber() {
             <div className="relative aspect-[16/9] w-full overflow-hidden border border-gold/40 bg-surface">
               <video
                 ref={videoRef}
-                poster="/media/heritage-portrait.jpg"
+                preload="auto"
                 src={site.atelier.video}
                 autoPlay
                 loop
                 muted={isMuted}
                 playsInline
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover bg-black"
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
               >
