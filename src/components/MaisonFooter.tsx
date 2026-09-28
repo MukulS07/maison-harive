@@ -26,8 +26,8 @@ export function MaisonFooter({ className = "" }: MaisonFooterProps) {
       />
 
       <div className="mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-20">
-        {/* Exact 4-Column Balanced Grid */}
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10 xl:gap-14 items-start">
+        {/* 3-Column Balanced Grid */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 lg:gap-14 items-start">
           {/* Column 1: Brand & Tagline */}
           <div>
             <Link href="/" className="inline-block group">
@@ -94,64 +94,7 @@ export function MaisonFooter({ className = "" }: MaisonFooterProps) {
             </ul>
           </div>
 
-          {/* Column 3: Collections */}
-          <div>
-            <h3 className="font-serif text-[20px] font-normal text-ivory tracking-[0.02em] whitespace-nowrap">
-              Collections
-            </h3>
-            <ul className="mt-5 space-y-2.5 font-serif text-[15px] text-ivory/70">
-              <li>
-                <Link
-                  href="/archive?cat=buttons"
-                  className="transition-colors hover:text-gold-bright"
-                >
-                  Sherwani Buttons
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/archive?cat=brooches"
-                  className="transition-colors hover:text-gold-bright"
-                >
-                  Ceremonial Brooches
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/archive?cat=kalangi"
-                  className="transition-colors hover:text-gold-bright"
-                >
-                  Royal Kalangi
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/archive?cat=pendant"
-                  className="transition-colors hover:text-gold-bright"
-                >
-                  Citadel Pendants
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/concierge?section=custom"
-                  className="transition-colors hover:text-gold-bright"
-                >
-                  Custom Commissions
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/concierge?section=appointments"
-                  className="transition-colors hover:text-gold-bright"
-                >
-                  Salon Appointments
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Connect */}
+          {/* Column 3: Connect */}
           <div>
             <h3 className="font-serif text-[20px] font-normal text-ivory tracking-[0.02em] whitespace-nowrap">
               Connect
