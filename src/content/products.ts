@@ -1,5 +1,5 @@
 /**
- * The Maison Harive product catalogue.
+ * The Maison Harivé product catalogue.
  * Grounded in the Jaipur heritage and Parisian elegance.
  */
 
