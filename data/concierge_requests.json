@@ -1,5 +1,20 @@
 [
   {
+    "id": "req-1790603222768-ca36",
+    "reference": "MH-2026-YXGKK",
+    "clientName": "Test Connection Client",
+    "phone": "+1 555 0100",
+    "email": "test@example.com",
+    "serviceType": "Private Viewing",
+    "appointmentDate": "2026-10-15",
+    "appointmentTime": "Morning",
+    "notes": "Verifying Supabase connection between site and admin.",
+    "status": "PENDING",
+    "adminNotes": null,
+    "createdAt": "2026-09-28T13:47:02.768Z",
+    "updatedAt": "2026-09-28T13:47:02.768Z"
+  },
+  {
     "id": "req-1790597550141-2s1e",
     "reference": "MH-2026-CW47P",
     "clientName": "xyz",
