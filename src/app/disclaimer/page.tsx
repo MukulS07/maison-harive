@@ -49,7 +49,7 @@ export default function DisclaimerPage() {
             Because each artefact undergoes stringent quality inspection, gemstone certification, and hand-finishing, our dedicated 30-day preparation window guarantees the uncompromising standard of the house.
           </p>
           <p>
-            For ceremonial requirements or private salon consultations, please connect directly with{" "}
+            For ceremonial requirements or private consultations, please connect directly with{" "}
             <Link href="/concierge" className="text-gold-bright underline hover:text-gold-pale">
               The Concierge
             </Link>{" "}

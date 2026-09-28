@@ -109,7 +109,7 @@ export function ConciergeView({
         activeTab === "custom" ? `Category: ${customCategory}, Metal: ${customMetal}, Budget: ${customBudget}` : null,
         activeTab === "enquiry" ? `Product: ${enquiryProduct}, Topic: ${enquiryTopic}` : null,
         activeTab === "styling" ? `Occasion: ${stylingOccasion}, Palette: ${stylingPalette}` : null,
-        activeTab === "contact" ? (city ? `Preferred Salon: ${city}` : null) : null,
+        activeTab === "contact" ? (city ? `Preferred Location: ${city}` : null) : null,
         `Preferred Contact: ${contactMethod}`,
       ].filter(Boolean).join(" | ");
 
@@ -200,7 +200,7 @@ export function ConciergeView({
           The Concierge
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-[18px] text-ivory-soft italic md:text-[21px]">
-          Dedicated curators for private salon viewings, bespoke royal commissions, jewellery styling, and tailored acquisitions.
+          Dedicated curators for private viewings, bespoke royal commissions, jewellery styling, and tailored acquisitions.
         </p>
 
         {/* Section Tabs Switcher */}
@@ -302,7 +302,7 @@ export function ConciergeView({
               {activeTab === "appointments" && (
                 <div>
                   <div className="mb-8 border-b border-line pb-6 text-center md:text-left">
-                    <Eyebrow>SECTION I · SALON PRESENTATION</Eyebrow>
+                    <Eyebrow>SECTION I · PRIVATE PRESENTATION</Eyebrow>
                     <h2 className="font-display text-[26px] font-semibold tracking-[0.08em] text-ivory uppercase md:text-[32px]">
                       Private Appointments
                     </h2>
@@ -1061,7 +1061,7 @@ export function ConciergeView({
                   </div>
 
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    {/* Jaipur Salon */}
+                    {/* Jaipur Atelier */}
                     <div className="rounded-lg border border-gold/30 bg-surface/80 p-6 backdrop-blur-sm transition-all duration-300 hover:border-gold/60">
                       <div className="border-b border-line pb-3">
                         <span className="font-display text-[16px] font-bold tracking-[0.16em] text-gold uppercase">
@@ -1083,7 +1083,7 @@ export function ConciergeView({
                         </a>
                         <span className="text-line">·</span>
                         <a
-                          href={site.contact.salons[0].mapUrl}
+                          href={site.contact.locations[0].mapUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-ivory/70 hover:text-gold-bright"
@@ -1093,7 +1093,7 @@ export function ConciergeView({
                       </div>
                     </div>
 
-                    {/* Gurugram Salon */}
+                    {/* Gurugram Atelier */}
                     <div className="rounded-lg border border-gold/30 bg-surface/80 p-6 backdrop-blur-sm transition-all duration-300 hover:border-gold/60">
                       <div className="border-b border-line pb-3">
                         <span className="font-display text-[16px] font-bold tracking-[0.16em] text-gold uppercase">
@@ -1115,7 +1115,7 @@ export function ConciergeView({
                         </a>
                         <span className="text-line">·</span>
                         <a
-                          href={site.contact.salons[1].mapUrl}
+                          href={site.contact.locations[1].mapUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-ivory/70 hover:text-gold-bright"

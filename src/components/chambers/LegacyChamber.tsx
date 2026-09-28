@@ -25,8 +25,11 @@ export function LegacyChamber() {
               {site.legacy.body}
             </p>
             <div className="mt-[18px] flex flex-wrap gap-4">
-              <ButtonLink href="/archive" className="px-7 md:text-[13px] md:tracking-[0.28em]">
-                SEE THE COLLECTION
+              <ButtonLink href="/chambers/atelier" className="px-7 md:text-[13px] md:tracking-[0.28em]">
+                CHAMBER II · NEW CHAPTER
+              </ButtonLink>
+              <ButtonLink href="/sisters" variant="secondary" className="px-7 md:text-[13px] md:tracking-[0.28em]">
+                THE SISTERS
               </ButtonLink>
             </div>
           </div>

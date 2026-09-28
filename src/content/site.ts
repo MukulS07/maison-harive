@@ -138,10 +138,10 @@ export const site = {
     email: "Maison.harive@gmail.com",
     whatsappNumber: "918890022244",
     whatsappNumberAlt: "919829122444",
-    salons: [
+    locations: [
       {
         city: "Jaipur",
-        title: "Jaipur Atelier & Salon",
+        title: "Jaipur Atelier",
         tag: "Headquarters & Vault",
         address: "Pearl premier-4, opposite raj mahal palace, c scheme - 302001",
         line1: "Pearl premier-4, opposite raj mahal palace",
@@ -152,7 +152,7 @@ export const site = {
       },
       {
         city: "Gurugram",
-        title: "Gurugram Salon",
+        title: "Gurugram Atelier",
         tag: "NCR Private Viewing Suite",
         address: "The Oberoi Centre, DLF Phase 2, Sector 24, 122002",
         line1: "The Oberoi Centre, DLF Phase 2",

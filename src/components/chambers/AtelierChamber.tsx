@@ -91,7 +91,7 @@ export function AtelierChamber() {
           type: "Private Viewing",
           message: `Piece requested: ${fields.piece}`,
           prefDate: fields.date,
-          prefTime: "Atelier Salon Session",
+          prefTime: "Atelier Viewing Session",
         }),
       });
       const data = await res.json();

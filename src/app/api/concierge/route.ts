@@ -1,6 +1,69 @@
 import { NextResponse } from "next/server";
+import {
+  getStoreConciergeRequests,
+  createStoreConciergeRequest,
+  updateStoreConciergeStatus,
+  type ConciergeStatus,
+} from "@/lib/concierge-store";
+import { corsHeaders, handleOptions } from "@/lib/cors";
+
+export async function OPTIONS(request: Request) {
+  return handleOptions(request);
+}
+
+export async function GET(request: Request) {
+  const origin = request.headers.get("origin");
+  const headers = corsHeaders(origin);
+
+  try {
+    const { searchParams } = new URL(request.url);
+    const status = searchParams.get("status") as ConciergeStatus | null;
+    const query = searchParams.get("q")?.toLowerCase();
+
+    const all = await getStoreConciergeRequests();
+
+    let filtered = all;
+    if (status && status !== ("ALL" as unknown as ConciergeStatus)) {
+      filtered = filtered.filter((r) => r.status === status);
+    }
+    if (query) {
+      filtered = filtered.filter(
+        (r) =>
+          r.clientName.toLowerCase().includes(query) ||
+          r.reference.toLowerCase().includes(query) ||
+          (r.email && r.email.toLowerCase().includes(query)) ||
+          (r.phone && r.phone.toLowerCase().includes(query)) ||
+          r.serviceType.toLowerCase().includes(query)
+      );
+    }
+
+    const counts = {
+      total: all.length,
+      pending: all.filter((r) => r.status === "PENDING").length,
+      approved: all.filter((r) => r.status === "APPROVED").length,
+      inReview: all.filter((r) => r.status === "IN_REVIEW").length,
+      completed: all.filter((r) => r.status === "COMPLETED").length,
+      declined: all.filter((r) => r.status === "DECLINED").length,
+    };
+
+    return NextResponse.json(
+      {
+        counts,
+        total: filtered.length,
+        requests: filtered,
+      },
+      { headers }
+    );
+  } catch (err) {
+    console.error("[GET /api/concierge error]", err);
+    return NextResponse.json({ error: "Failed to fetch concierge requests" }, { status: 500, headers });
+  }
+}
 
 export async function POST(request: Request) {
+  const origin = request.headers.get("origin");
+  const headers = corsHeaders(origin);
+
   try {
     const body = await request.json();
     const rawName = typeof body.name === "string" ? body.name.trim().slice(0, 100) : "";
@@ -13,13 +76,13 @@ export async function POST(request: Request) {
 
     const honeypot = typeof body.website === "string" ? body.website.trim() : "";
     if (honeypot) {
-      return NextResponse.json({ success: true, message: "Received.", reference: "MH-0000-XXXXX" });
+      return NextResponse.json({ success: true, message: "Received.", reference: "MH-0000-XXXXX" }, { headers });
     }
 
     if (!rawName || rawName.length < 2 || (!rawPhone && !rawEmail)) {
       return NextResponse.json(
         { error: "A valid client name and at least one contact method (phone or email) are required." },
-        { status: 400 }
+        { status: 400, headers }
       );
     }
 
@@ -27,19 +90,20 @@ export async function POST(request: Request) {
     const randomHex = Math.random().toString(36).substring(2, 7).toUpperCase();
     const refCode = `MH-${new Date().getFullYear()}-${randomHex}`;
 
-    // Structure concierge booking payload
-    const booking = {
+    // 1. Persist directly to store (and Supabase cloud if configured)
+    const stored = await createStoreConciergeRequest({
       reference: refCode,
       clientName: rawName,
-      contact: { phone: rawPhone || null, email: rawEmail || null },
+      phone: rawPhone || null,
+      email: rawEmail || null,
       serviceType: rawType,
-      appointment: { date: rawPrefDate || null, time: rawPrefTime || null },
+      appointmentDate: rawPrefDate || null,
+      appointmentTime: rawPrefTime || null,
       notes: rawMessage || null,
-      receivedAt: new Date().toISOString(),
-      status: "CONFIRMED_PENDING_CONCIERGE",
-    };
+      status: "PENDING",
+    });
 
-    // 1. External Webhook Dispatch (Zapier, Slack, Discord, Telegram, or CRM)
+    // 2. External Webhook Dispatch (Zapier, Slack, Discord, Telegram, or CRM)
     const webhookUrl = process.env.CONCIERGE_WEBHOOK_URL;
     if (webhookUrl) {
       try {
@@ -48,7 +112,7 @@ export async function POST(request: Request) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             text: `👑 *New Maison Harivé Concierge Request* [${refCode}]\n*Client:* ${rawName}\n*Contact:* ${rawPhone || "N/A"} / ${rawEmail || "N/A"}\n*Service:* ${rawType}\n*Date/Time:* ${rawPrefDate || "Flexible"} (${rawPrefTime || "Anytime"})\n*Details:* ${rawMessage || "No notes"}`,
-            booking,
+            booking: stored,
           }),
         }).catch((err) => {
           console.error("[Concierge Webhook Error]", err);
@@ -58,7 +122,7 @@ export async function POST(request: Request) {
       }
     }
 
-    // 2. Resend Email Dispatch (if RESEND_API_KEY and recipient configured)
+    // 3. Resend Email Dispatch (if RESEND_API_KEY and recipient configured)
     const resendApiKey = process.env.RESEND_API_KEY;
     const staffEmail = process.env.CONCIERGE_NOTIFICATION_EMAIL || "concierge@maisonharive.com";
     if (resendApiKey) {
@@ -98,18 +162,42 @@ export async function POST(request: Request) {
       }
     }
 
-    // 3. Fallback server logging for development
-    console.log(
-      `👑 [Concierge Dispatch Received] Ref: ${refCode} | Client: ${rawName} | Contact: ${rawPhone || rawEmail} | Service: ${rawType}`
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Your private appointment request has been received by the Maison Harivé Concierge.",
+        reference: refCode,
+        booking: stored,
+      },
+      { headers }
     );
+  } catch (err) {
+    console.error("[POST /api/concierge error]", err);
+    return NextResponse.json({ error: "Invalid request payload format." }, { status: 400, headers });
+  }
+}
 
-    return NextResponse.json({
-      success: true,
-      message: "Your private appointment request has been received by the Maison Harivé Concierge.",
-      reference: refCode,
-      booking,
-    });
-  } catch {
-    return NextResponse.json({ error: "Invalid request payload format." }, { status: 400 });
+export async function PATCH(request: Request) {
+  const origin = request.headers.get("origin");
+  const headers = corsHeaders(origin);
+
+  try {
+    const body = await request.json();
+    const { id, reference, status, adminNotes } = body;
+
+    const targetId = id || reference;
+    if (!targetId || !status) {
+      return NextResponse.json({ error: "Target ID/reference and status are required." }, { status: 400, headers });
+    }
+
+    const updated = await updateStoreConciergeStatus(targetId, status, adminNotes);
+    if (!updated) {
+      return NextResponse.json({ error: "Concierge request not found." }, { status: 404, headers });
+    }
+
+    return NextResponse.json({ success: true, request: updated }, { headers });
+  } catch (err) {
+    console.error("[PATCH /api/concierge error]", err);
+    return NextResponse.json({ error: "Failed to update concierge request." }, { status: 500, headers });
   }
 }
