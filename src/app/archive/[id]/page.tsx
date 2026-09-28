@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Medallion } from "@/components/archive/Medallion";
 import { BackButton } from "@/components/BackButton";
@@ -33,8 +34,31 @@ export default async function ProductPage({ params }: PageProps<"/archive/[id]">
     <main className="min-h-dvh">
       <SiteHeader
         left={<BackButton href="/archive" label="The Archive" />}
-        center={<HeaderEyebrow>{(section?.label ?? "The Archive").toUpperCase()}</HeaderEyebrow>}
-        right={<Logo className="hidden md:inline md:text-base" />}
+        center={
+          <>
+            <div className="hidden md:block">
+              <HeaderEyebrow>{(section?.label ?? "The Archive").toUpperCase()}</HeaderEyebrow>
+            </div>
+            <Link
+              href="/concierge"
+              className="flex items-center gap-1.5 whitespace-nowrap rounded-pill border border-gold/50 bg-gold/10 px-3 py-1 font-display text-[10px] tracking-[0.22em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/25 hover:text-gold-pale md:hidden"
+            >
+              THE CONCIERGE
+            </Link>
+          </>
+        }
+        centerOnMobile
+        right={
+          <div className="flex items-center gap-3">
+            <Link
+              href="/concierge"
+              className="hidden items-center gap-1.5 rounded-pill border border-gold/50 bg-gold/10 px-3.5 py-1.5 font-display text-[11px] tracking-[0.25em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/25 hover:text-gold-pale md:flex"
+            >
+              THE CONCIERGE
+            </Link>
+            <Logo className="hidden md:inline md:text-base" />
+          </div>
+        }
       />
       <section className="relative flex flex-col items-center gap-6 overflow-hidden px-5 py-16 text-center md:py-24">
         <GoldBackdrop scrim={0.8} />

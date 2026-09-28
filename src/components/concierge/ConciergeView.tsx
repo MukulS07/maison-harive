@@ -6,7 +6,16 @@ import { useSearchParams } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { products } from "@/content/products";
 import { site } from "@/content/site";
-import { CheckIcon, ClockIcon, CloseIcon, SearchIcon, WhatsAppIcon } from "../icons";
+import {
+  CheckIcon,
+  ClockIcon,
+  CloseIcon,
+  MailIcon,
+  MapPinIcon,
+  PhoneIcon,
+  SearchIcon,
+  WhatsAppIcon,
+} from "../icons";
 import { Button, Eyebrow, GoldBackdrop } from "../ui";
 
 export type ConciergeSectionId =
@@ -15,7 +24,8 @@ export type ConciergeSectionId =
   | "enquiry"
   | "styling"
   | "whatsapp"
-  | "orders";
+  | "orders"
+  | "contact";
 
 export const conciergeSections: { id: ConciergeSectionId; label: string; short: string }[] = [
   { id: "appointments", label: "Private Appointments", short: "Appointments" },
@@ -24,6 +34,7 @@ export const conciergeSections: { id: ConciergeSectionId; label: string; short: 
   { id: "styling", label: "Styling", short: "Styling" },
   { id: "whatsapp", label: "WhatsApp Consultation", short: "WhatsApp" },
   { id: "orders", label: "Order History", short: "Orders" },
+  { id: "contact", label: "Contact Us", short: "Contact" },
 ];
 
 type ConciergeViewProps = {
@@ -107,6 +118,7 @@ export function ConciergeView({
         activeTab === "custom" ? `Category: ${customCategory}, Metal: ${customMetal}, Budget: ${customBudget}` : null,
         activeTab === "enquiry" ? `Product: ${enquiryProduct}, Topic: ${enquiryTopic}` : null,
         activeTab === "styling" ? `Occasion: ${stylingOccasion}, Palette: ${stylingPalette}` : null,
+        activeTab === "contact" ? (city ? `Preferred Salon: ${city}` : null) : null,
         `Preferred Contact: ${contactMethod}`,
       ].filter(Boolean).join(" | ");
 
@@ -179,7 +191,7 @@ export function ConciergeView({
 
         <div className="flex items-center gap-3">
           <a
-            href="https://wa.me/919999999999?text=Hello%20Maison%20Hariv%C3%A9%2C%20I%20would%20like%20to%20connect%20with%20The%20Concierge."
+            href={`https://wa.me/${site.contact.whatsappNumber}?text=Hello%20Maison%20Hariv%C3%A9%2C%20I%20would%20like%20to%20connect%20with%20The%20Concierge.`}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden items-center gap-2 rounded-pill border border-gold/40 bg-gold/10 px-3.5 py-1.5 font-display text-[11px] tracking-[0.22em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/20 sm:inline-flex"
@@ -828,15 +840,27 @@ export function ConciergeView({
                     </p>
                     <div className="mt-6 flex flex-wrap justify-center gap-4">
                       <a
-                        href="https://wa.me/919999999999?text=Hello%20Maison%20Hariv%C3%A9%2C%20I%20am%20interested%20in%20consulting%20with%20The%20Concierge%20regarding%20your%20jewels."
+                        href={`https://wa.me/${site.contact.whatsappNumber}?text=Hello%20Maison%20Hariv%C3%A9%2C%20I%20am%20interested%20in%20consulting%20with%20The%20Concierge%20regarding%20your%20jewels.`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-btn bg-gold px-8 py-3.5 font-display text-[13px] font-bold tracking-[0.25em] text-on-gold shadow-glow transition-all duration-300 hover:bg-gold-bright"
+                        className="inline-flex items-center gap-2 rounded-btn bg-gold px-7 py-3.5 font-display text-[12px] font-bold tracking-[0.22em] text-on-gold shadow-glow transition-all duration-300 hover:bg-gold-bright"
                       >
                         <WhatsAppIcon size={18} />
-                        START WHATSAPP CHAT NOW
+                        CHAT ON +91 88900 22244
+                      </a>
+                      <a
+                        href={`https://wa.me/${site.contact.whatsappNumberAlt}?text=Hello%20Maison%20Hariv%C3%A9%2C%20I%20am%20interested%20in%20consulting%20with%20The%20Concierge%20regarding%20your%20jewels.`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-btn border border-gold/50 bg-black/60 px-7 py-3.5 font-display text-[12px] font-bold tracking-[0.22em] text-gold-bright transition-all duration-300 hover:bg-gold/15 hover:border-gold"
+                      >
+                        <WhatsAppIcon size={18} />
+                        CHAT ON +91 9829122444
                       </a>
                     </div>
+                    <p className="mt-4 text-[13px] text-ivory-soft/60">
+                      Direct lines: <a href="tel:+918890022244" className="text-gold-bright hover:underline">+91 88900 22244</a> / <a href="tel:+919829122444" className="text-gold-bright hover:underline">+91 9829122444</a> · Email: <a href="mailto:Maison.harive@gmail.com" className="text-gold-bright hover:underline">Maison.harive@gmail.com</a>
+                    </p>
                   </div>
 
                   {/* Request WhatsApp Callback Form */}
@@ -1030,9 +1054,497 @@ export function ConciergeView({
                   )}
                 </div>
               )}
+
+              {/* 7. CONTACT US */}
+              {activeTab === "contact" && (
+                <div>
+                  <div className="mb-8 border-b border-line pb-6 text-center md:text-left">
+                    <Eyebrow>SECTION VII · DIRECT ADVISORY & SALONS</Eyebrow>
+                    <h2 className="font-display text-[26px] font-semibold tracking-[0.08em] text-ivory uppercase md:text-[32px]">
+                      Contact Us
+                    </h2>
+                    <p className="mt-2 text-[17px] text-ivory-soft italic md:text-[19px]">
+                      Connect directly with our curatorial advisory, founders&apos; office, or visit our private salons in Jaipur and Gurugram.
+                    </p>
+                  </div>
+
+                  {/* Contact Channels Grid */}
+                  <div className="mb-10 grid grid-cols-1 gap-5 md:grid-cols-3">
+                    {/* Phone Lines */}
+                    <div className="flex flex-col justify-between rounded-lg border border-gold/40 bg-surface-raised p-6">
+                      <div>
+                        <div className="mb-4 flex size-12 items-center justify-center rounded-full border border-gold/50 bg-gold/15 text-gold-bright shadow-glow">
+                          <PhoneIcon size={20} />
+                        </div>
+                        <span className="font-display text-micro tracking-[0.3em] text-gold uppercase">
+                          Telephone Lines
+                        </span>
+                        <h3 className="mt-1 font-display text-[16px] font-semibold tracking-[0.08em] text-ivory uppercase">
+                          Direct Contact
+                        </h3>
+                        <div className="mt-4 space-y-3">
+                          <div>
+                            <span className="text-micro tracking-wider text-muted uppercase block">Jaipur Atelier Desk</span>
+                            <a
+                              href="tel:+918890022244"
+                              className="font-display text-[16px] font-bold tracking-[0.08em] text-gold-bright hover:underline"
+                            >
+                              +91 88900 22244
+                            </a>
+                          </div>
+                          <div>
+                            <span className="text-micro tracking-wider text-muted uppercase block">Gurugram & Advisory Desk</span>
+                            <a
+                              href="tel:+919829122444"
+                              className="font-display text-[16px] font-bold tracking-[0.08em] text-gold-bright hover:underline"
+                            >
+                              +91 9829122444
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mt-6 border-t border-line/60 pt-4">
+                        <p className="text-micro tracking-wider text-muted uppercase">10:00 AM – 8:00 PM IST · Daily</p>
+                      </div>
+                    </div>
+
+                    {/* WhatsApp */}
+                    <div className="flex flex-col justify-between rounded-lg border border-gold/40 bg-surface-raised p-6">
+                      <div>
+                        <div className="mb-4 flex size-12 items-center justify-center rounded-full border border-gold/50 bg-gold/15 text-gold-bright shadow-glow">
+                          <WhatsAppIcon size={22} />
+                        </div>
+                        <span className="font-display text-micro tracking-[0.3em] text-gold uppercase">
+                          Instant Messaging
+                        </span>
+                        <h3 className="mt-1 font-display text-[16px] font-semibold tracking-[0.08em] text-ivory uppercase">
+                          WhatsApp Advisory
+                        </h3>
+                        <p className="mt-3 text-[14px] text-ivory-soft italic">
+                          Real-time jewel videos, bespoke customization, and immediate counsel.
+                        </p>
+                        <div className="mt-4 flex flex-col gap-2">
+                          <a
+                            href={`https://wa.me/${site.contact.whatsappNumber}?text=Hello%20Maison%20Hariv%C3%A9%2C%20I%20would%20like%20to%20connect%20with%20The%20Concierge.`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 rounded-btn border border-gold/50 bg-gold/10 px-3.5 py-2 font-display text-[11px] font-semibold tracking-[0.18em] text-gold-bright uppercase transition-all hover:bg-gold hover:text-on-gold"
+                          >
+                            <WhatsAppIcon size={14} />
+                            <span>Chat: +91 88900 22244</span>
+                          </a>
+                          <a
+                            href={`https://wa.me/${site.contact.whatsappNumberAlt}?text=Hello%20Maison%20Hariv%C3%A9%2C%20I%20would%20like%20to%20connect%20with%20The%20Concierge.`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 rounded-btn border border-gold/30 bg-surface px-3.5 py-2 font-display text-[11px] font-semibold tracking-[0.18em] text-ivory uppercase transition-all hover:border-gold hover:text-gold-bright"
+                          >
+                            <WhatsAppIcon size={14} />
+                            <span>Chat: +91 9829122444</span>
+                          </a>
+                        </div>
+                      </div>
+                      <div className="mt-4 border-t border-line/60 pt-4">
+                        <p className="text-micro tracking-wider text-muted uppercase">Fast Responses on WhatsApp</p>
+                      </div>
+                    </div>
+
+                    {/* Email */}
+                    <div className="flex flex-col justify-between rounded-lg border border-gold/40 bg-surface-raised p-6">
+                      <div>
+                        <div className="mb-4 flex size-12 items-center justify-center rounded-full border border-gold/50 bg-gold/15 text-gold-bright shadow-glow">
+                          <MailIcon size={20} />
+                        </div>
+                        <span className="font-display text-micro tracking-[0.3em] text-gold uppercase">
+                          Official Inquiries
+                        </span>
+                        <h3 className="mt-1 font-display text-[16px] font-semibold tracking-[0.08em] text-ivory uppercase">
+                          Email Curators
+                        </h3>
+                        <div className="mt-4">
+                          <a
+                            href={`mailto:${site.contact.email}?subject=Inquiry%20%C2%B7%20Maison%20Hariv%C3%A9`}
+                            className="break-all font-display text-[15px] font-bold tracking-[0.05em] text-gold-bright hover:underline"
+                          >
+                            {site.contact.email}
+                          </a>
+                          <p className="mt-3 text-[14px] text-ivory-soft italic">
+                            For salon appointments, ceremonial commissions, valuations, and diplomatic handover.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="mt-6 border-t border-line/60 pt-4">
+                        <a
+                          href={`mailto:${site.contact.email}?subject=Inquiry%20%C2%B7%20Maison%20Hariv%C3%A9`}
+                          className="inline-flex items-center gap-1.5 font-display text-[11px] tracking-[0.25em] text-gold uppercase hover:text-gold-bright"
+                        >
+                          <span>Compose Email</span>
+                          <span>→</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Salon & Atelier Addresses */}
+                  <div className="mb-10">
+                    <div className="mb-6">
+                      <Eyebrow>PHYSICAL ATELIERS</Eyebrow>
+                      <h3 className="font-display text-[22px] font-semibold tracking-[0.08em] text-ivory uppercase">
+                        Our Salons & Addresses
+                      </h3>
+                      <p className="mt-1 text-[15px] text-ivory-soft italic">
+                        Private viewings and bespoke counsel available by scheduled appointment.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                      {/* Jaipur Salon */}
+                      <div className="flex flex-col justify-between rounded-lg border border-gold/45 bg-surface-raised p-6 md:p-8">
+                        <div>
+                          <div className="flex items-center justify-between gap-3 border-b border-line pb-4">
+                            <div>
+                              <span className="font-display text-micro tracking-[0.3em] text-gold uppercase">
+                                Rajasthan
+                              </span>
+                              <h4 className="mt-1 font-display text-[20px] font-bold tracking-[0.08em] text-ivory uppercase">
+                                Jaipur
+                              </h4>
+                            </div>
+                            <span className="rounded-pill border border-gold/40 bg-gold/10 px-3 py-1 font-display text-[10px] tracking-[0.2em] text-gold-bright uppercase">
+                              Headquarters & Vault
+                            </span>
+                          </div>
+
+                          <div className="mt-5 space-y-3">
+                            <div className="flex items-start gap-3">
+                              <MapPinIcon size={18} className="mt-0.5 shrink-0 text-gold-bright" />
+                              <div className="text-[15px] leading-relaxed text-ivory-soft">
+                                <p className="font-semibold text-ivory">Pearl premier-4, opposite raj mahal palace</p>
+                                <p>C Scheme – 302001</p>
+                                <p className="text-muted">Jaipur, Rajasthan</p>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-3 pt-2">
+                              <PhoneIcon size={16} className="shrink-0 text-gold" />
+                              <a href="tel:+918890022244" className="font-display text-[14px] tracking-wider text-gold-bright hover:underline">
+                                +91 88900 22244
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-line/60 pt-5">
+                          <a
+                            href={site.contact.salons[0].mapUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 rounded-btn border border-gold/40 bg-black/40 px-4 py-2 font-display text-[11px] tracking-[0.2em] text-gold-bright uppercase transition-colors hover:border-gold hover:bg-gold/10"
+                          >
+                            <MapPinIcon size={13} />
+                            <span>Open in Maps</span>
+                          </a>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setActiveTab("appointments");
+                              setCity("Jaipur");
+                            }}
+                            className="inline-flex items-center gap-2 rounded-btn bg-gold/20 px-4 py-2 font-display text-[11px] tracking-[0.2em] text-gold-bright uppercase transition-colors hover:bg-gold hover:text-on-gold"
+                          >
+                            <span>Book Jaipur Salon</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Gurugram Salon */}
+                      <div className="flex flex-col justify-between rounded-lg border border-gold/45 bg-surface-raised p-6 md:p-8">
+                        <div>
+                          <div className="flex items-center justify-between gap-3 border-b border-line pb-4">
+                            <div>
+                              <span className="font-display text-micro tracking-[0.3em] text-gold uppercase">
+                                Delhi NCR
+                              </span>
+                              <h4 className="mt-1 font-display text-[20px] font-bold tracking-[0.08em] text-ivory uppercase">
+                                Gurugram
+                              </h4>
+                            </div>
+                            <span className="rounded-pill border border-gold/40 bg-gold/10 px-3 py-1 font-display text-[10px] tracking-[0.2em] text-gold-bright uppercase">
+                              Private Viewing Suite
+                            </span>
+                          </div>
+
+                          <div className="mt-5 space-y-3">
+                            <div className="flex items-start gap-3">
+                              <MapPinIcon size={18} className="mt-0.5 shrink-0 text-gold-bright" />
+                              <div className="text-[15px] leading-relaxed text-ivory-soft">
+                                <p className="font-semibold text-ivory">The Oberoi Centre, DLF Phase 2</p>
+                                <p>Sector 24 – 122002</p>
+                                <p className="text-muted">Gurugram, Haryana</p>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-3 pt-2">
+                              <PhoneIcon size={16} className="shrink-0 text-gold" />
+                              <a href="tel:+919829122444" className="font-display text-[14px] tracking-wider text-gold-bright hover:underline">
+                                +91 9829122444
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-line/60 pt-5">
+                          <a
+                            href={site.contact.salons[1].mapUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 rounded-btn border border-gold/40 bg-black/40 px-4 py-2 font-display text-[11px] tracking-[0.2em] text-gold-bright uppercase transition-colors hover:border-gold hover:bg-gold/10"
+                          >
+                            <MapPinIcon size={13} />
+                            <span>Open in Maps</span>
+                          </a>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setActiveTab("appointments");
+                              setCity("Gurugram");
+                            }}
+                            className="inline-flex items-center gap-2 rounded-btn bg-gold/20 px-4 py-2 font-display text-[11px] tracking-[0.2em] text-gold-bright uppercase transition-colors hover:bg-gold hover:text-on-gold"
+                          >
+                            <span>Book Gurugram Salon</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Send Direct Inquiry Form */}
+                  <div className="border-t border-line/60 pt-8">
+                    <h3 className="mb-2 font-display text-[18px] font-semibold tracking-[0.1em] text-gold uppercase">
+                      Send Direct Message To The Concierge
+                    </h3>
+                    <p className="mb-6 text-[15px] text-ivory-soft italic">
+                      Leave your inquiry below and our senior advisory curator will reach back out immediately.
+                    </p>
+
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div>
+                          <label className="mb-2 block font-display text-[12px] tracking-[0.25em] text-gold uppercase">
+                            Full Name *
+                          </label>
+                          <input
+                            required
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Your Name and Title"
+                            autoComplete="name"
+                            className="km-field"
+                          />
+                        </div>
+                        <div>
+                          <label className="mb-2 block font-display text-[12px] tracking-[0.25em] text-gold uppercase">
+                            Phone / WhatsApp *
+                          </label>
+                          <input
+                            required
+                            type="tel"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            placeholder="+91 Number"
+                            autoComplete="tel"
+                            inputMode="tel"
+                            className="km-field"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div>
+                          <label className="mb-2 block font-display text-[12px] tracking-[0.25em] text-gold uppercase">
+                            Email Address *
+                          </label>
+                          <input
+                            required
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="name@domain.com"
+                            autoComplete="email"
+                            inputMode="email"
+                            className="km-field"
+                          />
+                        </div>
+                        <div>
+                          <label className="mb-2 block font-display text-[12px] tracking-[0.25em] text-gold uppercase">
+                            Preferred Salon / Inquiry Scope
+                          </label>
+                          <select
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            className="km-field bg-surface text-ivory"
+                          >
+                            <option value="">General Remote Advisory</option>
+                            <option value="Jaipur">Jaipur (Pearl premier-4, C Scheme)</option>
+                            <option value="Gurugram">Gurugram (The Oberoi Centre, DLF Phase 2)</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="mb-2 block font-display text-[12px] tracking-[0.25em] text-gold uppercase">
+                          Your Inquiry or Message *
+                        </label>
+                        <textarea
+                          required
+                          rows={4}
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                          placeholder="How may our private concierge team assist you?"
+                          className="km-field"
+                        />
+                      </div>
+
+                      <div className="pt-2">
+                        <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto">
+                          {isSubmitting ? "DISPATCHING INQUIRY..." : "SEND CONCIERGE MESSAGE"}
+                        </Button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Persistent Salon & Contact Information Section */}
+        <section aria-labelledby="concierge-salons-heading" className="mt-16 border-t border-line/80 pt-12">
+          <div className="mb-8 text-center">
+            <Eyebrow>OUR SALONS & ATELIERS</Eyebrow>
+            <h2 id="concierge-salons-heading" className="km-gold-text mt-2 font-display text-[22px] font-bold tracking-[0.06em] uppercase md:text-[28px]">
+              Direct Contact & Locations
+            </h2>
+            <p className="mx-auto mt-2 max-w-xl text-[16px] text-ivory-soft italic">
+              Experience Maison Harivé jewels in person. Private viewings are conducted by appointment only.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {/* Jaipur Salon */}
+            <div className="rounded-lg border border-gold/30 bg-surface/80 p-6 backdrop-blur-sm transition-all duration-300 hover:border-gold/60">
+              <div className="flex items-center justify-between border-b border-line pb-3">
+                <span className="font-display text-[15px] font-bold tracking-[0.16em] text-gold uppercase">
+                  Jaipur
+                </span>
+                <span className="font-display text-[10px] tracking-[0.2em] text-gold-bright uppercase">
+                  Atelier & Headquarters
+                </span>
+              </div>
+              <p className="mt-4 font-display text-[15px] font-semibold text-ivory">
+                Pearl premier-4, opposite raj mahal palace
+              </p>
+              <p className="mt-1 text-[14px] text-ivory-soft">
+                C Scheme – 302001, Jaipur
+              </p>
+              <div className="mt-4 flex flex-wrap items-center gap-4 border-t border-line/50 pt-3 text-[13px]">
+                <a
+                  href="tel:+918890022244"
+                  className="font-display font-medium text-gold-bright hover:underline"
+                >
+                  +91 88900 22244
+                </a>
+                <span className="text-line">·</span>
+                <a
+                  href={site.contact.salons[0].mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ivory/70 hover:text-gold-bright"
+                >
+                  View on Map ↗
+                </a>
+              </div>
+            </div>
+
+            {/* Gurugram Salon */}
+            <div className="rounded-lg border border-gold/30 bg-surface/80 p-6 backdrop-blur-sm transition-all duration-300 hover:border-gold/60">
+              <div className="flex items-center justify-between border-b border-line pb-3">
+                <span className="font-display text-[15px] font-bold tracking-[0.16em] text-gold uppercase">
+                  Gurugram
+                </span>
+                <span className="font-display text-[10px] tracking-[0.2em] text-gold-bright uppercase">
+                  Private Viewing Suite
+                </span>
+              </div>
+              <p className="mt-4 font-display text-[15px] font-semibold text-ivory">
+                The Oberoi Centre, DLF Phase 2
+              </p>
+              <p className="mt-1 text-[14px] text-ivory-soft">
+                Sector 24 – 122002, Gurugram
+              </p>
+              <div className="mt-4 flex flex-wrap items-center gap-4 border-t border-line/50 pt-3 text-[13px]">
+                <a
+                  href="tel:+919829122444"
+                  className="font-display font-medium text-gold-bright hover:underline"
+                >
+                  +91 9829122444
+                </a>
+                <span className="text-line">·</span>
+                <a
+                  href={site.contact.salons[1].mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ivory/70 hover:text-gold-bright"
+                >
+                  View on Map ↗
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Contact Bar */}
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-gold/30 bg-black/60 p-5 md:px-8">
+            <div className="flex flex-wrap items-center gap-6">
+              <div>
+                <span className="block font-display text-[10px] tracking-[0.25em] text-gold uppercase">
+                  Contact Numbers
+                </span>
+                <div className="mt-1 flex flex-wrap items-center gap-2 font-display text-[14px] text-ivory">
+                  <a href="tel:+918890022244" className="hover:text-gold-bright">+91 88900 22244</a>
+                  <span className="text-gold/40">/</span>
+                  <a href="tel:+919829122444" className="hover:text-gold-bright">+91 9829122444</a>
+                </div>
+              </div>
+              <div className="hidden h-8 w-px bg-line sm:block" />
+              <div>
+                <span className="block font-display text-[10px] tracking-[0.25em] text-gold uppercase">
+                  Direct Email
+                </span>
+                <a
+                  href={`mailto:${site.contact.email}`}
+                  className="mt-1 block font-display text-[14px] text-gold-bright hover:underline"
+                >
+                  {site.contact.email}
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab("contact");
+                  window.scrollTo({ top: 300, behavior: "smooth" });
+                }}
+                className="inline-flex items-center gap-2 rounded-pill border border-gold/50 bg-gold/15 px-4 py-2 font-display text-[11px] tracking-[0.2em] text-gold-bright uppercase transition-all hover:bg-gold hover:text-on-gold"
+              >
+                <span>Full Contact Portal</span>
+                <span>→</span>
+              </button>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );

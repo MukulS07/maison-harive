@@ -27,7 +27,20 @@ export function SistersPage() {
         <GoldBackdrop scrim={0.7} />
         <SiteHeader
           left={<BackButton href="/chambers" label="The Chambers" />}
-          center={<HeaderEyebrow>{"THE WOMEN BEHIND THE DOOR"}</HeaderEyebrow>}
+          center={
+            <>
+              <div className="hidden md:block">
+                <HeaderEyebrow>{"THE WOMEN BEHIND THE DOOR"}</HeaderEyebrow>
+              </div>
+              <Link
+                href="/concierge"
+                className="flex items-center gap-1.5 whitespace-nowrap rounded-pill border border-gold/40 px-3 py-1 font-display text-[10px] tracking-[0.22em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/15 md:hidden"
+              >
+                THE CONCIERGE
+              </Link>
+            </>
+          }
+          centerOnMobile
           right={
             <div className="flex items-center gap-3">
               <Link

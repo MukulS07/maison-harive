@@ -129,6 +129,40 @@ export const site = {
       "Every treasure from the MAISON comes with a special note, a gift to keep, and its Certificate of Authenticity",
     bagCount: 0,
   },
+
+  contact: {
+    phones: [
+      { display: "+91 88900 22244", raw: "+918890022244" },
+      { display: "+91 9829122444", raw: "+919829122444" },
+    ],
+    email: "Maison.harive@gmail.com",
+    whatsappNumber: "918890022244",
+    whatsappNumberAlt: "919829122444",
+    salons: [
+      {
+        city: "Jaipur",
+        title: "Jaipur Atelier & Salon",
+        tag: "Headquarters & Vault",
+        address: "Pearl premier-4, opposite raj mahal palace, c scheme - 302001",
+        line1: "Pearl premier-4, opposite raj mahal palace",
+        line2: "C Scheme",
+        pincode: "302001",
+        phone: "+91 88900 22244",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=Pearl+premier-4+opposite+raj+mahal+palace+c+scheme+Jaipur+302001",
+      },
+      {
+        city: "Gurugram",
+        title: "Gurugram Salon",
+        tag: "NCR Private Viewing Suite",
+        address: "The Oberoi Centre, DLF Phase 2, Sector 24, 122002",
+        line1: "The Oberoi Centre, DLF Phase 2",
+        line2: "Sector 24",
+        pincode: "122002",
+        phone: "+91 9829122444",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=The+Oberoi+Centre+DLF+Phase+2+Sector+24+Gurugram+122002",
+      },
+    ],
+  },
 };
 
 export const chamberOrder: ChamberId[] = ["legacy", "atelier"];

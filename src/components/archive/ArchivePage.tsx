@@ -62,12 +62,25 @@ export function ArchivePage({ initialSection = "buttons" }: { initialSection?: A
         <GoldBackdrop scrim={0.72} />
         <SiteHeader
           left={<BackButton href="/sisters" label="The Sisters" />}
-          center={<HeaderEyebrow>THE ARCHIVE</HeaderEyebrow>}
+          center={
+            <>
+              <div className="hidden md:block">
+                <HeaderEyebrow>THE ARCHIVE</HeaderEyebrow>
+              </div>
+              <Link
+                href="/concierge"
+                className="flex items-center gap-1.5 whitespace-nowrap rounded-pill border border-gold/50 bg-gold/10 px-3 py-1 font-display text-[10px] tracking-[0.22em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/25 hover:text-gold-pale md:hidden"
+              >
+                THE CONCIERGE
+              </Link>
+            </>
+          }
+          centerOnMobile
           right={
             <div className="flex items-center gap-2.5 md:gap-4">
               <Link
                 href="/concierge"
-                className="hidden items-center gap-1.5 rounded-pill border border-gold/50 bg-gold/10 px-3.5 py-1.5 font-display text-[11px] tracking-[0.25em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/25 hover:text-gold-pale sm:flex"
+                className="hidden items-center gap-1.5 rounded-pill border border-gold/50 bg-gold/10 px-3.5 py-1.5 font-display text-[11px] tracking-[0.25em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/25 hover:text-gold-pale md:flex"
               >
                 THE CONCIERGE
               </Link>
