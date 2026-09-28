@@ -64,7 +64,7 @@ export const products: Product[] = [
     category: "brooches",
     price: "Inquire",
     tagline: "She was never meant to follow.",
-    typeLabel: "Brooch/Pend ant",
+    typeLabel: "Brooch / Pendant",
     image: "/products/empress.webp",
     featured: true,
   },
@@ -128,7 +128,7 @@ export const products: Product[] = [
     category: "buttons",
     price: "Inquire",
     tagline: "Fierce enough to protect a kingdom.",
-    typeLabel: "Brooch/Butto ns",
+    typeLabel: "Brooch / Buttons",
     image: "/products/narasimha-the-monarchs-lion.webp",
   },
   {
@@ -165,7 +165,7 @@ export const products: Product[] = [
     category: "brooches",
     price: "Inquire",
     tagline: "An endless fall of brilliance.",
-    typeLabel: "Brooch/Pend ant",
+    typeLabel: "Brooch / Pendant",
     image: "/products/cascade.webp",
   },
   {
@@ -257,7 +257,7 @@ export const products: Product[] = [
     category: "pendant",
     price: "Inquire",
     tagline: "Every angle reveals another story.",
-    typeLabel: "Pendant/Broo ch",
+    typeLabel: "Pendant / Brooch",
     image: "/products/prism.webp",
   },
   {
@@ -375,7 +375,7 @@ export const products: Product[] = [
     category: "pendant",
     price: "Inquire",
     tagline: "Soft in character. Bold in presence.",
-    typeLabel: "Pendant/ brooch",
+    typeLabel: "Pendant / Brooch",
     image: "/products/velvet-flare.webp",
   },
   {
@@ -429,7 +429,7 @@ export const products: Product[] = [
     category: "brooches",
     price: "Inquire",
     tagline: "She reigns at the very top.",
-    typeLabel: "brooch/ pendant",
+    typeLabel: "Brooch / Pendant",
     image: "/products/sultanas-zenith.webp",
   },
   {

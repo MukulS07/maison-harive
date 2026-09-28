@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useId, useRef, useState, type FormEvent } from "react";
-import { featuredProducts } from "@/content/products";
+import { featuredProducts, products } from "@/content/products";
 import { site } from "@/content/site";
 import { Button, ButtonLink, Diamond, Eyebrow, GoldBackdrop } from "../ui";
 
@@ -316,7 +316,7 @@ export function AtelierChamber() {
                         value={fields.piece}
                         onChange={(e) => set("piece")(e.target.value)}
                       >
-                        {featuredProducts.map((p) => (
+                        {products.map((p) => (
                           <option key={p.id} value={p.name}>
                             {p.name}
                           </option>

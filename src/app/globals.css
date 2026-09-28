@@ -116,17 +116,21 @@
   font-size: 20px;
   transition: border-color var(--km-dur-fast) ease;
 }
+
 .km-field::placeholder {
   color: var(--km-muted);
   font-style: italic;
 }
+
 .km-field:hover,
 .km-field:focus-visible {
   border-bottom-color: var(--km-gold-bright);
 }
+
 .km-field[aria-invalid="true"] {
   border-bottom-color: var(--km-gold-bright);
 }
+
 .km-field option {
   background: var(--km-surface);
   color: var(--km-ivory);
@@ -137,23 +141,35 @@
   stroke-dasharray: 6 4;
   animation: km-links 3s linear infinite;
 }
+
 @keyframes km-links {
-  to { stroke-dashoffset: -40; }
+  to {
+    stroke-dashoffset: -40;
+  }
 }
 
 /* Slow breathing glow on the home ENTER button. */
 .km-pulse {
   animation: km-pulse 4s ease-in-out infinite;
 }
+
 @keyframes km-pulse {
-  0%, 100% { box-shadow: var(--km-glow); }
-  50% { box-shadow: var(--km-glow-strong), 0 0 90px color-mix(in srgb, var(--km-gold-bright) 35%, transparent); }
+
+  0%,
+  100% {
+    box-shadow: var(--km-glow);
+  }
+
+  50% {
+    box-shadow: var(--km-glow-strong), 0 0 90px color-mix(in srgb, var(--km-gold-bright) 35%, transparent);
+  }
 }
 
 /* Horizontal scroll rows without a visible scrollbar. */
 .km-scroll-x {
   scrollbar-width: none;
 }
+
 .km-scroll-x::-webkit-scrollbar {
   display: none;
 }
@@ -162,43 +178,80 @@
 .km-flicker {
   animation: km-flicker 5s ease-in-out infinite;
 }
+
 @keyframes km-flicker {
-  0%, 100% { opacity: 1; }
-  45% { opacity: 0.82; }
-  55% { opacity: 0.95; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 0.82;
+  }
+
+  55% {
+    opacity: 0.95;
+  }
 }
 
 .km-dust {
   animation: km-float linear infinite;
 }
+
 @keyframes km-float {
-  0% { transform: translateY(0); opacity: 0; }
-  15% { opacity: 0.85; }
-  100% { transform: translateY(-140px); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.85;
+  }
+
+  100% {
+    transform: translateY(-140px);
+    opacity: 0;
+  }
 }
 
 .km-drip {
   animation: km-drip 2s ease-in infinite;
 }
+
 @keyframes km-drip {
-  0% { transform: translateY(0); opacity: 0; }
-  20% { opacity: 1; }
-  100% { transform: translateY(44px); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(44px);
+    opacity: 0;
+  }
 }
 
+
 @media (prefers-reduced-motion: reduce) {
+
   .km-chain,
   .km-pulse,
   .km-flicker,
   .km-drip {
     animation: none;
   }
+
   .km-dust {
     display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

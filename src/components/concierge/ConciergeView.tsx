@@ -60,12 +60,11 @@ export function ConciergeView({
   const [message, setMessage] = useState("");
 
   // Section specific states
-  const [viewingType, setViewingType] = useState("Private Atelier Salon");
   const [prefDate, setPrefDate] = useState("");
   const [prefTime, setPrefTime] = useState("Afternoon (2 PM – 5 PM)");
 
   const [customCategory, setCustomCategory] = useState("Sherwani Buttons");
-  const [customMetal, setCustomMetal] = useState("22K Yellow Gold & Kundan Polki");
+  const [customMetal, setCustomMetal] = useState("18k gold");
   const [customBudget, setCustomBudget] = useState("Flexible / Discretionary");
 
   const [enquiryProduct, setEnquiryProduct] = useState(
@@ -104,7 +103,7 @@ export function ConciergeView({
     try {
       const notes = [
         message ? `Notes: ${message}` : null,
-        activeTab === "appointments" ? `Viewing: ${viewingType} (${city ? "City: " + city : ""})` : null,
+        activeTab === "appointments" ? (city ? `City: ${city}` : null) : null,
         activeTab === "custom" ? `Category: ${customCategory}, Metal: ${customMetal}, Budget: ${customBudget}` : null,
         activeTab === "enquiry" ? `Product: ${enquiryProduct}, Topic: ${enquiryTopic}` : null,
         activeTab === "styling" ? `Occasion: ${stylingOccasion}, Palette: ${stylingPalette}` : null,
@@ -304,9 +303,6 @@ export function ConciergeView({
                     <h2 className="font-display text-[26px] font-semibold tracking-[0.08em] text-ivory uppercase md:text-[32px]">
                       Private Appointments
                     </h2>
-                    <p className="mt-2 text-[17px] text-ivory-soft italic md:text-[19px]">
-                      Reserve an intimate private viewing of our collection. Available at our private atelier salon, your personal residence, or via a confidential digital salon.
-                    </p>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-6">
@@ -373,21 +369,7 @@ export function ConciergeView({
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-                      <div>
-                        <label className="mb-2 block font-display text-[12px] tracking-[0.25em] text-gold uppercase">
-                          Viewing Format
-                        </label>
-                        <select
-                          value={viewingType}
-                          onChange={(e) => setViewingType(e.target.value)}
-                          className="km-field bg-surface text-ivory"
-                        >
-                          <option value="Private Atelier Salon">Private Atelier Salon</option>
-                          <option value="Private Residence Viewing">Private Residence Viewing</option>
-                          <option value="Confidential Digital Salon">Confidential Digital Salon</option>
-                        </select>
-                      </div>
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                       <div>
                         <label className="mb-2 block font-display text-[12px] tracking-[0.25em] text-gold uppercase">
                           Contact Channel
@@ -542,11 +524,14 @@ export function ConciergeView({
                           onChange={(e) => setCustomMetal(e.target.value)}
                           className="km-field bg-surface text-ivory"
                         >
-                          <option value="22K Yellow Gold & Kundan Polki">22K Yellow Gold & Kundan Polki</option>
-                          <option value="18K Royal Gold & Diamonds">18K Royal Gold & Diamonds</option>
-                          <option value="Colombian Emerald Accents">Colombian Emerald Accents</option>
-                          <option value="Burmese Ruby Highlights">Burmese Ruby Highlights</option>
-                          <option value="Custom Family Gems / Recrafting">Custom Family Gems / Heirloom Recrafting</option>
+                          <option value="18k gold">18k gold</option>
+                          <option value="14k gold">14k gold</option>
+                          <option value="9k gold">9k gold</option>
+                          <option value="Silver">Silver</option>
+                          <option value="Gold with precious stones">Gold with precious stones</option>
+                          <option value="Silver with precious stones">Silver with precious stones</option>
+                          <option value="Gold with diamonds and polki">Gold with diamonds and polki</option>
+                          <option value="Silver with diamond and polki">Silver with diamond and polki</option>
                         </select>
                       </div>
                       <div>
@@ -673,7 +658,7 @@ export function ConciergeView({
                         >
                           {products.map((p) => (
                             <option key={p.id} value={p.name}>
-                              {p.name} ({p.category.toUpperCase()})
+                              {p.name} ({(p.typeLabel || p.category).toUpperCase()})
                             </option>
                           ))}
                         </select>
