@@ -150,49 +150,45 @@ export function ConciergeView({
       <GoldBackdrop scrim={0.8} />
 
       {/* Header bar */}
-      <header className="relative z-20 flex h-16 items-center justify-between border-b border-line px-5 md:h-header md:px-gutter">
-        <div className="flex items-center gap-4">
-          {onClose ? (
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex size-11 cursor-pointer items-center justify-center rounded-pill border border-gold/40 text-ivory transition-colors hover:border-gold hover:text-gold-bright"
-              aria-label="Close Concierge"
-            >
-              <CloseIcon />
-            </button>
-          ) : (
-            <Link
-              href="/archive"
-              className="font-display text-[13px] tracking-[0.25em] text-gold-bright uppercase transition-colors hover:text-gold-pale"
-            >
-              ← Return
-            </Link>
-          )}
-          <span className="font-display text-[13px] font-semibold tracking-[0.3em] text-gold uppercase md:text-label">
-            Maison Concierge
-          </span>
-        </div>
+      <header className="relative z-20 border-b border-line px-5 md:px-gutter">
+        <div className="flex h-14 items-center justify-between md:h-header">
+          <div className="flex items-center gap-3">
+            {onClose ? (
+              <button
+                type="button"
+                onClick={onClose}
+                className="flex size-10 cursor-pointer items-center justify-center rounded-pill border border-gold/40 text-ivory transition-colors hover:border-gold hover:text-gold-bright"
+                aria-label="Close Concierge"
+              >
+                <CloseIcon />
+              </button>
+            ) : (
+              <Link
+                href="/archive"
+                className="font-display text-[12px] tracking-[0.2em] text-gold-bright uppercase transition-colors hover:text-gold-pale"
+                aria-label="Return to Archive"
+              >
+                ←
+              </Link>
+            )}
+          </div>
 
-        <Link
-          href="/"
-          className="font-display text-[15px] font-semibold tracking-[0.28em] text-ivory hover:text-gold-bright md:text-lg"
-        >
-          {site.logo}
-        </Link>
+          <Link
+            href="/"
+            className="font-display text-[14px] font-semibold tracking-[0.28em] text-ivory hover:text-gold-bright md:text-lg"
+          >
+            {site.logo}
+          </Link>
 
-        <div className="flex items-center gap-3">
           <a
             href={`https://wa.me/${site.contact.whatsappNumber}?text=Hello%20Maison%20Hariv%C3%A9%2C%20I%20would%20like%20to%20connect%20with%20The%20Concierge.`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-pill border border-gold/40 bg-gold/10 px-3.5 py-1.5 font-display text-[11px] tracking-[0.18em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/20"
+            className="flex items-center gap-1.5 rounded-pill border border-gold/40 bg-gold/10 px-2.5 py-1.5 font-display text-[11px] tracking-[0.15em] text-gold-bright uppercase transition-all duration-300 hover:border-gold hover:bg-gold/20 md:gap-2 md:px-3.5"
+            aria-label="WhatsApp Direct Line"
           >
             <WhatsAppIcon size={14} />
-            <span className="flex flex-col text-left leading-tight sm:flex-row sm:items-center sm:gap-1.5">
-              <span className="text-[10px] text-gold/80 sm:text-[11px]">Direct Line:</span>
-              <span className="font-semibold text-ivory tracking-wider text-[11px] sm:text-[12px]">+91 88900 22244</span>
-            </span>
+            <span className="hidden sm:inline font-semibold text-ivory tracking-wider text-[11px]">+91 88900 22244</span>
           </a>
         </div>
       </header>
