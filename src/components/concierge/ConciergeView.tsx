@@ -2,8 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { products } from "@/content/products";
 import { site } from "@/content/site";
 import {
@@ -39,25 +38,18 @@ export const conciergeSections: { id: ConciergeSectionId; label: string; short: 
 
 type ConciergeViewProps = {
   initialSection?: ConciergeSectionId;
+  initialProduct?: string;
   onClose?: () => void;
   isModal?: boolean;
 };
 
 export function ConciergeView({
   initialSection = "appointments",
+  initialProduct,
   onClose,
   isModal = false,
 }: ConciergeViewProps) {
-  const searchParams = useSearchParams();
-  const paramSection = searchParams.get("section") as ConciergeSectionId | null;
-  const paramProduct = searchParams.get("product");
-
-  const [activeTab, setActiveTab] = useState<ConciergeSectionId>(() => {
-    if (paramSection && conciergeSections.some((s) => s.id === paramSection)) {
-      return paramSection;
-    }
-    return initialSection;
-  });
+  const [activeTab, setActiveTab] = useState<ConciergeSectionId>(initialSection);
   const [submittedRef, setSubmittedRef] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
@@ -79,29 +71,27 @@ export function ConciergeView({
   const [customBudget, setCustomBudget] = useState("Flexible / Discretionary");
 
   const [enquiryProduct, setEnquiryProduct] = useState(
-    paramProduct || products[0]?.name || "Shield of Legacy"
+    initialProduct || products[0]?.name || "Shield of Legacy"
   );
   const [enquiryTopic, setEnquiryTopic] = useState("Gemstone & Purity Certifications");
 
   const [stylingOccasion, setStylingOccasion] = useState("Royal Wedding Ceremony");
   const [stylingPalette, setStylingPalette] = useState("Ivory & Gold Zari");
 
-  // Sync with searchParams if navigated with new query
-  const [prevParamSection, setPrevParamSection] = useState(paramSection);
-  if (prevParamSection !== paramSection) {
-    setPrevParamSection(paramSection);
+  // Read URL query params on client without forcing Next.js SSR bailout
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const paramSection = params.get("section") as ConciergeSectionId | null;
+    const paramProd = params.get("product");
+
     if (paramSection && conciergeSections.some((s) => s.id === paramSection)) {
       setActiveTab(paramSection);
     }
-  }
-
-  const [prevParamProduct, setPrevParamProduct] = useState(paramProduct);
-  if (prevParamProduct !== paramProduct) {
-    setPrevParamProduct(paramProduct);
-    if (paramProduct) {
-      setEnquiryProduct(paramProduct);
+    if (paramProd) {
+      setEnquiryProduct(paramProd);
     }
-  }
+  }, []);
 
   // Order history search
   const [orderQuery, setOrderQuery] = useState("");
