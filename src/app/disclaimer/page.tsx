@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Logo, SiteHeader } from "@/components/SiteHeader";
-import { Eyebrow, GoldBackdrop } from "@/components/ui";
+import { Eyebrow } from "@/components/ui";
 import { MaisonFooter } from "@/components/MaisonFooter";
 
 export const metadata: Metadata = {
@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 export default function DisclaimerPage() {
   return (
     <main className="relative flex min-h-dvh flex-col justify-between bg-black text-ivory">
-      <GoldBackdrop scrim={0.92} />
 
       <SiteHeader
         left={<Logo className="text-base tracking-[0.3em]" />}
@@ -27,7 +26,7 @@ export default function DisclaimerPage() {
         }
       />
 
-      <article className="relative z-10 mx-auto max-w-3xl px-5 py-20 md:py-28">
+      <article className="mx-auto max-w-3xl px-5 py-12 md:py-28">
         <Eyebrow className="mb-4">HOUSE NOTICE · CRAFTSMANSHIP &amp; TIMELINE</Eyebrow>
         <h1 className="km-gold-text font-display text-[clamp(32px,5vw,56px)] font-bold tracking-[0.06em] uppercase">
           Disclaimer

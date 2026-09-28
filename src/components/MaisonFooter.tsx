@@ -162,7 +162,7 @@ export function MaisonFooter({ className = "" }: MaisonFooterProps) {
               <div className="flex items-start gap-2.5">
                 <MapPinIcon size={16} className="mt-1 shrink-0 text-gold" />
                 <div className="leading-snug">
-                  <span className="block font-medium text-ivory">Jaipur Atelier</span>
+                  <span className="block font-medium text-ivory">Jaipur</span>
                   <span className="text-ivory/65">
                     Pearl premier-4, opposite raj mahal palace, c scheme - 302001
                   </span>
@@ -173,7 +173,7 @@ export function MaisonFooter({ className = "" }: MaisonFooterProps) {
               <div className="flex items-start gap-2.5">
                 <MapPinIcon size={16} className="mt-1 shrink-0 text-gold" />
                 <div className="leading-snug">
-                  <span className="block font-medium text-ivory">Gurugram Salon</span>
+                  <span className="block font-medium text-ivory">Gurugram</span>
                   <span className="text-ivory/65">
                     The Oberoi Centre, DLF Phase 2, Sector 24, 122002
                   </span>

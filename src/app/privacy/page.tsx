@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Logo, SiteHeader } from "@/components/SiteHeader";
-import { Eyebrow, GoldBackdrop } from "@/components/ui";
+import { Eyebrow } from "@/components/ui";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <main className="relative flex min-h-dvh flex-col bg-black text-ivory">
-      <GoldBackdrop scrim={0.92} />
 
       <SiteHeader
         left={<Logo className="text-base tracking-[0.3em]" />}
@@ -27,7 +26,7 @@ export default function PrivacyPage() {
         }
       />
 
-      <article className="relative z-10 mx-auto max-w-3xl px-5 py-24">
+      <article className="mx-auto max-w-3xl px-5 py-12 md:py-24">
         <Eyebrow className="mb-4">LEGAL</Eyebrow>
         <h1 className="km-gold-text font-display text-[clamp(32px,5vw,56px)] font-bold tracking-[0.06em] uppercase">
           Privacy Policy
@@ -128,7 +127,7 @@ export default function PrivacyPage() {
         </div>
       </article>
 
-      <footer className="relative z-10 mt-auto border-t border-line/60 py-6 text-center">
+      <footer className="mt-auto border-t border-line/60 py-6 text-center">
         <p className="font-display text-micro tracking-[0.3em] text-gold/60 uppercase">
           {site.brand} · {site.tagline}
         </p>
