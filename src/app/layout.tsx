@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Cinzel, Cormorant_Garamond } from "next/font/google";
 import { site } from "@/content/site";
 import { TreasuryBagProvider } from "@/context/TreasuryBagContext";
+import { CookieConsent } from "@/components/CookieConsent";
+import { Analytics } from "@/components/Analytics";
 import "./globals.css";
 
 const cinzel = Cinzel({
@@ -59,6 +61,13 @@ export const metadata: Metadata = {
     description: site.description,
     images: ["/media/heritage-portrait.jpg"],
   },
+  icons: {
+    icon: [
+      { url: "/media/WebsiteLogo/Websitelogo.png", type: "image/png" },
+    ],
+    shortcut: "/media/WebsiteLogo/Websitelogo.png",
+    apple: "/media/WebsiteLogo/Websitelogo.png",
+  },
 };
 
 export const viewport: Viewport = {
@@ -73,6 +82,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${cinzel.variable} ${cormorant.variable}`}>
       <body className="min-h-dvh pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
         <TreasuryBagProvider>{children}</TreasuryBagProvider>
+        <CookieConsent />
+        <Analytics />
       </body>
     </html>
   );

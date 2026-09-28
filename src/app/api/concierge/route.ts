@@ -11,6 +11,11 @@ export async function POST(request: Request) {
     const rawPrefDate = typeof body.prefDate === "string" ? body.prefDate.trim().slice(0, 40) : "";
     const rawPrefTime = typeof body.prefTime === "string" ? body.prefTime.trim().slice(0, 40) : "";
 
+    const honeypot = typeof body.website === "string" ? body.website.trim() : "";
+    if (honeypot) {
+      return NextResponse.json({ success: true, message: "Received.", reference: "MH-0000-XXXXX" });
+    }
+
     if (!rawName || rawName.length < 2 || (!rawPhone && !rawEmail)) {
       return NextResponse.json(
         { error: "A valid client name and at least one contact method (phone or email) are required." },

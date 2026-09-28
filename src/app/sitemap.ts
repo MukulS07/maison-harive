@@ -13,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/archive`, lastModified: new Date(), changeFrequency: "daily", priority: 0.95 },
     { url: `${baseUrl}/treasures`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
     { url: `${baseUrl}/concierge`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
+    { url: `${baseUrl}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/terms`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const productPages: MetadataRoute.Sitemap = products.map((product) => ({
