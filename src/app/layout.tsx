@@ -63,10 +63,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/media/WebsiteLogo/Websitelogo.png", type: "image/png" },
+      { url: "/media/WebsiteLogo/Websitelogo1.png", type: "image/png" },
     ],
-    shortcut: "/media/WebsiteLogo/Websitelogo.png",
-    apple: "/media/WebsiteLogo/Websitelogo.png",
+    shortcut: "/media/WebsiteLogo/Websitelogo1.png",
+    apple: "/media/WebsiteLogo/Websitelogo1.png",
   },
 };
 
