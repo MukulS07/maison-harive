@@ -16,6 +16,7 @@ import {
   WhatsAppIcon,
 } from "../icons";
 import { Button, Eyebrow, GoldBackdrop } from "../ui";
+import { MaisonFooter } from "../MaisonFooter";
 
 export type ConciergeSectionId =
   | "appointments"
@@ -1163,6 +1164,8 @@ export function ConciergeView({
           )}
         </AnimatePresence>
       </main>
+
+      {!isModal && <MaisonFooter className="mt-16" />}
     </div>
   );
 }

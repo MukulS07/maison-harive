@@ -14,6 +14,7 @@ import { AllTreasures3DSection } from "./AllTreasures3DSection";
 import { ProductCard3D } from "./ProductCard3D";
 import { SearchModal } from "./SearchModal";
 import { BagModal } from "./BagModal";
+import { MaisonFooter } from "../MaisonFooter";
 
 /*
  * Necklace geometry (spec §5.2), in the mockup's 1440-wide space, measured from the top of
@@ -168,6 +169,8 @@ export function ArchivePage({ initialSection = "buttons" }: { initialSection?: A
       ) : (
         <AllTreasures3DSection />
       )}
+
+      <MaisonFooter />
     </main>
   );
 }

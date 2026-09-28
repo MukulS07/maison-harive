@@ -1,4 +1,5 @@
-@import "tailwindcss" source("..");
+@import "tailwindcss" source;
+("..");
 @import "../../styles/tokens.css";
 
 /* next/font exposes hashed family names through --font-cinzel / --font-cormorant
