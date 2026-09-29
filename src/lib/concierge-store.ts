@@ -196,6 +196,44 @@ export async function updateStoreConciergeStatus(
   status: ConciergeStatus,
   adminNotes?: string
 ): Promise<ConciergeRequest | null> {
+  const updatedAt = new Date().toISOString();
+
+  if (isSupabaseConfigured()) {
+    const supabase = getSupabaseAdmin();
+    if (supabase) {
+      const updatePayload: Record<string, unknown> = { status, updated_at: updatedAt };
+      if (adminNotes !== undefined) updatePayload.admin_notes = adminNotes;
+
+      const { data, error } = await supabase
+        .from("concierge_requests")
+        .update(updatePayload)
+        .or(`id.eq.${idOrReference},reference.eq.${idOrReference}`)
+        .select()
+        .maybeSingle();
+
+      if (error) {
+        console.error("[Concierge Store] Supabase update failed:", error);
+      } else if (data) {
+        return {
+          id: data.id,
+          reference: data.reference,
+          clientName: data.client_name,
+          phone: data.phone,
+          email: data.email,
+          serviceType: data.service_type,
+          appointmentDate: data.appointment_date,
+          appointmentTime: data.appointment_time,
+          notes: data.notes,
+          status: (data.status as ConciergeStatus) || "PENDING",
+          adminNotes: data.admin_notes,
+          createdAt: data.created_at,
+          updatedAt: data.updated_at,
+        };
+      }
+    }
+  }
+
+  // Local fallback — only reached when Supabase is unconfigured or the row lives solely in the local file.
   const local = ensureLocalFile();
   const index = local.findIndex((r) => r.id === idOrReference || r.reference === idOrReference);
   if (index === -1) return null;
@@ -204,22 +242,7 @@ export async function updateStoreConciergeStatus(
   if (adminNotes !== undefined) {
     local[index].adminNotes = adminNotes;
   }
-  local[index].updatedAt = new Date().toISOString();
-
-  if (isSupabaseConfigured()) {
-    const supabase = getSupabaseAdmin();
-    if (supabase) {
-      await supabase
-        .from("concierge_requests")
-        .update({
-          status,
-          admin_notes: local[index].adminNotes,
-          updated_at: local[index].updatedAt,
-        })
-        .or(`id.eq.${local[index].id},reference.eq.${local[index].reference}`);
-    }
-  }
-
+  local[index].updatedAt = updatedAt;
   saveLocal(local);
   return local[index];
 }

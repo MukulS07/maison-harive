@@ -109,6 +109,53 @@ export async function createStoreProduct(input: Partial<Product> & { name: strin
 }
 
 export async function updateStoreProduct(id: string, updates: Partial<Product>): Promise<Product | null> {
+  const updatedAt = new Date().toISOString();
+
+  if (isSupabaseConfigured()) {
+    const supabase = getSupabaseAdmin();
+    if (supabase) {
+      const cleanedUpdates: Record<string, unknown> = { updated_at: updatedAt };
+      if (updates.name !== undefined) cleanedUpdates.name = updates.name;
+      if (updates.category !== undefined) cleanedUpdates.category = updates.category;
+      if (updates.price !== undefined) cleanedUpdates.price = updates.price;
+      if (updates.tagline !== undefined) cleanedUpdates.tagline = updates.tagline;
+      if (updates.typeLabel !== undefined) cleanedUpdates.type_label = updates.typeLabel;
+      if (updates.image !== undefined) cleanedUpdates.image = updates.image;
+      if (updates.featured !== undefined) cleanedUpdates.featured = updates.featured;
+
+      const { data, error } = await supabase
+        .from("products")
+        .update(cleanedUpdates)
+        .eq("id", id)
+        .select()
+        .maybeSingle();
+
+      if (error) {
+        console.error("[Products Store] Supabase update failed:", error);
+      } else if (data) {
+        const updated: Product = {
+          id: data.id,
+          name: data.name,
+          category: data.category as ProductCategory,
+          price: data.price || "Inquire",
+          tagline: data.tagline || undefined,
+          typeLabel: data.type_label || undefined,
+          image: data.image || undefined,
+          featured: data.featured || false,
+        };
+
+        const local = ensureLocalFile();
+        const idx = local.findIndex((p) => p.id === id);
+        if (idx >= 0) local[idx] = updated;
+        else local.unshift(updated);
+        saveLocal(local);
+
+        return updated;
+      }
+    }
+  }
+
+  // Local fallback — only reached when Supabase is unconfigured or the row lives solely in the local file.
   const local = ensureLocalFile();
   const index = local.findIndex((p) => p.id === id);
   if (index === -1) return null;
@@ -125,25 +172,6 @@ export async function updateStoreProduct(id: string, updates: Partial<Product>):
     ...cleanedUpdates,
     id, // protect ID
   };
-
-  if (isSupabaseConfigured()) {
-    const supabase = getSupabaseAdmin();
-    if (supabase) {
-      await supabase
-        .from("products")
-        .update({
-          name: updated.name,
-          category: updated.category,
-          price: updated.price,
-          tagline: updated.tagline,
-          type_label: updated.typeLabel,
-          image: updated.image,
-          featured: updated.featured,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", id);
-    }
-  }
 
   local[index] = updated;
   saveLocal(local);
