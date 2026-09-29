@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
-import { archiveSections, productsFor, toNumeral, type ArchiveSectionId, type Product } from "@/content/products";
+import { archiveSections, toNumeral, type ArchiveSectionId, type Product } from "@/content/products";
 import { site } from "@/content/site";
 import { BackButton } from "../BackButton";
 import { BagIcon, SearchIcon } from "../icons";
@@ -45,18 +45,25 @@ const HANG = { type: "spring" as const, stiffness: 210, damping: 14, mass: 0.9 }
 import { useTreasuryBag } from "@/context/TreasuryBagContext";
 
 /** Page 4 (spec §5): the shop, where each section hangs as a necklace from its tab. */
-export function ArchivePage({ initialSection = "buttons" }: { initialSection?: ArchiveSectionId }) {
+export function ArchivePage({
+  initialSection = "buttons",
+  products,
+}: {
+  initialSection?: ArchiveSectionId;
+  products: Product[];
+}) {
   const [active, setActive] = useState<ArchiveSectionId>(initialSection);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isBagOpen, setIsBagOpen] = useState(false);
   const { bagCount } = useTreasuryBag();
   const index = archiveSections.findIndex((s) => s.id === active);
   const section = archiveSections[index];
-  const pieces = productsFor(active);
+  const pieces =
+    active === "treasures" ? products.filter((p) => p.featured) : products.filter((p) => p.category === active);
 
   return (
     <main className="min-h-dvh">
-      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} products={products} />
       <BagModal isOpen={isBagOpen} onClose={() => setIsBagOpen(false)} />
 
       <section className="relative overflow-hidden">
@@ -167,7 +174,7 @@ export function ArchivePage({ initialSection = "buttons" }: { initialSection?: A
           </section>
         </>
       ) : (
-        <AllTreasures3DSection />
+        <AllTreasures3DSection products={products} />
       )}
 
       <MaisonFooter />

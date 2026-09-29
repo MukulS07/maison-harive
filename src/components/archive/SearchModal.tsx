@@ -4,16 +4,17 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { products, type Product } from "@/content/products";
+import { type Product } from "@/content/products";
 import { CloseIcon, SearchIcon } from "../icons";
 import { Eyebrow } from "../ui";
 
 type SearchModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  products: Product[];
 };
 
-export function SearchModal({ isOpen, onClose }: SearchModalProps) {
+export function SearchModal({ isOpen, onClose, products }: SearchModalProps) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 

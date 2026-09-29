@@ -6,8 +6,12 @@ import { BackButton } from "@/components/BackButton";
 import { Logo, SiteHeader, HeaderEyebrow } from "@/components/SiteHeader";
 import { ButtonLink, Eyebrow, GoldBackdrop, Numeral } from "@/components/ui";
 import { ProductBagButton } from "@/components/archive/ProductBagButton";
-import { archiveSections, getProduct, products, productsFor, toNumeral } from "@/content/products";
+import { archiveSections, products, toNumeral } from "@/content/products";
 import { site } from "@/content/site";
+import { getStoreProducts } from "@/lib/products-store";
+
+export const dynamicParams = true;
+export const revalidate = 30;
 
 export function generateStaticParams() {
   return products.map((p) => ({ id: p.id }));
@@ -15,17 +19,19 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/archive/[id]">): Promise<Metadata> {
   const { id } = await params;
-  const product = getProduct(id);
+  const all = await getStoreProducts();
+  const product = all.find((p) => p.id === id);
   return { title: product ? product.name : "The Archive" };
 }
 
 export default async function ProductPage({ params }: PageProps<"/archive/[id]">) {
   const { id } = await params;
-  const product = getProduct(id);
+  const all = await getStoreProducts();
+  const product = all.find((p) => p.id === id);
   if (!product) notFound();
 
   const section = archiveSections.find((s) => s.id === product.category);
-  const inSection = product.featured ? productsFor("treasures") : productsFor(product.category);
+  const inSection = product.featured ? all.filter((p) => p.featured) : all.filter((p) => p.category === product.category);
   const idx = inSection.findIndex((p) => p.id === id);
   const numeral = toNumeral(idx >= 0 ? idx : 0);
 

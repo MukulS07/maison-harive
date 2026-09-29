@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
-import { products, toNumeral, type ProductCategory, type Product } from "@/content/products";
+import { toNumeral, type ProductCategory, type Product } from "@/content/products";
 import { ProductCard3D } from "./ProductCard3D";
 
 type FilterId = "all" | "featured" | ProductCategory;
@@ -16,7 +16,7 @@ const filterTabs: { id: FilterId; label: string }[] = [
   { id: "pendant", label: "Pendants" },
 ];
 
-export function AllTreasures3DSection() {
+export function AllTreasures3DSection({ products }: { products: Product[] }) {
   const [activeFilter, setActiveFilter] = useState<FilterId>("all");
 
   const filteredProducts = useMemo(() => {

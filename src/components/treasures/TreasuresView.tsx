@@ -36,7 +36,7 @@ export function TreasuresView() {
 
   return (
     <main className="min-h-dvh bg-black text-ivory">
-      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} products={products} />
       <BagModal isOpen={isBagOpen} onClose={() => setIsBagOpen(false)} />
 
       {/* Hero Banner */}
