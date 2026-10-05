@@ -78,7 +78,7 @@ export const site = {
 
   collection: {
     /** Real catalogue categories */
-    filters: ["All Pieces", "Buttons", "Brooches", "Kalangi", "Pendants"],
+    filters: ["All Pieces", "Buttons", "Brooches", "Pendants"],
     nextArtefact: "Next Artefact",
     photo: "/media/heritage-portrait.jpg",
   },

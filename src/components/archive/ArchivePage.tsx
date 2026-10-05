@@ -30,7 +30,12 @@ const DRAPE_Y = 170;
 const DRAPE = `M260 ${DRAPE_Y} Q720 ${DRAPE_Y + 360} 1180 ${DRAPE_Y}`;
 const JEWEL_X = [260, 490, 720, 950, 1180];
 
-const hookX = (i: number) => TABS_LEFT + 100 + i * TAB_STEP;
+const hookX = (i: number) => {
+  const n = archiveSections.length;
+  const totalW = W - 2 * TABS_LEFT;
+  const colW = (totalW - (n - 1) * 24) / n;
+  return TABS_LEFT + colW / 2 + i * (colW + 24);
+};
 const jewelTop = (x: number) => {
   const t = (x - 260) / 920;
   return DRAPE_Y + 720 * t * (1 - t);
@@ -287,8 +292,13 @@ function NecklaceDesktop({ active, onSelect, pieces }: NecklaceProps) {
         <div
           role="group"
           aria-label="Sections"
-          className="absolute z-20 grid grid-cols-5 gap-6"
-          style={{ left: TABS_LEFT, width: W - 2 * TABS_LEFT, top: 6 }}
+          className="absolute z-20 grid gap-6"
+          style={{
+            left: TABS_LEFT,
+            width: W - 2 * TABS_LEFT,
+            top: 6,
+            gridTemplateColumns: `repeat(${archiveSections.length}, minmax(0, 1fr))`,
+          }}
         >
           {archiveSections.map((s, i) => {
             const on = i === active;

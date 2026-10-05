@@ -12,7 +12,6 @@ const filterTabs: { id: FilterId; label: string }[] = [
   { id: "featured", label: "Featured" },
   { id: "buttons", label: "Buttons" },
   { id: "brooches", label: "Brooches" },
-  { id: "kalangi", label: "Kalangi" },
   { id: "pendant", label: "Pendants" },
 ];
 

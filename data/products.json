@@ -22,10 +22,10 @@
   {
     "id": "seshnag-talisman",
     "name": "Seshnag Talisman",
-    "category": "kalangi",
+    "category": "pendant",
     "price": "Inquire",
     "tagline": "Where ancient power meets eternal protection.",
-    "typeLabel": "Pendant/ Kalangi",
+    "typeLabel": "Pendant",
     "image": "/products/seshnag-talisman.webp"
   },
   {
@@ -178,10 +178,10 @@
   {
     "id": "citadel-emerald-turban-ornament",
     "name": "Citadel Emerald Turban Ornament",
-    "category": "kalangi",
+    "category": "brooches",
     "price": "Inquire",
     "tagline": "A crown deserves its own armour.",
-    "typeLabel": "Kalangi",
+    "typeLabel": "Brooch",
     "image": "/products/citadel-emerald-turban-ornament.webp",
     "featured": true
   },

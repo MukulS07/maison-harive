@@ -19,7 +19,6 @@ const filters: { id: FilterId; label: string }[] = [
   { id: "all", label: "All Pieces" },
   { id: "buttons", label: "Buttons" },
   { id: "brooches", label: "Brooches" },
-  { id: "kalangi", label: "Kalangi" },
   { id: "pendant", label: "Pendants" },
 ];
 

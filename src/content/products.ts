@@ -42,10 +42,10 @@ export const products: Product[] = [
   {
     id: "seshnag-talisman",
     name: "Seshnag Talisman",
-    category: "kalangi",
+    category: "pendant",
     price: "Inquire",
     tagline: "Where ancient power meets eternal protection.",
-    typeLabel: "Pendant/ Kalangi",
+    typeLabel: "Pendant",
     image: "/products/seshnag-talisman.webp",
   },
   {
@@ -198,10 +198,10 @@ export const products: Product[] = [
   {
     id: "citadel-emerald-turban-ornament",
     name: "Citadel Emerald Turban Ornament",
-    category: "kalangi",
+    category: "brooches",
     price: "Inquire",
     tagline: "A crown deserves its own armour.",
-    typeLabel: "Kalangi",
+    typeLabel: "Brooch",
     image: "/products/citadel-emerald-turban-ornament.webp",
     featured: true,
   },
@@ -530,7 +530,6 @@ export type ArchiveSectionId = "treasures" | ProductCategory;
 export const archiveSections: { id: ArchiveSectionId; label: string; caption: string }[] = [
   { id: "buttons", label: "Buttons", caption: "Buttons for the sherwani and the bandhgala." },
   { id: "brooches", label: "Brooches", caption: "Worn at the heart, over the chest." },
-  { id: "kalangi", label: "Kalangi", caption: "The jewel of the turban." },
   { id: "pendant", label: "Pendants", caption: "Worn close, carried always." },
   { id: "treasures", label: "All Treasures", caption: "Every piece in the Maison, on one strand." },
 ];
