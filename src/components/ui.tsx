@@ -43,7 +43,7 @@ export function pillClass(active: boolean, compact = false) {
   return `inline-flex shrink-0 items-center rounded-pill border leading-tight whitespace-nowrap transition-colors duration-300 ${size} ${
     active
       ? "border-line-strong bg-gold/15 text-ivory"
-      : "border-line text-ivory hover:border-line-strong hover:text-gold-bright"
+      : "border-gold/70 bg-gold/5 text-ivory hover:border-gold-bright hover:bg-gold/15 hover:text-gold-bright"
   }`;
 }
 
