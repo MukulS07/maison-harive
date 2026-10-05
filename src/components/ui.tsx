@@ -39,11 +39,11 @@ export function Button({
 
 /** Rounded section/filter pill (spec §0.4). */
 export function pillClass(active: boolean, compact = false) {
-  const size = compact ? "px-3.5 py-2 text-[15px]" : "px-[18px] py-[9px] text-[15px] md:text-nav";
-  return `inline-flex shrink-0 items-center rounded-pill border leading-tight whitespace-nowrap transition-colors duration-300 ${size} ${
+  const size = compact ? "px-4 py-2 text-[14px]" : "px-5 py-2.5 text-[15px] md:text-nav";
+  return `inline-flex shrink-0 items-center rounded-pill border-[1.5px] font-medium leading-tight whitespace-nowrap transition-all duration-300 backdrop-blur-md shadow-sm ${size} ${
     active
-      ? "border-line-strong bg-gold/15 text-ivory"
-      : "border-gold/70 bg-gold/5 text-ivory hover:border-gold-bright hover:bg-gold/15 hover:text-gold-bright"
+      ? "border-gold-bright bg-gold/25 text-gold-pale shadow-[0_0_16px_rgba(232,199,127,0.35)]"
+      : "border-gold bg-black/60 text-ivory hover:border-gold-bright hover:bg-gold/20 hover:text-gold-bright hover:shadow-[0_0_16px_rgba(232,199,127,0.3)]"
   }`;
 }
 
