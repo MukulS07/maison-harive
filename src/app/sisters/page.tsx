@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SistersPage } from "@/components/SistersPage";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "The Sisters",
@@ -8,5 +8,6 @@ export const metadata: Metadata = {
 };
 
 export default function Sisters() {
-  return <SistersPage />;
+  // Hidden for now
+  redirect("/chambers");
 }

@@ -218,9 +218,9 @@ export function AtelierChamber() {
               <ButtonLink href="#private-viewing" className="px-8 py-4 md:text-[13px] md:tracking-[0.28em]">
                 REQUEST A PRIVATE VIEWING
               </ButtonLink>
-              <ButtonLink href="/archive" variant="secondary" className="px-8 py-4 md:text-[13px] md:tracking-[0.28em]">
+              {/* <ButtonLink href="/archive" variant="secondary" className="px-8 py-4 md:text-[13px] md:tracking-[0.28em]">
                 EXPLORE THE ARCHIVE
-              </ButtonLink>
+              </ButtonLink> */}
             </div>
           </div>
         </div>

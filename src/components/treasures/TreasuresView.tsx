@@ -42,7 +42,7 @@ export function TreasuresView() {
       <section className="relative overflow-hidden border-b border-line">
         <GoldBackdrop scrim={0.7} />
         <SiteHeader
-          left={<BackButton href="/archive" label="The Archive" />}
+          left={<BackButton href="/chambers" label="The Chambers" />}
           center={
             <>
               <div className="hidden md:block">

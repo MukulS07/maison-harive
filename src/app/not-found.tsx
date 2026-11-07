@@ -12,10 +12,10 @@ export default function NotFound() {
         left={<Logo className="text-base tracking-[0.3em]" />}
         right={
           <Link
-            href="/archive"
+            href="/chambers"
             className="font-display text-[12px] tracking-[0.25em] text-gold-bright uppercase transition-colors hover:text-gold-pale"
           >
-            The Archive
+            The Chambers
           </Link>
         }
       />
@@ -31,7 +31,7 @@ export default function NotFound() {
         </p>
 
         <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <ButtonLink href="/archive">EXPLORE THE ARCHIVE</ButtonLink>
+          <ButtonLink href="/chambers">EXPLORE THE CHAMBERS</ButtonLink>
           <ButtonLink href="/" variant="secondary">
             RETURN TO THE GATES
           </ButtonLink>

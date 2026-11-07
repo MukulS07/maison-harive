@@ -28,9 +28,9 @@ export function LegacyChamber() {
               <ButtonLink href="/chambers/atelier" className="px-7 md:text-[13px] md:tracking-[0.28em]">
                 CHAMBER II · NEW CHAPTER
               </ButtonLink>
-              <ButtonLink href="/sisters" variant="secondary" className="px-7 md:text-[13px] md:tracking-[0.28em]">
+              {/* <ButtonLink href="/sisters" variant="secondary" className="px-7 md:text-[13px] md:tracking-[0.28em]">
                 THE SISTERS
-              </ButtonLink>
+              </ButtonLink> */}
             </div>
           </div>
           <FramedPlaceholder

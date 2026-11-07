@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { ArchivePage } from "@/components/archive/ArchivePage";
-import { getStoreProducts } from "@/lib/products-store";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "The Archive · Products",
@@ -11,6 +10,6 @@ export const metadata: Metadata = {
 export const revalidate = 30;
 
 export default async function Archive() {
-  const products = await getStoreProducts();
-  return <ArchivePage products={products} />;
+  // The Archive section is hidden for now
+  redirect("/chambers");
 }

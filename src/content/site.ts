@@ -29,8 +29,8 @@ export const site = {
   /** Home page header pills. */
   nav: [
     { label: "The Maison", href: "/chambers/legacy" },
-    { label: "The Sisters", href: "/sisters" },
-    { label: "The Archive", href: "/archive" },
+    // { label: "The Sisters", href: "/sisters" }, // Hidden for now
+    // { label: "The Archive", href: "/archive" }, // Hidden for now
     { label: "The Concierge", href: "/concierge" },
   ],
 
@@ -69,9 +69,9 @@ export const site = {
   legacy: {
     lead: "Heritage, seen through a new lens.",
     body:
-      "Born into the fifth generation of the Rambhajos family, jewellery has always been a part of Harshi and Ritvi’s world. Growing up in Jaipur, surrounded by a living legacy of treasures, stories and generations of craft, shaped their understanding of jewellery from the very beginning. Maison Harivé emerged from this heritage, carrying the soul of Jaipur into a new expression. The sisters bring together the richness of Indian craftsmanship with the elegance, restraint and spirit of French culture. Rooted in where they come from, yet inspired by where the world is going, Maison Harivé is their own interpretation of heritage.\n\nA new house, where Jaipur meets France, and an old legacy finds a new language.",
+      "Born into the fifth generation of a family, jewellery has always been a part of their world. Growing up in Jaipur, surrounded by a living legacy of treasures, stories and generations of craft, shaped their understanding of jewellery from the very beginning. Maison Harivé emerged from this heritage, carrying the soul of Jaipur into a new expression. The sisters bring together the richness of Indian craftsmanship with the elegance, restraint and spirit of French culture. Rooted in where they come from, yet inspired by where the world is going, Maison Harivé is their own interpretation of heritage.\n\nA new house, where Jaipur meets France, and an old legacy finds a new language.",
     portrait: "[ HERITAGE PORTRAIT / FILM ]",
-    image: "/media/heritage-portrait.jpg",
+    image: "/media/legacy-portrait-v2.jpg",
     conceptEyebrow: "THE CONCEPT",
     concept: "Every piece, a royal artefact with its own story.",
   },

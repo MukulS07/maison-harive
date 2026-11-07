@@ -66,11 +66,11 @@ export function MaisonFooter({ className = "" }: MaisonFooterProps) {
                   Home
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/archive" className="transition-colors hover:text-gold-bright">
                   The Archive
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/treasures" className="transition-colors hover:text-gold-bright">
                   All Treasures
@@ -86,11 +86,11 @@ export function MaisonFooter({ className = "" }: MaisonFooterProps) {
                   The Concierge
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/sisters" className="transition-colors hover:text-gold-bright">
                   The Sisters
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 

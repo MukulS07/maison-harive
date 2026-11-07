@@ -189,11 +189,11 @@ export function BagModal({ isOpen, onClose }: BagModalProps) {
               ) : (
                 <div className="flex flex-col gap-2.5">
                   <Link
-                    href="/archive"
+                    href="/chambers"
                     onClick={onClose}
                     className="inline-flex items-center justify-center rounded-btn bg-gold px-6 py-3 font-display text-[12px] font-bold tracking-[0.25em] text-on-gold shadow-glow hover:bg-gold-bright transition-all"
                   >
-                    EXPLORE THE ARCHIVE
+                    EXPLORE THE CHAMBERS
                   </Link>
                   <button
                     type="button"

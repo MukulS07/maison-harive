@@ -345,14 +345,14 @@ function StageHeader() {
           >
             THE CONCIERGE
           </Link>
-          <Link
+          {/* <Link
             href="/sisters"
             className="group flex items-center gap-2.5 rounded-pill border border-gold bg-gold/12 px-4 py-2.5 text-[15px] whitespace-nowrap text-gold-bright italic transition-colors duration-300 hover:bg-gold/20 md:px-[18px] md:text-nav"
           >
             <span className="md:hidden">The Sisters</span>
             <span className="hidden md:inline">The Women Behind the Door</span>
             <ArrowRight size={16} className="transition-transform duration-300 ease-royal group-hover:translate-x-0.5" />
-          </Link>
+          </Link> */}
         </div>
       }
     />

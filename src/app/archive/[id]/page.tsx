@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { BackButton } from "@/components/BackButton";
 import { Logo, SiteHeader, HeaderEyebrow } from "@/components/SiteHeader";
 import { ButtonLink, Eyebrow, GoldBackdrop, Numeral } from "@/components/ui";
@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: PageProps<"/archive/[id]">): 
 }
 
 export default async function ProductPage({ params }: PageProps<"/archive/[id]">) {
+  redirect("/chambers");
   const { id } = await params;
   const all = await getStoreProducts();
   const product = all.find((p) => p.id === id);

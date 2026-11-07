@@ -18,10 +18,10 @@ export default function PrivacyPage() {
         left={<Logo className="text-base tracking-[0.3em]" />}
         right={
           <Link
-            href="/archive"
+            href="/chambers"
             className="font-display text-[12px] tracking-[0.25em] text-gold-bright uppercase transition-colors hover:text-gold-pale"
           >
-            The Archive
+            The Chambers
           </Link>
         }
       />

@@ -164,9 +164,9 @@ export function ConciergeView({
               </button>
             ) : (
               <Link
-                href="/archive"
+                href="/chambers"
                 className="font-display text-[12px] tracking-[0.2em] text-gold-bright uppercase transition-colors hover:text-gold-pale"
-                aria-label="Return to Archive"
+                aria-label="Return to Chambers"
               >
                 ←
               </Link>
@@ -276,10 +276,10 @@ export function ConciergeView({
                   Submit Another Request
                 </Button>
                 <Link
-                  href="/archive"
+                  href="/chambers"
                   className="inline-flex items-center justify-center rounded-btn bg-gold px-8 py-3.5 font-display text-[13px] font-bold tracking-[0.28em] text-on-gold shadow-glow hover:bg-gold-bright"
                 >
-                  Return to Archive
+                  Return to The Chambers
                 </Link>
               </div>
             </motion.div>

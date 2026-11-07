@@ -71,12 +71,14 @@ export function SistersPage() {
         </motion.div>
       </div>
 
+      {/* Archive button hidden for now
       <div className="flex justify-center px-5 pt-12 pb-20 md:pt-10">
         <ButtonLink href="/archive" className="py-[18px]">
           ARCHIVE
           <ArrowRight strokeWidth={1.8} />
         </ButtonLink>
       </div>
+      */}
     </main>
   );
 }
